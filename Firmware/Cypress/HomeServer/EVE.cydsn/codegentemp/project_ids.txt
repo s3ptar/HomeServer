@@ -1,0 +1,7 @@
+C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\PSoC_Sensorboard.cydsn\PSoC_Sensorboard.cyprj|de8c0158-392f-4399-bace-ac48dc7105e7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|454ae071-d9c8-4159-94c1-9d46790b2c3e
+C:\Users\rene_\OneDrive\Dokumente\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|afe07bba-c9f6-4eb5-8874-0972c611dbe5
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f89c9266-16cb-438b-8438-0902e10bb41f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|727a351e-f157-4ce4-8329-fd4658e5b97a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|003bf197-a3d5-44fa-a892-a93a31ab486b
+C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\EVE.cyprj|c7ce1334-7fcc-4bd6-8a85-cfc935c18cdd

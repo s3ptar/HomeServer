@@ -1,0 +1,1 @@
+-O0 -ffunction-sections -fdata-sections -g2 -Wstack-usage=100 -mcpu=rx600 -misa=v1 -mlittle-endian-data -x assembler-with-cpp -Wa,--gdwarf2 -I"C:/projekte/repo/HomeServer/Firmware/Renesas/RX600_EVE_HomeServer/src" -Wa,-adlhn="start.lst" -MMD -MP -MF"generate/start.d" -MT"generate/start.o" -c "../generate/start.S" -o "generate/start.o"

@@ -1,0 +1,182 @@
+   1                             		.file	"Menu.c"
+   2                             		.section P,"ax"
+   3                             	.Ltext0:
+   4                             		.section C,"a",@progbits
+   5                             		.p2align 2
+   6                             	.LC0:
+   7 0000 55 68 72 7A 65 69 74 00 		.string	"Uhrzeit"
+   8                             		.section	.text.MainMenu,"ax",@progbits
+   9                             		.global	_MainMenu
+  11                             	_MainMenu:
+  12                             	.LFB0:
+  13                             		.file 1 "../src/EVE/Menu.c"
+   1:../src/EVE/Menu.c **** /*
+   2:../src/EVE/Menu.c ****  * Menu.c
+   3:../src/EVE/Menu.c ****  *
+   4:../src/EVE/Menu.c ****  *  Created on: 26.01.2019
+   5:../src/EVE/Menu.c ****  *      Author: Besitzer
+   6:../src/EVE/Menu.c ****  */
+   7:../src/EVE/Menu.c **** 
+   8:../src/EVE/Menu.c **** /************************************************************************
+   9:../src/EVE/Menu.c ****  * Includes
+  10:../src/EVE/Menu.c ****  ***********************************************************************/
+  11:../src/EVE/Menu.c **** #include "Menu.h"
+  12:../src/EVE/Menu.c **** /************************************************************************
+  13:../src/EVE/Menu.c ****  * Informations
+  14:../src/EVE/Menu.c ****  ***********************************************************************/
+  15:../src/EVE/Menu.c **** 
+  16:../src/EVE/Menu.c **** /************************************************************************
+  17:../src/EVE/Menu.c ****  * Local Funtions
+  18:../src/EVE/Menu.c ****  ***********************************************************************/
+  19:../src/EVE/Menu.c **** 
+  20:../src/EVE/Menu.c **** /************************************************************************
+  21:../src/EVE/Menu.c ****  * Global Variable
+  22:../src/EVE/Menu.c ****  ***********************************************************************/
+  23:../src/EVE/Menu.c **** 
+  24:../src/EVE/Menu.c **** /************************************************************************
+  25:../src/EVE/Menu.c ****  * Constant
+  26:../src/EVE/Menu.c ****  ***********************************************************************/
+  27:../src/EVE/Menu.c **** 
+  28:../src/EVE/Menu.c **** #define Menu_Banner_End			23
+  29:../src/EVE/Menu.c **** 
+  30:../src/EVE/Menu.c **** /************************************************************************
+  31:../src/EVE/Menu.c **** *! \fn			void MainMenu(char* BannerString)
+  32:../src/EVE/Menu.c **** *  \brief		Print the Banner and an Information rom String
+  33:../src/EVE/Menu.c **** *  \param		char *BannerString
+  34:../src/EVE/Menu.c **** *  \exception	none
+  35:../src/EVE/Menu.c **** *  \return		none
+  36:../src/EVE/Menu.c **** ************************************************************************/
+  37:../src/EVE/Menu.c **** void MainMenu(char* BannerString){
+  14                             		.loc 1 37 0
+  15 0000 7E A6                   		push.l	r6
+  16                             	.LCFI0:
+  17 0002 71 06 FC                		add	#-4, r0, r6
+  18                             	.LCFI1:
+  19 0005 71 60 F4                		add	#-12, r6, r0
+  20                             	.LCFI2:
+  21 0008 E3 61                   		mov.L	r1, [r6]
+  38:../src/EVE/Menu.c **** 
+  39:../src/EVE/Menu.c **** 	//Draw Menu band
+  40:../src/EVE/Menu.c **** 	cli = 0;
+  22                             		.loc 1 40 0
+  23 000a FB 52 00 00 00 00       		mov.L	#_cli, r5
+  24 0010 F8 56 00                		mov.L	#0, [r5]
+  41:../src/EVE/Menu.c **** 	cmd_dlstart();
+  25                             		.loc 1 41 0
+  26 0013 05 00 00 00             		bsr	_cmd_dlstart
+  42:../src/EVE/Menu.c **** 	cmd(CLEAR(1, 1, 1));
+  27                             		.loc 1 42 0
+  28 0017 FB 12 07 00 00 26       		mov.L	#0x26000007, r1
+  29 001d 05 00 00 00             		bsr	_cmd
+  43:../src/EVE/Menu.c **** 	cmd(BEGIN(RECTS));
+  30                             		.loc 1 43 0
+  31 0021 FB 12 09 00 00 1F       		mov.L	#0x1f000009, r1
+  32 0027 05 00 00 00             		bsr	_cmd
+  44:../src/EVE/Menu.c **** 	    cmd(VERTEX2II(0, 23, 0, 0));
+  33                             		.loc 1 44 0
+  34 002b FB 12 00 70 01 80       		mov.L	#0x80017000, r1
+  35 0031 05 00 00 00             		bsr	_cmd
+  45:../src/EVE/Menu.c **** 	    cmd(VERTEX2II(480, 0, 0, 0));
+  36                             		.loc 1 45 0
+  37 0035 FB 12 00 00 00 BC       		mov.L	#0xbc000000, r1
+  38 003b 05 00 00 00             		bsr	_cmd
+  46:../src/EVE/Menu.c **** 	    cmd_gradient(480, 14, 0xFFFF00, 480, 0, 0xFF0000);
+  39                             		.loc 1 46 0
+  40 003f F8 06 00                		mov.L	#0, [r0]
+  41 0042 F9 02 01 00 00 FF 00    		mov.L	#0xff0000, 4[r0]
+  42 0049 FB 1A E0 01             		mov.L	#0x1e0, r1
+  43 004d 66 E2                   		mov.L	#14, r2
+  44 004f FB 32 00 FF FF 00       		mov.L	#0xffff00, r3
+  45 0055 FB 4A E0 01             		mov.L	#0x1e0, r4
+  46 0059 05 00 00 00             		bsr	_cmd_gradient
+  47:../src/EVE/Menu.c **** 	cmd(END());
+  47                             		.loc 1 47 0
+  48 005d FB 12 00 00 00 21       		mov.L	#0x21000000, r1
+  49 0063 05 00 00 00             		bsr	_cmd
+  48:../src/EVE/Menu.c **** 	//Set Color Black
+  49:../src/EVE/Menu.c **** 	cmd(COLOR_RGB(0, 0, 0));
+  50                             		.loc 1 49 0
+  51 0067 FB 12 00 00 00 04       		mov.L	#0x4000000, r1
+  52 006d 05 00 00 00             		bsr	_cmd
+  50:../src/EVE/Menu.c **** 	cmd_text(302, 1, 22, 0, BannerString);
+  53                             		.loc 1 50 0
+  54 0071 EC 65                   		mov.L	[r6], r5
+  55 0073 E3 05                   		mov.L	r5, [r0]
+  56 0075 FB 1A 2E 01             		mov.L	#0x12e, r1
+  57 0079 66 12                   		mov.L	#1, r2
+  58 007b 75 43 16                		mov.L	#22, r3
+  59 007e 66 04                   		mov.L	#0, r4
+  60 0080 05 00 00 00             		bsr	_cmd_text
+  51:../src/EVE/Menu.c **** 	//Draw Line
+  52:../src/EVE/Menu.c **** 	cmd(BEGIN(LINES));
+  61                             		.loc 1 52 0
+  62 0084 FB 12 03 00 00 1F       		mov.L	#0x1f000003, r1
+  63 008a 05 00 00 00             		bsr	_cmd
+  53:../src/EVE/Menu.c **** 		cmd(COLOR_RGB(0, 0, 0));
+  64                             		.loc 1 53 0
+  65 008e FB 12 00 00 00 04       		mov.L	#0x4000000, r1
+  66 0094 05 00 00 00             		bsr	_cmd
+  54:../src/EVE/Menu.c **** 	    cmd(VERTEX2II(0, 26, 0, 0));
+  67                             		.loc 1 54 0
+  68 0098 FB 12 00 A0 01 80       		mov.L	#0x8001a000, r1
+  69 009e 05 00 00 00             		bsr	_cmd
+  55:../src/EVE/Menu.c **** 	    cmd(VERTEX2II(480, 26, 0, 0));
+  70                             		.loc 1 55 0
+  71 00a2 FB 12 00 A0 01 BC       		mov.L	#0xbc01a000, r1
+  72 00a8 05 00 00 00             		bsr	_cmd
+  56:../src/EVE/Menu.c **** 	cmd(END());
+  73                             		.loc 1 56 0
+  74 00ac FB 12 00 00 00 21       		mov.L	#0x21000000, r1
+  75 00b2 05 00 00 00             		bsr	_cmd
+  57:../src/EVE/Menu.c **** 
+  58:../src/EVE/Menu.c **** 	//Draw Menu band
+  59:../src/EVE/Menu.c **** 	cmd(BEGIN(RECTS));
+  76                             		.loc 1 59 0
+  77 00b6 FB 12 09 00 00 1F       		mov.L	#0x1f000009, r1
+  78 00bc 05 00 00 00             		bsr	_cmd
+  60:../src/EVE/Menu.c **** 	    cmd(COLOR_RGB(170, 255, 255));
+  79                             		.loc 1 60 0
+  80 00c0 FB 12 FF FF AA 04       		mov.L	#0x4aaffff, r1
+  81 00c6 05 00 00 00             		bsr	_cmd
+  61:../src/EVE/Menu.c **** 	    cmd(VERTEX2II(0, 25, 0, 0));
+  82                             		.loc 1 61 0
+  83 00ca FB 12 00 90 01 80       		mov.L	#0x80019000, r1
+  84 00d0 05 00 00 00             		bsr	_cmd
+  62:../src/EVE/Menu.c **** 	    cmd(VERTEX2II(480, 272, 0, 0));
+  85                             		.loc 1 62 0
+  86 00d4 FB 12 00 00 11 BC       		mov.L	#0xbc110000, r1
+  87 00da 05 00 00 00             		bsr	_cmd
+  63:../src/EVE/Menu.c **** 	cmd(END());
+  88                             		.loc 1 63 0
+  89 00de FB 12 00 00 00 21       		mov.L	#0x21000000, r1
+  90 00e4 05 00 00 00             		bsr	_cmd
+  64:../src/EVE/Menu.c **** 
+  65:../src/EVE/Menu.c **** 	cmd(COLOR_RGB(0, 0, 0));
+  91                             		.loc 1 65 0
+  92 00e8 FB 12 00 00 00 04       		mov.L	#0x4000000, r1
+  93 00ee 05 00 00 00             		bsr	_cmd
+  66:../src/EVE/Menu.c **** 	cmd(TAG(Clock_Tag));
+  94                             		.loc 1 66 0
+  95 00f2 FB 12 01 00 00 03       		mov.L	#0x3000001, r1
+  96 00f8 05 00 00 00             		bsr	_cmd
+  67:../src/EVE/Menu.c **** 	cmd_button(17, 47, 90, 31, 27, 0, "Uhrzeit");
+  97                             		.loc 1 67 0
+  98 00fc F8 06 1B                		mov.L	#27, [r0]
+  99 00ff 3E 01 00                		mov.L	#0, 4[r0]
+ 100 0102 F9 02 02 00 00 00 00    		mov.L	#.LC0, 8[r0]
+ 101 0109 75 41 11                		mov.L	#17, r1
+ 102 010c 75 42 2F                		mov.L	#47, r2
+ 103 010f 75 43 5A                		mov.L	#0x5a, r3
+ 104 0112 75 44 1F                		mov.L	#31, r4
+ 105 0115 05 00 00 00             		bsr	_cmd_button
+  68:../src/EVE/Menu.c **** 
+  69:../src/EVE/Menu.c **** 	refresh_display();
+ 106                             		.loc 1 69 0
+ 107 0119 05 00 00 00             		bsr	_refresh_display
+  70:../src/EVE/Menu.c **** 
+  71:../src/EVE/Menu.c **** }
+ 108                             		.loc 1 71 0
+ 109 011d 3F 66 05                		rtsd	#20, r6-r6
+ 110                             	.LFE0:
+ 154                             	.Letext0:
+ 155                             		.file 2 "../src/EVE/Eve.h"

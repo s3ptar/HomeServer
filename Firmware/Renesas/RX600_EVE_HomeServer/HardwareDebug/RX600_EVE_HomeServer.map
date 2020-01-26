@@ -1,0 +1,1552 @@
+Archive member included because of file (symbol)
+
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o)
+                              ./src/EVE/EVE.o (_sprintf)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strlen.o)
+                              ./src/EVE/copro_commands.o (_strlen)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o) (__svfprintf_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (__dtoa_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o) (__impure_ptr)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (__localeconv_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (__malloc_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memchr.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (_memchr)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memcpy.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o) (_memcpy)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mlock.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o) (___malloc_lock)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o) (__Balloc)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o) (__sbrk_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sf_fpclassify.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (___fpclassifyf)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strcmp.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o) (_strcmp)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (___ssprint_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-callocr.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o) (__calloc_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-freer.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o) (__free_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memmove.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o) (_memmove)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memset.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-callocr.o) (_memset)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reallocr.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o) (__realloc_r)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o) (_errno)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_udivdi3.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (___udivdi3)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_umoddi3.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o) (___umoddi3)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_clz.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_udivdi3.o) (___clz_tab)
+c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a(sbrk.o)
+                              c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o) (_sbrk)
+
+Allocating common symbols
+Common symbol       size              file
+
+year                0x1               ./src/board.o
+delay_counter       0x4               ./src/board.o
+month_old           0x1               ./src/board.o
+cli                 0x4               ./src/EVE/EVE.o
+day                 0x1               ./src/board.o
+ms_counter          0x4               ./src/board.o
+min                 0x4               ./src/board.o
+year_old            0x1               ./src/board.o
+hr                  0x4               ./src/board.o
+dli                 0x4               ./src/EVE/EVE.o
+month               0x1               ./src/board.o
+ms                  0x4               ./src/board.o
+ms_counter2         0x4               ./src/board.o
+day_old             0x1               ./src/board.o
+sek                 0x4               ./src/board.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x00000000         0x00020000
+ROM              0xfff00000         0x00100000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./src/EVE/EVE.o
+LOAD ./src/EVE/EVE_SPI.o
+LOAD ./src/EVE/Menu.o
+LOAD ./src/EVE/copro_commands.o
+LOAD ./src/RX600_EVE_HomeServer.o
+LOAD ./src/SPI.o
+LOAD ./src/board.o
+LOAD ./generate/hwinit.o
+LOAD ./generate/inthandler.o
+LOAD ./generate/start.o
+LOAD ./generate/vects.o
+START GROUP
+LOAD c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libm.a
+LOAD c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a
+LOAD c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a
+END GROUP
+LOAD c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a
+START GROUP
+LOAD c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a
+LOAD c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a
+END GROUP
+LOAD c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a
+
+.fvectors       0xffffff80       0x80
+ *(.fvectors)
+ .fvectors      0xffffff80       0x80 ./generate/vects.o
+                0xffffff80                _HardwareVectors
+
+.text           0xfff00000     0x64d0
+ *(.text)
+ .text          0xfff00000       0x7a ./generate/start.o
+                0xfff00000                _PowerON_Reset
+ .text          0xfff0007a       0x10 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strlen.o)
+                0xfff0007a                _strlen
+ .text          0xfff0008a        0xf c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memchr.o)
+                0xfff0008a                _memchr
+ .text          0xfff00099        0x7 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memcpy.o)
+                0xfff00099                _memcpy
+ .text          0xfff000a0        0xf c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strcmp.o)
+                0xfff000a0                _strcmp
+ .text          0xfff000af       0x17 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memmove.o)
+                0xfff000af                _memmove
+ .text          0xfff000c6        0x7 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memset.o)
+                0xfff000c6                _memset
+ *(.text.*)
+ .text.refresh_display
+                0xfff000cd       0x48 ./src/EVE/EVE.o
+                0xfff000cd                _refresh_display
+ .text.EVE_BootUp
+                0xfff00115       0x6f ./src/EVE/EVE.o
+                0xfff00115                _EVE_BootUp
+ .text.updatecmdfifo
+                0xfff00184       0x50 ./src/EVE/EVE.o
+                0xfff00184                _updatecmdfifo
+ .text.waitcmdfifo_empty
+                0xfff001d4       0x3d ./src/EVE/EVE.o
+                0xfff001d4                _waitcmdfifo_empty
+ .text.recover_co_processor
+                0xfff00211       0x33 ./src/EVE/EVE.o
+                0xfff00211                _recover_co_processor
+ .text.play_sound
+                0xfff00244       0x3b ./src/EVE/EVE.o
+                0xfff00244                _play_sound
+ .text.TFT_off  0xfff0027f       0x12 ./src/EVE/EVE.o
+                0xfff0027f                _TFT_off
+ .text.TFT_on   0xfff00291       0x13 ./src/EVE/EVE.o
+                0xfff00291                _TFT_on
+ .text.TFT_dim  0xfff002a4       0x38 ./src/EVE/EVE.o
+                0xfff002a4                _TFT_dim
+ .text.TFT_fadeout
+                0xfff002dc       0x31 ./src/EVE/EVE.o
+                0xfff002dc                _TFT_fadeout
+ .text.TFT_fadein
+                0xfff0030d       0x31 ./src/EVE/EVE.o
+                0xfff0030d                _TFT_fadein
+ .text.dl       0xfff0033e       0x34 ./src/EVE/EVE.o
+                0xfff0033e                _dl
+ .text.video_timing
+                0xfff00372       0xf9 ./src/EVE/EVE.o
+                0xfff00372                _video_timing
+ .text.read_CHIPID
+                0xfff0046b       0x14 ./src/EVE/EVE.o
+                0xfff0046b                _read_CHIPID
+ .text.Touch    0xfff0047f       0x7d ./src/EVE/EVE.o
+                0xfff0047f                _Touch
+ .text.Logo     0xfff004fc       0x51 ./src/EVE/EVE.o
+                0xfff004fc                _Logo
+ .text.Display_test
+                0xfff0054d       0x4e ./src/EVE/EVE.o
+                0xfff0054d                _Display_test
+ .text.Display_test2
+                0xfff0059b      0x109 ./src/EVE/EVE.o
+                0xfff0059b                _Display_test2
+ .text.Display_test3
+                0xfff006a4      0x115 ./src/EVE/EVE.o
+                0xfff006a4                _Display_test3
+ .text.SelectChipOnOff
+                0xfff007b9       0x60 ./src/EVE/EVE_SPI.o
+                0xfff007b9                _SelectChipOnOff
+ .text.SPI_WRITE
+                0xfff00819       0x18 ./src/EVE/EVE_SPI.o
+                0xfff00819                _SPI_WRITE
+ .text.SPI_READ
+                0xfff00831       0x18 ./src/EVE/EVE_SPI.o
+                0xfff00831                _SPI_READ
+ .text.SPI2TransmitWord
+                0xfff00849       0x1e ./src/EVE/EVE_SPI.o
+                0xfff00849                _SPI2TransmitWord
+ .text.SPI2TransmitByte
+                0xfff00867       0x12 ./src/EVE/EVE_SPI.o
+                0xfff00867                _SPI2TransmitByte
+ .text.SPI2ReceiveByte
+                0xfff00879       0x18 ./src/EVE/EVE_SPI.o
+                0xfff00879                _SPI2ReceiveByte
+ .text.host_command
+                0xfff00891       0x2a ./src/EVE/EVE_SPI.o
+                0xfff00891                _host_command
+ .text.wr8      0xfff008bb       0x3f ./src/EVE/EVE_SPI.o
+                0xfff008bb                _wr8
+ .text.wr16     0xfff008fa       0x3f ./src/EVE/EVE_SPI.o
+                0xfff008fa                _wr16
+ .text.wr32     0xfff00939       0x49 ./src/EVE/EVE_SPI.o
+                0xfff00939                _wr32
+ .text.rd8      0xfff00982       0x4b ./src/EVE/EVE_SPI.o
+                0xfff00982                _rd8
+ .text.rd16     0xfff009cd       0x5b ./src/EVE/EVE_SPI.o
+                0xfff009cd                _rd16
+ .text.rd32     0xfff00a28       0x7c ./src/EVE/EVE_SPI.o
+                0xfff00a28                _rd32
+ .text.MainMenu
+                0xfff00aa4      0x120 ./src/EVE/Menu.o
+                0xfff00aa4                _MainMenu
+ .text.transfer_string
+                0xfff00bc4       0x80 ./src/EVE/copro_commands.o
+                0xfff00bc4                _transfer_string
+ .text.cmd_bgcolor
+                0xfff00c44       0x5e ./src/EVE/copro_commands.o
+                0xfff00c44                _cmd_bgcolor
+ .text.cmd_fgcolor
+                0xfff00ca2       0x5e ./src/EVE/copro_commands.o
+                0xfff00ca2                _cmd_fgcolor
+ .text.cmd_button
+                0xfff00d00       0xe8 ./src/EVE/copro_commands.o
+                0xfff00d00                _cmd_button
+ .text.cmd_dial
+                0xfff00de8       0xd9 ./src/EVE/copro_commands.o
+                0xfff00de8                _cmd_dial
+ .text.cmd_keys
+                0xfff00ec1       0xe8 ./src/EVE/copro_commands.o
+                0xfff00ec1                _cmd_keys
+ .text.cmd_gradient
+                0xfff00fa9      0x100 ./src/EVE/copro_commands.o
+                0xfff00fa9                _cmd_gradient
+ .text.cmd_progress
+                0xfff010a9      0x10c ./src/EVE/copro_commands.o
+                0xfff010a9                _cmd_progress
+ .text.cmd_scrollbar
+                0xfff011b5      0x114 ./src/EVE/copro_commands.o
+                0xfff011b5                _cmd_scrollbar
+ .text.cmd_slider
+                0xfff012c9      0x10c ./src/EVE/copro_commands.o
+                0xfff012c9                _cmd_slider
+ .text.cmd_spinner
+                0xfff013d5       0xa3 ./src/EVE/copro_commands.o
+                0xfff013d5                _cmd_spinner
+ .text.cmd_clock
+                0xfff01478      0x114 ./src/EVE/copro_commands.o
+                0xfff01478                _cmd_clock
+ .text.cmd_gauge
+                0xfff0158c      0x114 ./src/EVE/copro_commands.o
+                0xfff0158c                _cmd_gauge
+ .text.cmd_text
+                0xfff016a0       0xb5 ./src/EVE/copro_commands.o
+                0xfff016a0                _cmd_text
+ .text.cmd_number
+                0xfff01755       0xd7 ./src/EVE/copro_commands.o
+                0xfff01755                _cmd_number
+ .text.cmd_track
+                0xfff0182c       0xd9 ./src/EVE/copro_commands.o
+                0xfff0182c                _cmd_track
+ .text.cmd_coldstart
+                0xfff01905       0x31 ./src/EVE/copro_commands.o
+                0xfff01905                _cmd_coldstart
+ .text.cmd_dlstart
+                0xfff01936       0x31 ./src/EVE/copro_commands.o
+                0xfff01936                _cmd_dlstart
+ .text.cmd_stop
+                0xfff01967       0x31 ./src/EVE/copro_commands.o
+                0xfff01967                _cmd_stop
+ .text.cmd_setfont
+                0xfff01998       0x88 ./src/EVE/copro_commands.o
+                0xfff01998                _cmd_setfont
+ .text.cmd_swap
+                0xfff01a20       0x31 ./src/EVE/copro_commands.o
+                0xfff01a20                _cmd_swap
+ .text.cmd_logo
+                0xfff01a51       0x31 ./src/EVE/copro_commands.o
+                0xfff01a51                _cmd_logo
+ .text.cmd_calibrate
+                0xfff01a82       0x31 ./src/EVE/copro_commands.o
+                0xfff01a82                _cmd_calibrate
+ .text.cmd_memzero
+                0xfff01ab3       0x88 ./src/EVE/copro_commands.o
+                0xfff01ab3                _cmd_memzero
+ .text.cmd      0xfff01b3b       0x34 ./src/EVE/copro_commands.o
+                0xfff01b3b                _cmd
+ .text.main     0xfff01b6f       0xb4 ./src/RX600_EVE_HomeServer.o
+                0xfff01b6f                _main
+ .text.S_UART_SPI
+                0xfff01c23       0xac ./src/SPI.o
+                0xfff01c23                _S_UART_SPI
+ .text.send_SPI
+                0xfff01ccf       0x29 ./src/SPI.o
+                0xfff01ccf                _send_SPI
+ .text.read_SPI
+                0xfff01cf8       0x19 ./src/SPI.o
+                0xfff01cf8                _read_SPI
+ .text.USART_StatusGet
+                0xfff01d11       0x18 ./src/SPI.o
+                0xfff01d11                _USART_StatusGet
+ .text.init_clock
+                0xfff01d29       0x88 ./src/board.o
+                0xfff01d29                _init_clock
+ .text.Timer_MTU3_init
+                0xfff01db1       0x9c ./src/board.o
+                0xfff01db1                _Timer_MTU3_init
+ .text.init_board
+                0xfff01e4d       0x13 ./src/board.o
+                0xfff01e4d                _init_board
+ .text.delay_ms
+                0xfff01e60       0x25 ./src/board.o
+                0xfff01e60                _delay_ms
+ *fill*         0xfff01e85        0x3 
+ .text.SysTick_Handler
+                0xfff01e88      0x1b0 ./src/board.o
+                0xfff01e88                _SysTick_Handler
+ .text.init_IO  0xfff02038       0x1d ./src/board.o
+                0xfff02038                _init_IO
+ .text.Init_EEPROM_Slave
+                0xfff02055      0x11a ./src/board.o
+                0xfff02055                _Init_EEPROM_Slave
+ .text.HardwareSetup
+                0xfff0216f        0x7 ./generate/hwinit.o
+                0xfff0216f                _HardwareSetup
+ .text.INT_Excep_SuperVisorInst
+                0xfff02176        0x8 ./generate/inthandler.o
+                0xfff02176                _INT_Excep_SuperVisorInst
+ .text.INT_Excep_AccessInst
+                0xfff0217e        0x8 ./generate/inthandler.o
+                0xfff0217e                _INT_Excep_AccessInst
+ .text.INT_Excep_UndefinedInst
+                0xfff02186        0x8 ./generate/inthandler.o
+                0xfff02186                _INT_Excep_UndefinedInst
+ .text.INT_Excep_FloatingPoint
+                0xfff0218e        0x8 ./generate/inthandler.o
+                0xfff0218e                _INT_Excep_FloatingPoint
+ .text.INT_NonMaskableInterrupt
+                0xfff02196        0x8 ./generate/inthandler.o
+                0xfff02196                _INT_NonMaskableInterrupt
+ .text.INT_Dummy
+                0xfff0219e        0x8 ./generate/inthandler.o
+                0xfff0219e                _INT_Dummy
+ .text.INT_Excep_BRK
+                0xfff021a6        0x8 ./generate/inthandler.o
+                0xfff021a6                _INT_Excep_BRK
+ .text.INT_Excep_BSC_BUSERR
+                0xfff021ae        0x8 ./generate/inthandler.o
+                0xfff021ae                _INT_Excep_BSC_BUSERR
+ .text.INT_Excep_FCU_FIFERR
+                0xfff021b6        0x8 ./generate/inthandler.o
+                0xfff021b6                _INT_Excep_FCU_FIFERR
+ .text.INT_Excep_FCU_FRDYI
+                0xfff021be        0x8 ./generate/inthandler.o
+                0xfff021be                _INT_Excep_FCU_FRDYI
+ .text.INT_Excep_ICU_SWINT
+                0xfff021c6        0x8 ./generate/inthandler.o
+                0xfff021c6                _INT_Excep_ICU_SWINT
+ .text.INT_Excep_CMT0_CMI0
+                0xfff021ce        0x8 ./generate/inthandler.o
+                0xfff021ce                _INT_Excep_CMT0_CMI0
+ .text.INT_Excep_CMT1_CMI1
+                0xfff021d6        0x8 ./generate/inthandler.o
+                0xfff021d6                _INT_Excep_CMT1_CMI1
+ .text.INT_Excep_CMT2_CMI2
+                0xfff021de        0x8 ./generate/inthandler.o
+                0xfff021de                _INT_Excep_CMT2_CMI2
+ .text.INT_Excep_CMT3_CMI3
+                0xfff021e6        0x8 ./generate/inthandler.o
+                0xfff021e6                _INT_Excep_CMT3_CMI3
+ .text.INT_Excep_ETHER_EINT
+                0xfff021ee        0x8 ./generate/inthandler.o
+                0xfff021ee                _INT_Excep_ETHER_EINT
+ .text.INT_Excep_USB0_D0FIFO0
+                0xfff021f6        0x8 ./generate/inthandler.o
+                0xfff021f6                _INT_Excep_USB0_D0FIFO0
+ .text.INT_Excep_USB0_D1FIFO0
+                0xfff021fe        0x8 ./generate/inthandler.o
+                0xfff021fe                _INT_Excep_USB0_D1FIFO0
+ .text.INT_Excep_USB0_USBI0
+                0xfff02206        0x8 ./generate/inthandler.o
+                0xfff02206                _INT_Excep_USB0_USBI0
+ .text.INT_Excep_USB1_D0FIFO1
+                0xfff0220e        0x8 ./generate/inthandler.o
+                0xfff0220e                _INT_Excep_USB1_D0FIFO1
+ .text.INT_Excep_USB1_D1FIFO1
+                0xfff02216        0x8 ./generate/inthandler.o
+                0xfff02216                _INT_Excep_USB1_D1FIFO1
+ .text.INT_Excep_USB1_USBI1
+                0xfff0221e        0x8 ./generate/inthandler.o
+                0xfff0221e                _INT_Excep_USB1_USBI1
+ .text.INT_Excep_RSPI0_SPRI0
+                0xfff02226        0x8 ./generate/inthandler.o
+                0xfff02226                _INT_Excep_RSPI0_SPRI0
+ .text.INT_Excep_RSPI0_SPTI0
+                0xfff0222e        0x8 ./generate/inthandler.o
+                0xfff0222e                _INT_Excep_RSPI0_SPTI0
+ .text.INT_Excep_RSPI0_SPII0
+                0xfff02236        0x8 ./generate/inthandler.o
+                0xfff02236                _INT_Excep_RSPI0_SPII0
+ .text.INT_Excep_RSPI1_SPRI1
+                0xfff0223e        0x8 ./generate/inthandler.o
+                0xfff0223e                _INT_Excep_RSPI1_SPRI1
+ .text.INT_Excep_RSPI1_SPTI1
+                0xfff02246        0x8 ./generate/inthandler.o
+                0xfff02246                _INT_Excep_RSPI1_SPTI1
+ .text.INT_Excep_RSPI1_SPII1
+                0xfff0224e        0x8 ./generate/inthandler.o
+                0xfff0224e                _INT_Excep_RSPI1_SPII1
+ .text.INT_Excep_RSPI2_SPRI2
+                0xfff02256        0x8 ./generate/inthandler.o
+                0xfff02256                _INT_Excep_RSPI2_SPRI2
+ .text.INT_Excep_RSPI2_SPTI2
+                0xfff0225e        0x8 ./generate/inthandler.o
+                0xfff0225e                _INT_Excep_RSPI2_SPTI2
+ .text.INT_Excep_RSPI2_SPII2
+                0xfff02266        0x8 ./generate/inthandler.o
+                0xfff02266                _INT_Excep_RSPI2_SPII2
+ .text.INT_Excep_CAN0_RXF0
+                0xfff0226e        0x8 ./generate/inthandler.o
+                0xfff0226e                _INT_Excep_CAN0_RXF0
+ .text.INT_Excep_CAN0_TXF0
+                0xfff02276        0x8 ./generate/inthandler.o
+                0xfff02276                _INT_Excep_CAN0_TXF0
+ .text.INT_Excep_CAN0_RXM0
+                0xfff0227e        0x8 ./generate/inthandler.o
+                0xfff0227e                _INT_Excep_CAN0_RXM0
+ .text.INT_Excep_CAN0_TXM0
+                0xfff02286        0x8 ./generate/inthandler.o
+                0xfff02286                _INT_Excep_CAN0_TXM0
+ .text.INT_Excep_CAN1_RXF1
+                0xfff0228e        0x8 ./generate/inthandler.o
+                0xfff0228e                _INT_Excep_CAN1_RXF1
+ .text.INT_Excep_CAN1_TXF1
+                0xfff02296        0x8 ./generate/inthandler.o
+                0xfff02296                _INT_Excep_CAN1_TXF1
+ .text.INT_Excep_CAN1_RXM1
+                0xfff0229e        0x8 ./generate/inthandler.o
+                0xfff0229e                _INT_Excep_CAN1_RXM1
+ .text.INT_Excep_CAN1_TXM1
+                0xfff022a6        0x8 ./generate/inthandler.o
+                0xfff022a6                _INT_Excep_CAN1_TXM1
+ .text.INT_Excep_CAN2_RXF2
+                0xfff022ae        0x8 ./generate/inthandler.o
+                0xfff022ae                _INT_Excep_CAN2_RXF2
+ .text.INT_Excep_CAN2_TXF2
+                0xfff022b6        0x8 ./generate/inthandler.o
+                0xfff022b6                _INT_Excep_CAN2_TXF2
+ .text.INT_Excep_CAN2_RXM2
+                0xfff022be        0x8 ./generate/inthandler.o
+                0xfff022be                _INT_Excep_CAN2_RXM2
+ .text.INT_Excep_CAN2_TXM2
+                0xfff022c6        0x8 ./generate/inthandler.o
+                0xfff022c6                _INT_Excep_CAN2_TXM2
+ .text.INT_Excep_RTC_CUP
+                0xfff022ce        0x8 ./generate/inthandler.o
+                0xfff022ce                _INT_Excep_RTC_CUP
+ .text.INT_Excep_ICU_IRQ0
+                0xfff022d6        0x8 ./generate/inthandler.o
+                0xfff022d6                _INT_Excep_ICU_IRQ0
+ .text.INT_Excep_ICU_IRQ1
+                0xfff022de        0x8 ./generate/inthandler.o
+                0xfff022de                _INT_Excep_ICU_IRQ1
+ .text.INT_Excep_ICU_IRQ2
+                0xfff022e6        0x8 ./generate/inthandler.o
+                0xfff022e6                _INT_Excep_ICU_IRQ2
+ .text.INT_Excep_ICU_IRQ3
+                0xfff022ee        0x8 ./generate/inthandler.o
+                0xfff022ee                _INT_Excep_ICU_IRQ3
+ .text.INT_Excep_ICU_IRQ4
+                0xfff022f6        0x8 ./generate/inthandler.o
+                0xfff022f6                _INT_Excep_ICU_IRQ4
+ .text.INT_Excep_ICU_IRQ5
+                0xfff022fe        0x8 ./generate/inthandler.o
+                0xfff022fe                _INT_Excep_ICU_IRQ5
+ .text.INT_Excep_ICU_IRQ6
+                0xfff02306        0x8 ./generate/inthandler.o
+                0xfff02306                _INT_Excep_ICU_IRQ6
+ .text.INT_Excep_ICU_IRQ7
+                0xfff0230e        0x8 ./generate/inthandler.o
+                0xfff0230e                _INT_Excep_ICU_IRQ7
+ .text.INT_Excep_ICU_IRQ8
+                0xfff02316        0x8 ./generate/inthandler.o
+                0xfff02316                _INT_Excep_ICU_IRQ8
+ .text.INT_Excep_ICU_IRQ9
+                0xfff0231e        0x8 ./generate/inthandler.o
+                0xfff0231e                _INT_Excep_ICU_IRQ9
+ .text.INT_Excep_ICU_IRQ10
+                0xfff02326        0x8 ./generate/inthandler.o
+                0xfff02326                _INT_Excep_ICU_IRQ10
+ .text.INT_Excep_ICU_IRQ11
+                0xfff0232e        0x8 ./generate/inthandler.o
+                0xfff0232e                _INT_Excep_ICU_IRQ11
+ .text.INT_Excep_ICU_IRQ12
+                0xfff02336        0x8 ./generate/inthandler.o
+                0xfff02336                _INT_Excep_ICU_IRQ12
+ .text.INT_Excep_ICU_IRQ13
+                0xfff0233e        0x8 ./generate/inthandler.o
+                0xfff0233e                _INT_Excep_ICU_IRQ13
+ .text.INT_Excep_ICU_IRQ14
+                0xfff02346        0x8 ./generate/inthandler.o
+                0xfff02346                _INT_Excep_ICU_IRQ14
+ .text.INT_Excep_ICU_IRQ15
+                0xfff0234e        0x8 ./generate/inthandler.o
+                0xfff0234e                _INT_Excep_ICU_IRQ15
+ .text.INT_Excep_USB_USBR0
+                0xfff02356        0x8 ./generate/inthandler.o
+                0xfff02356                _INT_Excep_USB_USBR0
+ .text.INT_Excep_USB_USBR1
+                0xfff0235e        0x8 ./generate/inthandler.o
+                0xfff0235e                _INT_Excep_USB_USBR1
+ .text.INT_Excep_RTC_ALM
+                0xfff02366        0x8 ./generate/inthandler.o
+                0xfff02366                _INT_Excep_RTC_ALM
+ .text.INT_Excep_RTC_PRD
+                0xfff0236e        0x8 ./generate/inthandler.o
+                0xfff0236e                _INT_Excep_RTC_PRD
+ .text.INT_Excep_AD_ADI0
+                0xfff02376        0x8 ./generate/inthandler.o
+                0xfff02376                _INT_Excep_AD_ADI0
+ .text.INT_Excep_S12AD_S12ADI0
+                0xfff0237e        0x8 ./generate/inthandler.o
+                0xfff0237e                _INT_Excep_S12AD_S12ADI0
+ .text.INT_Excep_ICU_GROUP0
+                0xfff02386        0x8 ./generate/inthandler.o
+                0xfff02386                _INT_Excep_ICU_GROUP0
+ .text.INT_Excep_ICU_GROUP1
+                0xfff0238e        0x8 ./generate/inthandler.o
+                0xfff0238e                _INT_Excep_ICU_GROUP1
+ .text.INT_Excep_ICU_GROUP2
+                0xfff02396        0x8 ./generate/inthandler.o
+                0xfff02396                _INT_Excep_ICU_GROUP2
+ .text.INT_Excep_ICU_GROUP3
+                0xfff0239e        0x8 ./generate/inthandler.o
+                0xfff0239e                _INT_Excep_ICU_GROUP3
+ .text.INT_Excep_ICU_GROUP4
+                0xfff023a6        0x8 ./generate/inthandler.o
+                0xfff023a6                _INT_Excep_ICU_GROUP4
+ .text.INT_Excep_ICU_GROUP5
+                0xfff023ae        0x8 ./generate/inthandler.o
+                0xfff023ae                _INT_Excep_ICU_GROUP5
+ .text.INT_Excep_ICU_GROUP6
+                0xfff023b6        0x8 ./generate/inthandler.o
+                0xfff023b6                _INT_Excep_ICU_GROUP6
+ .text.INT_Excep_ICU_GROUP12
+                0xfff023be        0x8 ./generate/inthandler.o
+                0xfff023be                _INT_Excep_ICU_GROUP12
+ .text.INT_Excep_SCI12_SCIX0
+                0xfff023c6        0x8 ./generate/inthandler.o
+                0xfff023c6                _INT_Excep_SCI12_SCIX0
+ .text.INT_Excep_SCI12_SCIX1
+                0xfff023ce        0x8 ./generate/inthandler.o
+                0xfff023ce                _INT_Excep_SCI12_SCIX1
+ .text.INT_Excep_SCI12_SCIX2
+                0xfff023d6        0x8 ./generate/inthandler.o
+                0xfff023d6                _INT_Excep_SCI12_SCIX2
+ .text.INT_Excep_SCI12_SCIX3
+                0xfff023de        0x8 ./generate/inthandler.o
+                0xfff023de                _INT_Excep_SCI12_SCIX3
+ .text.INT_Excep_TPU0_TGI0A
+                0xfff023e6        0x8 ./generate/inthandler.o
+                0xfff023e6                _INT_Excep_TPU0_TGI0A
+ .text.INT_Excep_TPU0_TGI0B
+                0xfff023ee        0x8 ./generate/inthandler.o
+                0xfff023ee                _INT_Excep_TPU0_TGI0B
+ .text.INT_Excep_TPU0_TGI0C
+                0xfff023f6        0x8 ./generate/inthandler.o
+                0xfff023f6                _INT_Excep_TPU0_TGI0C
+ .text.INT_Excep_TPU0_TGI0D
+                0xfff023fe        0x8 ./generate/inthandler.o
+                0xfff023fe                _INT_Excep_TPU0_TGI0D
+ .text.INT_Excep_TPU1_TGI1A
+                0xfff02406        0x8 ./generate/inthandler.o
+                0xfff02406                _INT_Excep_TPU1_TGI1A
+ .text.INT_Excep_TPU1_TGI1B
+                0xfff0240e        0x8 ./generate/inthandler.o
+                0xfff0240e                _INT_Excep_TPU1_TGI1B
+ .text.INT_Excep_TPU2_TGI2A
+                0xfff02416        0x8 ./generate/inthandler.o
+                0xfff02416                _INT_Excep_TPU2_TGI2A
+ .text.INT_Excep_TPU2_TGI2B
+                0xfff0241e        0x8 ./generate/inthandler.o
+                0xfff0241e                _INT_Excep_TPU2_TGI2B
+ .text.INT_Excep_TPU3_TGI3A
+                0xfff02426        0x8 ./generate/inthandler.o
+                0xfff02426                _INT_Excep_TPU3_TGI3A
+ .text.INT_Excep_TPU3_TGI3B
+                0xfff0242e        0x8 ./generate/inthandler.o
+                0xfff0242e                _INT_Excep_TPU3_TGI3B
+ .text.INT_Excep_TPU3_TGI3C
+                0xfff02436        0x8 ./generate/inthandler.o
+                0xfff02436                _INT_Excep_TPU3_TGI3C
+ .text.INT_Excep_TPU3_TGI3D
+                0xfff0243e        0x8 ./generate/inthandler.o
+                0xfff0243e                _INT_Excep_TPU3_TGI3D
+ .text.INT_Excep_TPU4_TGI4A
+                0xfff02446        0x8 ./generate/inthandler.o
+                0xfff02446                _INT_Excep_TPU4_TGI4A
+ .text.INT_Excep_TPU4_TGI4B
+                0xfff0244e        0x8 ./generate/inthandler.o
+                0xfff0244e                _INT_Excep_TPU4_TGI4B
+ .text.INT_Excep_TPU5_TGI5A
+                0xfff02456        0x8 ./generate/inthandler.o
+                0xfff02456                _INT_Excep_TPU5_TGI5A
+ .text.INT_Excep_TPU5_TGI5B
+                0xfff0245e        0x8 ./generate/inthandler.o
+                0xfff0245e                _INT_Excep_TPU5_TGI5B
+ .text.INT_Excep_TPU6_TGI6A
+                0xfff02466        0x8 ./generate/inthandler.o
+                0xfff02466                _INT_Excep_TPU6_TGI6A
+ .text.INT_Excep_TPU6_TGI6B
+                0xfff0246e        0x8 ./generate/inthandler.o
+                0xfff0246e                _INT_Excep_TPU6_TGI6B
+ .text.INT_Excep_TPU6_TGI6C
+                0xfff02476        0x8 ./generate/inthandler.o
+                0xfff02476                _INT_Excep_TPU6_TGI6C
+ .text.INT_Excep_TPU6_TGI6D
+                0xfff0247e        0x8 ./generate/inthandler.o
+                0xfff0247e                _INT_Excep_TPU6_TGI6D
+ .text.INT_Excep_MTU0_TGIA0
+                0xfff02486        0x7 ./generate/inthandler.o
+                0xfff02486                _INT_Excep_MTU0_TGIA0
+ .text.INT_Excep_MTU0_TGIB0
+                0xfff0248d        0x7 ./generate/inthandler.o
+                0xfff0248d                _INT_Excep_MTU0_TGIB0
+ .text.INT_Excep_MTU0_TGIC0
+                0xfff02494        0x7 ./generate/inthandler.o
+                0xfff02494                _INT_Excep_MTU0_TGIC0
+ .text.INT_Excep_MTU0_TGID0
+                0xfff0249b        0x7 ./generate/inthandler.o
+                0xfff0249b                _INT_Excep_MTU0_TGID0
+ .text.INT_Excep_MTU0_TGIE0
+                0xfff024a2        0x8 ./generate/inthandler.o
+                0xfff024a2                _INT_Excep_MTU0_TGIE0
+ .text.INT_Excep_MTU0_TGIF0
+                0xfff024aa        0x8 ./generate/inthandler.o
+                0xfff024aa                _INT_Excep_MTU0_TGIF0
+ .text.INT_Excep_TPU7_TGI7A
+                0xfff024b2        0x8 ./generate/inthandler.o
+                0xfff024b2                _INT_Excep_TPU7_TGI7A
+ .text.INT_Excep_TPU7_TGI7B
+                0xfff024ba        0x8 ./generate/inthandler.o
+                0xfff024ba                _INT_Excep_TPU7_TGI7B
+ .text.INT_Excep_MTU1_TGIA1
+                0xfff024c2        0x7 ./generate/inthandler.o
+                0xfff024c2                _INT_Excep_MTU1_TGIA1
+ .text.INT_Excep_MTU1_TGIB1
+                0xfff024c9        0x7 ./generate/inthandler.o
+                0xfff024c9                _INT_Excep_MTU1_TGIB1
+ .text.INT_Excep_TPU8_TGI8A
+                0xfff024d0        0x8 ./generate/inthandler.o
+                0xfff024d0                _INT_Excep_TPU8_TGI8A
+ .text.INT_Excep_TPU8_TGI8B
+                0xfff024d8        0x8 ./generate/inthandler.o
+                0xfff024d8                _INT_Excep_TPU8_TGI8B
+ .text.INT_Excep_MTU2_TGIA2
+                0xfff024e0        0x7 ./generate/inthandler.o
+                0xfff024e0                _INT_Excep_MTU2_TGIA2
+ .text.INT_Excep_MTU2_TGIB2
+                0xfff024e7        0x7 ./generate/inthandler.o
+                0xfff024e7                _INT_Excep_MTU2_TGIB2
+ .text.INT_Excep_TPU9_TGI9A
+                0xfff024ee        0x8 ./generate/inthandler.o
+                0xfff024ee                _INT_Excep_TPU9_TGI9A
+ .text.INT_Excep_TPU9_TGI9B
+                0xfff024f6        0x8 ./generate/inthandler.o
+                0xfff024f6                _INT_Excep_TPU9_TGI9B
+ .text.INT_Excep_TPU9_TGI9C
+                0xfff024fe        0x8 ./generate/inthandler.o
+                0xfff024fe                _INT_Excep_TPU9_TGI9C
+ .text.INT_Excep_TPU9_TGI9D
+                0xfff02506        0x8 ./generate/inthandler.o
+                0xfff02506                _INT_Excep_TPU9_TGI9D
+ .text.INT_Excep_MTU3_TGIA3
+                0xfff0250e        0x7 ./generate/inthandler.o
+                0xfff0250e                _INT_Excep_MTU3_TGIA3
+ .text.INT_Excep_MTU3_TGIB3
+                0xfff02515        0x7 ./generate/inthandler.o
+                0xfff02515                _INT_Excep_MTU3_TGIB3
+ .text.INT_Excep_MTU3_TGIC3
+                0xfff0251c        0x7 ./generate/inthandler.o
+                0xfff0251c                _INT_Excep_MTU3_TGIC3
+ .text.INT_Excep_MTU3_TGID3
+                0xfff02523        0x7 ./generate/inthandler.o
+                0xfff02523                _INT_Excep_MTU3_TGID3
+ .text.INT_Excep_TPU10_TGI10A
+                0xfff0252a        0x8 ./generate/inthandler.o
+                0xfff0252a                _INT_Excep_TPU10_TGI10A
+ .text.INT_Excep_TPU10_TGI10B
+                0xfff02532        0x8 ./generate/inthandler.o
+                0xfff02532                _INT_Excep_TPU10_TGI10B
+ .text.INT_Excep_MTU4_TGIA4
+                0xfff0253a        0x7 ./generate/inthandler.o
+                0xfff0253a                _INT_Excep_MTU4_TGIA4
+ .text.INT_Excep_MTU4_TGIB4
+                0xfff02541        0x7 ./generate/inthandler.o
+                0xfff02541                _INT_Excep_MTU4_TGIB4
+ .text.INT_Excep_MTU4_TGIC4
+                0xfff02548        0x8 ./generate/inthandler.o
+                0xfff02548                _INT_Excep_MTU4_TGIC4
+ .text.INT_Excep_MTU4_TGID4
+                0xfff02550        0x8 ./generate/inthandler.o
+                0xfff02550                _INT_Excep_MTU4_TGID4
+ .text.INT_Excep_MTU4_TCIV4
+                0xfff02558        0x8 ./generate/inthandler.o
+                0xfff02558                _INT_Excep_MTU4_TCIV4
+ .text.INT_Excep_TPU11_TGI11A
+                0xfff02560        0x8 ./generate/inthandler.o
+                0xfff02560                _INT_Excep_TPU11_TGI11A
+ .text.INT_Excep_TPU11_TGI11B
+                0xfff02568        0x8 ./generate/inthandler.o
+                0xfff02568                _INT_Excep_TPU11_TGI11B
+ .text.INT_Excep_MTU5_TGIU5
+                0xfff02570        0x8 ./generate/inthandler.o
+                0xfff02570                _INT_Excep_MTU5_TGIU5
+ .text.INT_Excep_MTU5_TGIV5
+                0xfff02578        0x8 ./generate/inthandler.o
+                0xfff02578                _INT_Excep_MTU5_TGIV5
+ .text.INT_Excep_MTU5_TGIW5
+                0xfff02580        0x8 ./generate/inthandler.o
+                0xfff02580                _INT_Excep_MTU5_TGIW5
+ .text.INT_Excep_POE_OEI1
+                0xfff02588        0x8 ./generate/inthandler.o
+                0xfff02588                _INT_Excep_POE_OEI1
+ .text.INT_Excep_POE_OEI2
+                0xfff02590        0x8 ./generate/inthandler.o
+                0xfff02590                _INT_Excep_POE_OEI2
+ .text.INT_Excep_TMR0_CMIA0
+                0xfff02598        0x8 ./generate/inthandler.o
+                0xfff02598                _INT_Excep_TMR0_CMIA0
+ .text.INT_Excep_TMR0_CMIB0
+                0xfff025a0        0x8 ./generate/inthandler.o
+                0xfff025a0                _INT_Excep_TMR0_CMIB0
+ .text.INT_Excep_TMR0_OVI0
+                0xfff025a8        0x8 ./generate/inthandler.o
+                0xfff025a8                _INT_Excep_TMR0_OVI0
+ .text.INT_Excep_TMR1_CMIA1
+                0xfff025b0        0x8 ./generate/inthandler.o
+                0xfff025b0                _INT_Excep_TMR1_CMIA1
+ .text.INT_Excep_TMR1_CMIB1
+                0xfff025b8        0x8 ./generate/inthandler.o
+                0xfff025b8                _INT_Excep_TMR1_CMIB1
+ .text.INT_Excep_TMR1_OVI1
+                0xfff025c0        0x8 ./generate/inthandler.o
+                0xfff025c0                _INT_Excep_TMR1_OVI1
+ .text.INT_Excep_TMR2_CMIA2
+                0xfff025c8        0x8 ./generate/inthandler.o
+                0xfff025c8                _INT_Excep_TMR2_CMIA2
+ .text.INT_Excep_TMR2_CMIB2
+                0xfff025d0        0x8 ./generate/inthandler.o
+                0xfff025d0                _INT_Excep_TMR2_CMIB2
+ .text.INT_Excep_TMR2_OVI2
+                0xfff025d8        0x8 ./generate/inthandler.o
+                0xfff025d8                _INT_Excep_TMR2_OVI2
+ .text.INT_Excep_TMR3_CMIA3
+                0xfff025e0        0x8 ./generate/inthandler.o
+                0xfff025e0                _INT_Excep_TMR3_CMIA3
+ .text.INT_Excep_TMR3_CMIB3
+                0xfff025e8        0x8 ./generate/inthandler.o
+                0xfff025e8                _INT_Excep_TMR3_CMIB3
+ .text.INT_Excep_TMR3_OVI3
+                0xfff025f0        0x8 ./generate/inthandler.o
+                0xfff025f0                _INT_Excep_TMR3_OVI3
+ .text.INT_Excep_RIIC0_EEI0
+                0xfff025f8        0x8 ./generate/inthandler.o
+                0xfff025f8                _INT_Excep_RIIC0_EEI0
+ .text.INT_Excep_RIIC0_RXI0
+                0xfff02600        0x8 ./generate/inthandler.o
+                0xfff02600                _INT_Excep_RIIC0_RXI0
+ .text.INT_Excep_RIIC0_TXI0
+                0xfff02608        0x8 ./generate/inthandler.o
+                0xfff02608                _INT_Excep_RIIC0_TXI0
+ .text.INT_Excep_RIIC0_TEI0
+                0xfff02610        0x8 ./generate/inthandler.o
+                0xfff02610                _INT_Excep_RIIC0_TEI0
+ .text.INT_Excep_RIIC1_EEI1
+                0xfff02618        0x8 ./generate/inthandler.o
+                0xfff02618                _INT_Excep_RIIC1_EEI1
+ .text.INT_Excep_RIIC1_RXI1
+                0xfff02620        0x8 ./generate/inthandler.o
+                0xfff02620                _INT_Excep_RIIC1_RXI1
+ .text.INT_Excep_RIIC1_TXI1
+                0xfff02628        0x8 ./generate/inthandler.o
+                0xfff02628                _INT_Excep_RIIC1_TXI1
+ .text.INT_Excep_RIIC1_TEI1
+                0xfff02630        0x8 ./generate/inthandler.o
+                0xfff02630                _INT_Excep_RIIC1_TEI1
+ .text.INT_Excep_RIIC2_EEI2
+                0xfff02638        0x8 ./generate/inthandler.o
+                0xfff02638                _INT_Excep_RIIC2_EEI2
+ .text.INT_Excep_RIIC2_RXI2
+                0xfff02640        0x8 ./generate/inthandler.o
+                0xfff02640                _INT_Excep_RIIC2_RXI2
+ .text.INT_Excep_RIIC2_TXI2
+                0xfff02648        0x8 ./generate/inthandler.o
+                0xfff02648                _INT_Excep_RIIC2_TXI2
+ .text.INT_Excep_RIIC2_TEI2
+                0xfff02650        0x8 ./generate/inthandler.o
+                0xfff02650                _INT_Excep_RIIC2_TEI2
+ .text.INT_Excep_RIIC3_EEI3
+                0xfff02658        0x8 ./generate/inthandler.o
+                0xfff02658                _INT_Excep_RIIC3_EEI3
+ .text.INT_Excep_RIIC3_RXI3
+                0xfff02660        0x8 ./generate/inthandler.o
+                0xfff02660                _INT_Excep_RIIC3_RXI3
+ .text.INT_Excep_RIIC3_TXI3
+                0xfff02668        0x8 ./generate/inthandler.o
+                0xfff02668                _INT_Excep_RIIC3_TXI3
+ .text.INT_Excep_RIIC3_TEI3
+                0xfff02670        0x8 ./generate/inthandler.o
+                0xfff02670                _INT_Excep_RIIC3_TEI3
+ .text.INT_Excep_DMAC_DMAC0I
+                0xfff02678        0x8 ./generate/inthandler.o
+                0xfff02678                _INT_Excep_DMAC_DMAC0I
+ .text.INT_Excep_DMAC_DMAC1I
+                0xfff02680        0x8 ./generate/inthandler.o
+                0xfff02680                _INT_Excep_DMAC_DMAC1I
+ .text.INT_Excep_DMAC_DMAC2I
+                0xfff02688        0x8 ./generate/inthandler.o
+                0xfff02688                _INT_Excep_DMAC_DMAC2I
+ .text.INT_Excep_DMAC_DMAC3I
+                0xfff02690        0x8 ./generate/inthandler.o
+                0xfff02690                _INT_Excep_DMAC_DMAC3I
+ .text.INT_Excep_EXDMAC_EXDMAC0I
+                0xfff02698        0x8 ./generate/inthandler.o
+                0xfff02698                _INT_Excep_EXDMAC_EXDMAC0I
+ .text.INT_Excep_EXDMAC_EXDMAC1I
+                0xfff026a0        0x8 ./generate/inthandler.o
+                0xfff026a0                _INT_Excep_EXDMAC_EXDMAC1I
+ .text.INT_Excep_DEU_DEU0
+                0xfff026a8        0x8 ./generate/inthandler.o
+                0xfff026a8                _INT_Excep_DEU_DEU0
+ .text.INT_Excep_DEU_DEU1
+                0xfff026b0        0x8 ./generate/inthandler.o
+                0xfff026b0                _INT_Excep_DEU_DEU1
+ .text.INT_Excep_PDC_PCDFI
+                0xfff026b8        0x8 ./generate/inthandler.o
+                0xfff026b8                _INT_Excep_PDC_PCDFI
+ .text.INT_Excep_PDC_PCFEI
+                0xfff026c0        0x8 ./generate/inthandler.o
+                0xfff026c0                _INT_Excep_PDC_PCFEI
+ .text.INT_Excep_PDC_PCERI
+                0xfff026c8        0x8 ./generate/inthandler.o
+                0xfff026c8                _INT_Excep_PDC_PCERI
+ .text.INT_Excep_SCI0_RXI0
+                0xfff026d0        0x8 ./generate/inthandler.o
+                0xfff026d0                _INT_Excep_SCI0_RXI0
+ .text.INT_Excep_SCI0_TXI0
+                0xfff026d8        0x8 ./generate/inthandler.o
+                0xfff026d8                _INT_Excep_SCI0_TXI0
+ .text.INT_Excep_SCI0_TEI0
+                0xfff026e0        0x8 ./generate/inthandler.o
+                0xfff026e0                _INT_Excep_SCI0_TEI0
+ .text.INT_Excep_SCI1_RXI1
+                0xfff026e8        0x8 ./generate/inthandler.o
+                0xfff026e8                _INT_Excep_SCI1_RXI1
+ .text.INT_Excep_SCI1_TXI1
+                0xfff026f0        0x8 ./generate/inthandler.o
+                0xfff026f0                _INT_Excep_SCI1_TXI1
+ .text.INT_Excep_SCI1_TEI1
+                0xfff026f8        0x8 ./generate/inthandler.o
+                0xfff026f8                _INT_Excep_SCI1_TEI1
+ .text.INT_Excep_SCI2_RXI2
+                0xfff02700        0x8 ./generate/inthandler.o
+                0xfff02700                _INT_Excep_SCI2_RXI2
+ .text.INT_Excep_SCI2_TXI2
+                0xfff02708        0x8 ./generate/inthandler.o
+                0xfff02708                _INT_Excep_SCI2_TXI2
+ .text.INT_Excep_SCI2_TEI2
+                0xfff02710        0x8 ./generate/inthandler.o
+                0xfff02710                _INT_Excep_SCI2_TEI2
+ .text.INT_Excep_SCI3_RXI3
+                0xfff02718        0x8 ./generate/inthandler.o
+                0xfff02718                _INT_Excep_SCI3_RXI3
+ .text.INT_Excep_SCI3_TXI3
+                0xfff02720        0x8 ./generate/inthandler.o
+                0xfff02720                _INT_Excep_SCI3_TXI3
+ .text.INT_Excep_SCI3_TEI3
+                0xfff02728        0x8 ./generate/inthandler.o
+                0xfff02728                _INT_Excep_SCI3_TEI3
+ .text.INT_Excep_SCI4_RXI4
+                0xfff02730        0x8 ./generate/inthandler.o
+                0xfff02730                _INT_Excep_SCI4_RXI4
+ .text.INT_Excep_SCI4_TXI4
+                0xfff02738        0x8 ./generate/inthandler.o
+                0xfff02738                _INT_Excep_SCI4_TXI4
+ .text.INT_Excep_SCI4_TEI4
+                0xfff02740        0x8 ./generate/inthandler.o
+                0xfff02740                _INT_Excep_SCI4_TEI4
+ .text.INT_Excep_SCI5_RXI5
+                0xfff02748        0x8 ./generate/inthandler.o
+                0xfff02748                _INT_Excep_SCI5_RXI5
+ .text.INT_Excep_SCI5_TXI5
+                0xfff02750        0x8 ./generate/inthandler.o
+                0xfff02750                _INT_Excep_SCI5_TXI5
+ .text.INT_Excep_SCI5_TEI5
+                0xfff02758        0x8 ./generate/inthandler.o
+                0xfff02758                _INT_Excep_SCI5_TEI5
+ .text.INT_Excep_SCI6_RXI6
+                0xfff02760        0x8 ./generate/inthandler.o
+                0xfff02760                _INT_Excep_SCI6_RXI6
+ .text.INT_Excep_SCI6_TXI6
+                0xfff02768        0x8 ./generate/inthandler.o
+                0xfff02768                _INT_Excep_SCI6_TXI6
+ .text.INT_Excep_SCI6_TEI6
+                0xfff02770        0x8 ./generate/inthandler.o
+                0xfff02770                _INT_Excep_SCI6_TEI6
+ .text.INT_Excep_SCI7_RXI7
+                0xfff02778        0x8 ./generate/inthandler.o
+                0xfff02778                _INT_Excep_SCI7_RXI7
+ .text.INT_Excep_SCI7_TXI7
+                0xfff02780        0x8 ./generate/inthandler.o
+                0xfff02780                _INT_Excep_SCI7_TXI7
+ .text.INT_Excep_SCI7_TEI7
+                0xfff02788        0x8 ./generate/inthandler.o
+                0xfff02788                _INT_Excep_SCI7_TEI7
+ .text.INT_Excep_SCI8_RXI8
+                0xfff02790        0x8 ./generate/inthandler.o
+                0xfff02790                _INT_Excep_SCI8_RXI8
+ .text.INT_Excep_SCI8_TXI8
+                0xfff02798        0x8 ./generate/inthandler.o
+                0xfff02798                _INT_Excep_SCI8_TXI8
+ .text.INT_Excep_SCI8_TEI8
+                0xfff027a0        0x8 ./generate/inthandler.o
+                0xfff027a0                _INT_Excep_SCI8_TEI8
+ .text.INT_Excep_SCI9_RXI9
+                0xfff027a8        0x8 ./generate/inthandler.o
+                0xfff027a8                _INT_Excep_SCI9_RXI9
+ .text.INT_Excep_SCI9_TXI9
+                0xfff027b0        0x8 ./generate/inthandler.o
+                0xfff027b0                _INT_Excep_SCI9_TXI9
+ .text.INT_Excep_SCI9_TEI9
+                0xfff027b8        0x8 ./generate/inthandler.o
+                0xfff027b8                _INT_Excep_SCI9_TEI9
+ .text.INT_Excep_SCI10_RXI10
+                0xfff027c0        0x8 ./generate/inthandler.o
+                0xfff027c0                _INT_Excep_SCI10_RXI10
+ .text.INT_Excep_SCI10_TXI10
+                0xfff027c8        0x8 ./generate/inthandler.o
+                0xfff027c8                _INT_Excep_SCI10_TXI10
+ .text.INT_Excep_SCI10_TEI10
+                0xfff027d0        0x8 ./generate/inthandler.o
+                0xfff027d0                _INT_Excep_SCI10_TEI10
+ .text.INT_Excep_SCI11_RXI11
+                0xfff027d8        0x8 ./generate/inthandler.o
+                0xfff027d8                _INT_Excep_SCI11_RXI11
+ .text.INT_Excep_SCI11_TXI11
+                0xfff027e0        0x8 ./generate/inthandler.o
+                0xfff027e0                _INT_Excep_SCI11_TXI11
+ .text.INT_Excep_SCI11_TEI11
+                0xfff027e8        0x8 ./generate/inthandler.o
+                0xfff027e8                _INT_Excep_SCI11_TEI11
+ .text.INT_Excep_SCI12_RXI12
+                0xfff027f0        0x8 ./generate/inthandler.o
+                0xfff027f0                _INT_Excep_SCI12_RXI12
+ .text.INT_Excep_SCI12_TXI12
+                0xfff027f8        0x8 ./generate/inthandler.o
+                0xfff027f8                _INT_Excep_SCI12_TXI12
+ .text.INT_Excep_SCI12_TEI12
+                0xfff02800        0x8 ./generate/inthandler.o
+                0xfff02800                _INT_Excep_SCI12_TEI12
+ .text.INT_Excep_IEB_IEBINT
+                0xfff02808        0x8 ./generate/inthandler.o
+                0xfff02808                _INT_Excep_IEB_IEBINT
+ .text._sprintf_r
+                0xfff02810       0x33 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o)
+                0xfff02810                __sprintf_r
+ .text.sprintf  0xfff02843       0x3b c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o)
+                0xfff02843                _sprintf
+ .text.exponent
+                0xfff0287e       0x67 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ .text.cvt.isra.0
+                0xfff028e5       0xa2 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ .text._svfprintf_r
+                0xfff02987      0xe8a c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+                0xfff02987                __svfprintf_r
+ .text.quorem   0xfff03811      0x10b c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+ .text._dtoa_r  0xfff0391c      0x924 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+                0xfff0391c                __dtoa_r
+ .text._setlocale_r
+                0xfff04240       0x48 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff04240                __setlocale_r
+ .text.__locale_charset
+                0xfff04288        0x7 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff04288                ___locale_charset
+ .text.__locale_mb_cur_max
+                0xfff0428f        0x9 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff0428f                ___locale_mb_cur_max
+ .text.__locale_msgcharset
+                0xfff04298        0x7 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff04298                ___locale_msgcharset
+ .text.__locale_cjk_lang
+                0xfff0429f        0x3 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff0429f                ___locale_cjk_lang
+ .text._localeconv_r
+                0xfff042a2        0x7 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff042a2                __localeconv_r
+ .text.setlocale
+                0xfff042a9       0x12 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff042a9                _setlocale
+ .text.localeconv
+                0xfff042bb        0x7 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0xfff042bb                _localeconv
+ .text.malloc_extend_top
+                0xfff042c2      0x126 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+ .text._malloc_r
+                0xfff043e8      0x309 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0xfff043e8                __malloc_r
+ .text.__malloc_lock
+                0xfff046f1        0x1 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mlock.o)
+                0xfff046f1                ___malloc_lock
+ .text.__malloc_unlock
+                0xfff046f2        0x1 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mlock.o)
+                0xfff046f2                ___malloc_unlock
+ .text._Balloc  0xfff046f3       0x54 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff046f3                __Balloc
+ .text._Bfree   0xfff04747       0x11 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04747                __Bfree
+ .text.__multadd
+                0xfff04758       0x78 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04758                ___multadd
+ .text.__s2b    0xfff047d0       0x7a c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff047d0                ___s2b
+ .text.__hi0bits
+                0xfff0484a       0x45 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff0484a                ___hi0bits
+ .text.__lo0bits
+                0xfff0488f       0x5b c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff0488f                ___lo0bits
+ .text.__i2b    0xfff048ea       0x12 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff048ea                ___i2b
+ .text.__multiply
+                0xfff048fc      0x111 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff048fc                ___multiply
+ .text.__pow5mult
+                0xfff04a0d       0x7c c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04a0d                ___pow5mult
+ .text.__lshift
+                0xfff04a89       0x9d c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04a89                ___lshift
+ .text.__mcmp   0xfff04b26       0x30 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04b26                ___mcmp
+ .text.__mdiff  0xfff04b56       0xca c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04b56                ___mdiff
+ .text.__ulp    0xfff04c20       0x27 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04c20                ___ulp
+ .text.__b2d    0xfff04c47       0x66 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04c47                ___b2d
+ .text.__d2b    0xfff04cad       0x59 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04cad                ___d2b
+ .text.__ratio  0xfff04d06       0x3e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04d06                ___ratio
+ .text._mprec_log10
+                0xfff04d44       0x23 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04d44                __mprec_log10
+ .text.__copybits
+                0xfff04d67       0x30 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04d67                ___copybits
+ .text.__any_on
+                0xfff04d97       0x3b c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff04d97                ___any_on
+ .text._sbrk_r  0xfff04dd2       0x21 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o)
+                0xfff04dd2                __sbrk_r
+ .text.__fpclassifyf
+                0xfff04df3       0x32 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sf_fpclassify.o)
+                0xfff04df3                ___fpclassifyf
+ .text.__ssprint_r
+                0xfff04e25       0xe9 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+                0xfff04e25                ___ssprint_r
+ .text._svfiprintf_r
+                0xfff04f0e      0x831 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+                0xfff04f0e                __svfiprintf_r
+ .text._calloc_r
+                0xfff0573f       0x61 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-callocr.o)
+                0xfff0573f                __calloc_r
+ .text._malloc_trim_r
+                0xfff057a0       0xa0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-freer.o)
+                0xfff057a0                __malloc_trim_r
+ .text._free_r  0xfff05840      0x178 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-freer.o)
+                0xfff05840                __free_r
+ .text._realloc_r
+                0xfff059b8      0x2bd c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reallocr.o)
+                0xfff059b8                __realloc_r
+ .text.cleanup_glue
+                0xfff05c75       0x19 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+                0xfff05c75                _cleanup_glue
+ .text._reclaim_reent
+                0xfff05c8e       0x9d c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+                0xfff05c8e                __reclaim_reent
+ .text.sbrk     0xfff05d2b       0x1a c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a(sbrk.o)
+                0xfff05d2b                _sbrk
+ *(P)
+ P              0xfff05d45        0x0 ./src/EVE/EVE.o
+ P              0xfff05d45        0x0 ./src/EVE/EVE_SPI.o
+ P              0xfff05d45        0x0 ./src/EVE/Menu.o
+ P              0xfff05d45        0x0 ./src/EVE/copro_commands.o
+ P              0xfff05d45        0x0 ./src/RX600_EVE_HomeServer.o
+ P              0xfff05d45        0x0 ./src/SPI.o
+ P              0xfff05d45        0x0 ./src/board.o
+ P              0xfff05d45        0x0 ./generate/hwinit.o
+ P              0xfff05d45        0x0 ./generate/inthandler.o
+ P              0xfff05d45        0x0 ./generate/start.o
+ P              0xfff05d45        0x0 ./generate/vects.o
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strlen.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memchr.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memcpy.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mlock.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sf_fpclassify.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strcmp.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-callocr.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-freer.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memmove.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memset.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reallocr.o)
+ P              0xfff05d45        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+ *fill*         0xfff05d45        0x3 
+ P              0xfff05d48      0x3d0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_udivdi3.o)
+                0xfff05d48                __COM_DIV64u
+                0xfff05d48                ___udivdi3
+ P              0xfff06118      0x3b8 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_umoddi3.o)
+                0xfff06118                ___umoddi3
+                0xfff06118                __COM_MOD64u
+ P              0xfff064d0        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_clz.o)
+ P              0xfff064d0        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a(sbrk.o)
+                0xfff064d0                etext = .
+
+.rvectors       0xfff064d0      0x400
+                0xfff064d0                _rvectors_start = .
+ *(.rvectors)
+ .rvectors      0xfff064d0      0x400 ./generate/vects.o
+                0xfff064d0                _RelocatableVectors
+                0xfff068d0                _rvectors_end = .
+
+.init           0xfff068d0        0x0
+ *(.init)
+                0xfff068d0                __preinit_array_start = .
+ *(.preinit_array)
+                0xfff068d0                __preinit_array_end = .
+                0xfff068d0                __init_array_start = ((. + 0x3) & 0xfffffffc)
+ *(.init_array)
+ *(SORT(.init_array.*))
+                0xfff068d0                __init_array_end = .
+                0xfff068d0                __fini_array_start = .
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0xfff068d0                __fini_array_end = .
+
+.fini
+ *(.fini)
+
+.got
+ *(.got)
+ *(.got.plt)
+
+.rodata         0xfff068d0      0x3f4
+ *(.rodata)
+ *(.rodata.*)
+ .rodata.months
+                0xfff068d0        0xc ./src/board.o
+                0xfff068d0                _months
+ .rodata._svfprintf_r
+                0xfff068dc      0x164 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ .rodata.str1.1
+                0xfff06a40       0x34 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ .rodata.zeroes.4173
+                0xfff06a74       0x10 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ .rodata.blanks.4172
+                0xfff06a84       0x10 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ .rodata.str1.1
+                0xfff06a94        0xd c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+                                  0xf (size before relaxing)
+ .rodata.str1.1
+                0xfff06aa1        0x2 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+ *fill*         0xfff06aa3        0x1 
+ .rodata._global_impure_ptr
+                0xfff06aa4        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+                0xfff06aa4                __global_impure_ptr
+ .rodata.str1.1
+                0xfff06aa8        0x8 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                                  0xb (size before relaxing)
+ .rodata.__mprec_tens
+                0xfff06ab0       0x64 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff06ab0                ___mprec_tens
+ .rodata.__mprec_bigtens
+                0xfff06b14        0x8 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff06b14                ___mprec_bigtens
+ .rodata.__mprec_tinytens
+                0xfff06b1c        0x8 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+                0xfff06b1c                ___mprec_tinytens
+ .rodata.p05.2562
+                0xfff06b24        0xc c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+ .rodata.blanks.4116
+                0xfff06b30       0x10 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+ .rodata.str1.1
+                0x00000000       0x22 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+ .rodata.zeroes.4117
+                0xfff06b40       0x10 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+ *(C_1)
+ *(C_2)
+ *(C)
+ C              0xfff06b50       0x4c ./src/EVE/EVE.o
+ C              0xfff06b9c        0x8 ./src/EVE/Menu.o
+ C              0xfff06ba4       0x20 ./src/RX600_EVE_HomeServer.o
+ C              0xfff06bc4      0x100 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_clz.o)
+                0xfff06bc4                ___clz_tab
+                0xfff06cc4                _erodata = .
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame
+ *(.eh_frame)
+
+.jcr
+ *(.jcr)
+
+.tors           0xfff06cc4        0x0
+                0xfff06cc4                __CTOR_LIST__ = .
+                0xfff06cc4                . = ALIGN (0x2)
+                0xfff06cc4                ___ctors = .
+ *(.ctors)
+                0xfff06cc4                ___ctors_end = .
+                0xfff06cc4                __CTOR_END__ = .
+                0xfff06cc4                __DTOR_LIST__ = .
+                0xfff06cc4                ___dtors = .
+ *(.dtors)
+                0xfff06cc4                ___dtors_end = .
+                0xfff06cc4                __DTOR_END__ = .
+                0xfff06cc4                . = ALIGN (0x2)
+                0xfff06cc4                _mdata = .
+
+.ustack         0x00000200        0x0
+                0x00000200                _ustack = .
+
+.istack         0x00000100        0x0
+                0x00000100                _istack = .
+
+.data           0x00000204      0x8c4 load address 0xfff06cc4
+                0x00000204                _data = .
+ *(.data)
+ *(.data.*)
+ .data.fdhdgg   0x00000204        0xc ./src/EVE/EVE_SPI.o
+                0x00000204                _fdhdgg
+ .data.lum      0x00000210        0x4 ./src/RX600_EVE_HomeServer.o
+                0x00000210                _lum
+ .data.impure_data
+                0x00000214      0x424 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x00000638        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+                0x00000638                __impure_ptr
+ .data.lc_message_charset
+                0x0000063c       0x20 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+ .data.lconv    0x0000065c       0x38 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+ .data.lc_ctype_charset
+                0x00000694       0x20 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+ .data.__mb_cur_max
+                0x000006b4        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0x000006b4                ___mb_cur_max
+ .data.__malloc_av_
+                0x000006b8      0x408 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0x000006b8                ___malloc_av_
+ .data.__malloc_trim_threshold
+                0x00000ac0        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00000ac0                ___malloc_trim_threshold
+ .data.__malloc_sbrk_base
+                0x00000ac4        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00000ac4                ___malloc_sbrk_base
+ *(D)
+ *(D_1)
+ D_1            0x00000ac8        0x0 ./src/EVE/EVE.o
+ D_1            0x00000ac8        0x0 ./src/EVE/EVE_SPI.o
+ D_1            0x00000ac8        0x0 ./src/EVE/Menu.o
+ D_1            0x00000ac8        0x0 ./src/EVE/copro_commands.o
+ D_1            0x00000ac8        0x0 ./src/RX600_EVE_HomeServer.o
+ D_1            0x00000ac8        0x0 ./src/SPI.o
+ D_1            0x00000ac8        0x0 ./src/board.o
+ D_1            0x00000ac8        0x0 ./generate/hwinit.o
+ D_1            0x00000ac8        0x0 ./generate/inthandler.o
+ D_1            0x00000ac8        0x0 ./generate/start.o
+ D_1            0x00000ac8        0x0 ./generate/vects.o
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strlen.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memchr.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memcpy.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mlock.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sf_fpclassify.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strcmp.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-callocr.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-freer.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memmove.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memset.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reallocr.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_udivdi3.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_umoddi3.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_clz.o)
+ D_1            0x00000ac8        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a(sbrk.o)
+ *(D_2)
+                0x00000ac8                _edata = .
+
+.gcc_exc
+ *(.gcc_exc)
+
+.bss            0x00000ac8       0x84 load address 0xfff07588
+                0x00000ac8                _bss = .
+ *(.bss)
+ *(.bss.**)
+ .bss.__ft_cmd_fifo_wp
+                0x00000ac8        0x4 ./src/EVE/EVE.o
+                0x00000ac8                ___ft_cmd_fifo_wp
+ .bss._PathLocale
+                0x00000acc        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0x00000acc                __PathLocale
+ .bss.__nlocale_changed
+                0x00000ad0        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0x00000ad0                ___nlocale_changed
+ .bss.__mlocale_changed
+                0x00000ad4        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+                0x00000ad4                ___mlocale_changed
+ .bss.__malloc_max_total_mem
+                0x00000ad8        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00000ad8                ___malloc_max_total_mem
+ .bss.__malloc_max_sbrked_mem
+                0x00000adc        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00000adc                ___malloc_max_sbrked_mem
+ .bss.__malloc_top_pad
+                0x00000ae0        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00000ae0                ___malloc_top_pad
+ .bss.__malloc_current_mallinfo
+                0x00000ae4       0x28 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+                0x00000ae4                ___malloc_current_mallinfo
+ .bss.errno     0x00000b0c        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+                0x00000b0c                _errno
+ .bss.heap_end.1345
+                0x00000b10        0x4 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a(sbrk.o)
+ *(COMMON)
+ COMMON         0x00000b14        0x8 ./src/EVE/EVE.o
+                0x00000b14                _cli
+                0x00000b18                _dli
+ COMMON         0x00000b1c       0x30 ./src/board.o
+                0x00000b1c                _year
+                0x00000b20                _delay_counter
+                0x00000b24                _month_old
+                0x00000b25                _day
+                0x00000b28                _ms_counter
+                0x00000b2c                _min
+                0x00000b30                _year_old
+                0x00000b34                _hr
+                0x00000b38                _month
+                0x00000b3c                _ms
+                0x00000b40                _ms_counter2
+                0x00000b44                _day_old
+                0x00000b48                _sek
+ *(B)
+ *(B_1)
+ B_1            0x00000b4c        0x0 ./src/EVE/EVE.o
+ B_1            0x00000b4c        0x0 ./src/EVE/EVE_SPI.o
+ B_1            0x00000b4c        0x0 ./src/EVE/Menu.o
+ B_1            0x00000b4c        0x0 ./src/EVE/copro_commands.o
+ B_1            0x00000b4c        0x0 ./src/RX600_EVE_HomeServer.o
+ B_1            0x00000b4c        0x0 ./src/SPI.o
+ B_1            0x00000b4c        0x0 ./src/board.o
+ B_1            0x00000b4c        0x0 ./generate/hwinit.o
+ B_1            0x00000b4c        0x0 ./generate/inthandler.o
+ B_1            0x00000b4c        0x0 ./generate/start.o
+ B_1            0x00000b4c        0x0 ./generate/vects.o
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strlen.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memchr.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memcpy.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mlock.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sf_fpclassify.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-strcmp.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-callocr.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-freer.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memmove.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-memset.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reallocr.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_udivdi3.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_umoddi3.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_clz.o)
+ B_1            0x00000b4c        0x0 c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a(sbrk.o)
+ *(B_2)
+                0x00000b4c                _ebss = .
+                0x00000b4c                _end = .
+OUTPUT(RX600_EVE_HomeServer.elf elf32-rx-le)
+
+.debug_frame    0x00000000     0x2654
+ .debug_frame   0x00000000      0x2dc ./src/EVE/EVE.o
+ .debug_frame   0x000002dc      0x20c ./src/EVE/EVE_SPI.o
+ .debug_frame   0x000004e8       0x40 ./src/EVE/Menu.o
+ .debug_frame   0x00000528      0x45c ./src/EVE/copro_commands.o
+ .debug_frame   0x00000984       0x40 ./src/RX600_EVE_HomeServer.o
+ .debug_frame   0x000009c4       0xa4 ./src/SPI.o
+ .debug_frame   0x00000a68      0x104 ./src/board.o
+ .debug_frame   0x00000b6c       0x34 ./generate/hwinit.o
+ .debug_frame   0x00000ba0     0x1ab4 ./generate/inthandler.o
+
+.debug_info     0x00000000    0x10dfb
+ .debug_info    0x00000000      0x9ba ./src/EVE/EVE.o
+ .debug_info    0x000009ba      0x87e ./src/EVE/EVE_SPI.o
+ .debug_info    0x00001238       0xbc ./src/EVE/Menu.o
+ .debug_info    0x000012f4      0x780 ./src/EVE/copro_commands.o
+ .debug_info    0x00001a74      0x6e0 ./src/RX600_EVE_HomeServer.o
+ .debug_info    0x00002154     0x5152 ./src/SPI.o
+ .debug_info    0x000072a6     0x8b1a ./src/board.o
+ .debug_info    0x0000fdc0       0x5a ./generate/hwinit.o
+ .debug_info    0x0000fe1a      0xed3 ./generate/inthandler.o
+ .debug_info    0x00010ced       0x8a ./generate/start.o
+ .debug_info    0x00010d77       0x84 ./generate/vects.o
+
+.debug_abbrev   0x00000000      0xb60
+ .debug_abbrev  0x00000000      0x276 ./src/EVE/EVE.o
+ .debug_abbrev  0x00000276      0x19d ./src/EVE/EVE_SPI.o
+ .debug_abbrev  0x00000413       0x83 ./src/EVE/Menu.o
+ .debug_abbrev  0x00000496      0x13f ./src/EVE/copro_commands.o
+ .debug_abbrev  0x000005d5      0x151 ./src/RX600_EVE_HomeServer.o
+ .debug_abbrev  0x00000726      0x169 ./src/SPI.o
+ .debug_abbrev  0x0000088f      0x1db ./src/board.o
+ .debug_abbrev  0x00000a6a       0x37 ./generate/hwinit.o
+ .debug_abbrev  0x00000aa1       0x44 ./generate/inthandler.o
+ .debug_abbrev  0x00000ae5       0x14 ./generate/start.o
+ .debug_abbrev  0x00000af9       0x67 ./generate/vects.o
+
+.debug_aranges  0x00000000      0x9f0
+ .debug_aranges
+                0x00000000       0xb0 ./src/EVE/EVE.o
+ .debug_aranges
+                0x000000b0       0x80 ./src/EVE/EVE_SPI.o
+ .debug_aranges
+                0x00000130       0x20 ./src/EVE/Menu.o
+ .debug_aranges
+                0x00000150       0xe0 ./src/EVE/copro_commands.o
+ .debug_aranges
+                0x00000230       0x20 ./src/RX600_EVE_HomeServer.o
+ .debug_aranges
+                0x00000250       0x38 ./src/SPI.o
+ .debug_aranges
+                0x00000288       0x50 ./src/board.o
+ .debug_aranges
+                0x000002d8       0x20 ./generate/hwinit.o
+ .debug_aranges
+                0x000002f8      0x6c0 ./generate/inthandler.o
+ .debug_aranges
+                0x000009b8       0x20 ./generate/start.o
+ .debug_aranges
+                0x000009d8       0x18 ./generate/vects.o
+
+.debug_ranges   0x00000000      0x928
+ .debug_ranges  0x00000000       0xa0 ./src/EVE/EVE.o
+ .debug_ranges  0x000000a0       0x70 ./src/EVE/EVE_SPI.o
+ .debug_ranges  0x00000110       0x10 ./src/EVE/Menu.o
+ .debug_ranges  0x00000120       0xd0 ./src/EVE/copro_commands.o
+ .debug_ranges  0x000001f0       0x10 ./src/RX600_EVE_HomeServer.o
+ .debug_ranges  0x00000200       0x28 ./src/SPI.o
+ .debug_ranges  0x00000228       0x40 ./src/board.o
+ .debug_ranges  0x00000268       0x10 ./generate/hwinit.o
+ .debug_ranges  0x00000278      0x6b0 ./generate/inthandler.o
+
+.debug_line     0x00000000     0x1e13
+ .debug_line    0x00000000      0x38a ./src/EVE/EVE.o
+ .debug_line    0x0000038a      0x1bc ./src/EVE/EVE_SPI.o
+ .debug_line    0x00000546       0x66 ./src/EVE/Menu.o
+ .debug_line    0x000005ac      0x420 ./src/EVE/copro_commands.o
+ .debug_line    0x000009cc      0x1cf ./src/RX600_EVE_HomeServer.o
+ .debug_line    0x00000b9b       0xe4 ./src/SPI.o
+ .debug_line    0x00000c7f      0x260 ./src/board.o
+ .debug_line    0x00000edf       0x47 ./generate/hwinit.o
+ .debug_line    0x00000f26      0xe51 ./generate/inthandler.o
+ .debug_line    0x00001d77       0x68 ./generate/start.o
+ .debug_line    0x00001ddf       0x34 ./generate/vects.o
+
+.debug_str      0x00000000     0x4fc9
+ .debug_str     0x00000000      0x2bc ./src/EVE/EVE.o
+                                0x30a (size before relaxing)
+ .debug_str     0x000002bc       0xbb ./src/EVE/EVE_SPI.o
+                                0x269 (size before relaxing)
+ .debug_str     0x00000377       0x28 ./src/EVE/Menu.o
+                                0x189 (size before relaxing)
+ .debug_str     0x0000039f      0x186 ./src/EVE/copro_commands.o
+                                0x2ee (size before relaxing)
+ .debug_str     0x00000525       0x44 ./src/RX600_EVE_HomeServer.o
+                                0x1ca (size before relaxing)
+ .debug_str     0x00000569      0xcd9 ./src/SPI.o
+                                0xe46 (size before relaxing)
+ .debug_str     0x00001242     0x2bce ./src/board.o
+                               0x39ac (size before relaxing)
+ .debug_str     0x00003e10       0x23 ./generate/hwinit.o
+                                0x123 (size before relaxing)
+ .debug_str     0x00003e33     0x115f ./generate/inthandler.o
+                               0x121e (size before relaxing)
+ .debug_str     0x00004f92       0x37 ./generate/vects.o
+                                 0xff (size before relaxing)
+
+.comment        0x00000000       0x5a
+ .comment       0x00000000       0x2d ./src/EVE/EVE.o
+                                 0x2e (size before relaxing)
+ .comment       0x00000000       0x2e ./src/EVE/EVE_SPI.o
+ .comment       0x00000000       0x2e ./src/EVE/Menu.o
+ .comment       0x00000000       0x2e ./src/EVE/copro_commands.o
+ .comment       0x00000000       0x2e ./src/RX600_EVE_HomeServer.o
+ .comment       0x00000000       0x2e ./src/SPI.o
+ .comment       0x00000000       0x2e ./src/board.o
+ .comment       0x00000000       0x2e ./generate/hwinit.o
+ .comment       0x00000000       0x2e ./generate/inthandler.o
+ .comment       0x00000000       0x2e ./generate/vects.o
+ .comment       0x0000002d       0x2d c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sprintf.o)
+                                 0x2e (size before relaxing)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfprintf.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-dtoa.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-impure.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-locale.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mallocr.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mlock.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-mprec.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sbrkr.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-sf_fpclassify.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-svfiprintf.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-callocr.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-freer.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reallocr.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libc.a(lib_a-reent.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_udivdi3.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_umoddi3.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX\libgcc.a(_clz.o)
+ .comment       0x00000000       0x2e c:/program files (x86)/gcc for renesas rx 4.8.4.201803-gnurx-elf/rx-elf/rx-elf/bin/../lib/gcc/rx-elf/4.8.4.201803-GNURX/../../../../rx-elf/lib\libnosys.a(sbrk.o)

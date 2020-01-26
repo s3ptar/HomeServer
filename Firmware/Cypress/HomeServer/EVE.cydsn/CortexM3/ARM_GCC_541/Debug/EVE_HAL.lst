@@ -1,0 +1,3289 @@
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"EVE_HAL.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.enable_EVE,"ax",%progbits
+  20              		.align	2
+  21              		.global	enable_EVE
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	enable_EVE, %function
+  25              	enable_EVE:
+  26              	.LFB0:
+  27              		.file 1 "EVE_HAL.c"
+   1:EVE_HAL.c     **** /* ========================================
+   2:EVE_HAL.c     ****  *
+   3:EVE_HAL.c     ****  * Copyright YOUR COMPANY, THE YEAR
+   4:EVE_HAL.c     ****  * All Rights Reserved
+   5:EVE_HAL.c     ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:EVE_HAL.c     ****  *
+   7:EVE_HAL.c     ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:EVE_HAL.c     ****  * WHICH IS THE PROPERTY OF your company.
+   9:EVE_HAL.c     ****  *
+  10:EVE_HAL.c     ****  * ========================================
+  11:EVE_HAL.c     **** */
+  12:EVE_HAL.c     **** /***********************************************************************
+  13:EVE_HAL.c     **** *! \file:                   EVE_HAL.h
+  14:EVE_HAL.c     **** *  \projekt:                PSOC_EVE_Sensorboard
+  15:EVE_HAL.c     **** *  \created on:             2020-02-12
+  16:EVE_HAL.c     **** *  \author:                 R. Gräber
+  17:EVE_HAL.c     **** *  \version:                0
+  18:EVE_HAL.c     **** *  \history:                -
+  19:EVE_HAL.c     **** *  \brief                   HAL - Hardware abstraction Layer, define Low Level
+  20:EVE_HAL.c     ****                             Funtion here
+  21:EVE_HAL.c     **** ***********************************************************************/
+  22:EVE_HAL.c     **** 
+  23:EVE_HAL.c     **** /***********************************************************************
+  24:EVE_HAL.c     **** * Includes
+  25:EVE_HAL.c     **** ***********************************************************************/
+  26:EVE_HAL.c     **** #include "EVE_HAL.h"
+  27:EVE_HAL.c     **** #include "SPI_EVE.h"
+  28:EVE_HAL.c     **** #include "Utils.h"
+  29:EVE_HAL.c     **** #include "SS_EVE.h"
+  30:EVE_HAL.c     **** /***********************************************************************
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 2
+
+
+  31:EVE_HAL.c     **** * Informations
+  32:EVE_HAL.c     **** ***********************************************************************/
+  33:EVE_HAL.c     **** //https://www.dyclassroom.com/c/c-pointers-and-two-dimensional-array
+  34:EVE_HAL.c     **** /***********************************************************************
+  35:EVE_HAL.c     **** * Local Funtions
+  36:EVE_HAL.c     **** ***********************************************************************/
+  37:EVE_HAL.c     **** void enable_EVE(eve_enable_t enable);
+  38:EVE_HAL.c     **** void SPI_WRITE (U8 wert);
+  39:EVE_HAL.c     **** /***********************************************************************
+  40:EVE_HAL.c     **** * Global Variable
+  41:EVE_HAL.c     **** ***********************************************************************/
+  42:EVE_HAL.c     **** 
+  43:EVE_HAL.c     **** /***********************************************************************
+  44:EVE_HAL.c     **** * Constant
+  45:EVE_HAL.c     **** ***********************************************************************/
+  46:EVE_HAL.c     **** 
+  47:EVE_HAL.c     **** ////////////// Values for MEMORY_ACCESS_CONTROL register ///////////////////////
+  48:EVE_HAL.c     **** #define DEG0_NORMAL                 0x08
+  49:EVE_HAL.c     **** #define DEG0_BMP                    0x88
+  50:EVE_HAL.c     **** #define DEG90_NORMAL                0xA8
+  51:EVE_HAL.c     **** #define DEG90_BMP                   0xE8
+  52:EVE_HAL.c     **** #define DEG180_NORMAL               0xC8      
+  53:EVE_HAL.c     **** #define DEG180_BMP                  0x48
+  54:EVE_HAL.c     **** #define DEG270_NORMAL               0x68
+  55:EVE_HAL.c     **** #define DEG270_BMP                  0x28
+  56:EVE_HAL.c     **** 
+  57:EVE_HAL.c     **** 
+  58:EVE_HAL.c     **** 
+  59:EVE_HAL.c     **** #define ft_pgm_read_byte(x)         (*(x))
+  60:EVE_HAL.c     **** 
+  61:EVE_HAL.c     **** #define Pi                          3.14159
+  62:EVE_HAL.c     **** //////////////////// SPI Transfer description byte /////////////////////////////
+  63:EVE_HAL.c     **** 
+  64:EVE_HAL.c     **** //#define ID 1					// Use this if BS0 is connected to High
+  65:EVE_HAL.c     **** #define ID 0					// Use this if BS0 is connected to low
+  66:EVE_HAL.c     **** 
+  67:EVE_HAL.c     **** ///////////////////////////////////////////////////////////////////////////////
+  68:EVE_HAL.c     **** 
+  69:EVE_HAL.c     **** 
+  70:EVE_HAL.c     **** 
+  71:EVE_HAL.c     **** ////////////////////////////// Display Variables ///////////////////////////////
+  72:EVE_HAL.c     **** 
+  73:EVE_HAL.c     **** 
+  74:EVE_HAL.c     **** U8 fdhdgg[]={60,80,62,80,64,80,65,80,67,80,0,0};
+  75:EVE_HAL.c     **** unsigned int                       dli,cli;
+  76:EVE_HAL.c     **** extern U32 currfreq;// = 40;
+  77:EVE_HAL.c     **** 
+  78:EVE_HAL.c     **** 
+  79:EVE_HAL.c     **** /***********************************************************************
+  80:EVE_HAL.c     **** *! \fn			void enable_EVE(eve_enable_t enable)
+  81:EVE_HAL.c     **** *  \brief		Set or Reset PowerDown Pin
+  82:EVE_HAL.c     **** *  \param		eve_enable_t enable - 0 = Powerdowen
+  83:EVE_HAL.c     **** *  \exception	none
+  84:EVE_HAL.c     **** *  \return		none
+  85:EVE_HAL.c     **** ***********************************************************************/
+  86:EVE_HAL.c     **** void enable_EVE(eve_enable_t enable){
+  28              		.loc 1 86 0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 3
+
+
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 7047     		bx	lr
+  35              		.cfi_endproc
+  36              	.LFE0:
+  37              		.size	enable_EVE, .-enable_EVE
+  38 0002 00BF     		.section	.text.SelectChipOnOff,"ax",%progbits
+  39              		.align	2
+  40              		.global	SelectChipOnOff
+  41              		.thumb
+  42              		.thumb_func
+  43              		.type	SelectChipOnOff, %function
+  44              	SelectChipOnOff:
+  45              	.LFB1:
+  87:EVE_HAL.c     ****     
+  88:EVE_HAL.c     ****     if(enable){
+  89:EVE_HAL.c     ****         //Power Up FT Pin
+  90:EVE_HAL.c     ****     }else{
+  91:EVE_HAL.c     ****         //Power Down FT Pin
+  92:EVE_HAL.c     ****     }
+  93:EVE_HAL.c     ****     
+  94:EVE_HAL.c     **** }
+  95:EVE_HAL.c     ****     
+  96:EVE_HAL.c     **** 
+  97:EVE_HAL.c     **** /***********************************************************************
+  98:EVE_HAL.c     **** *! \fn			void enable_EVE(eve_enable_t enable)
+  99:EVE_HAL.c     **** *  \brief		SelectChip (switch CSN Signal)
+ 100:EVE_HAL.c     **** *  \param		U8 ChipOnOff
+ 101:EVE_HAL.c     **** *  \exception	none
+ 102:EVE_HAL.c     **** *  \return		none
+ 103:EVE_HAL.c     **** ***********************************************************************/
+ 104:EVE_HAL.c     **** void SelectChipOnOff(U8 ChipOnOff){
+  46              		.loc 1 104 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50              	.LVL1:
+  51              		.loc 1 104 0
+  52 0000 08B5     		push	{r3, lr}
+  53              		.cfi_def_cfa_offset 8
+  54              		.cfi_offset 3, -8
+  55              		.cfi_offset 14, -4
+  56              	.LVL2:
+ 105:EVE_HAL.c     ****     unsigned char go=1;
+ 106:EVE_HAL.c     ****     U32 timeout=1000000;
+ 107:EVE_HAL.c     ****         if (ChipOnOff == ChipOn){
+  57              		.loc 1 107 0
+  58 0002 0128     		cmp	r0, #1
+  59 0004 02D1     		bne	.L3
+ 108:EVE_HAL.c     ****             //Select SPI Slave
+ 109:EVE_HAL.c     ****             //EVE_CS_on;
+ 110:EVE_HAL.c     ****             SS_EVE_Write(1);
+  60              		.loc 1 110 0
+  61 0006 FFF7FEFF 		bl	SS_EVE_Write
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 4
+
+
+  62              	.LVL3:
+  63 000a 08BD     		pop	{r3, pc}
+  64              	.LVL4:
+  65              	.L3:
+ 111:EVE_HAL.c     ****         }
+ 112:EVE_HAL.c     ****         else if (ChipOnOff == ChipOff){
+  66              		.loc 1 112 0
+  67 000c 20B1     		cbz	r0, .L8
+  68 000e 08BD     		pop	{r3, pc}
+  69              	.LVL5:
+  70              	.L7:
+ 113:EVE_HAL.c     ****             while(go){
+ 114:EVE_HAL.c     ****                 timeout--;
+ 115:EVE_HAL.c     ****                 if(timeout==0)
+  71              		.loc 1 115 0
+  72 0010 013B     		subs	r3, r3, #1
+  73              	.LVL6:
+  74 0012 03D1     		bne	.L5
+ 116:EVE_HAL.c     ****                     go=0;    
+  75              		.loc 1 116 0
+  76 0014 0022     		movs	r2, #0
+  77              	.LVL7:
+  78 0016 01E0     		b	.L5
+  79              	.LVL8:
+  80              	.L8:
+  81 0018 034B     		ldr	r3, .L11
+  82 001a 0122     		movs	r2, #1
+  83              	.LVL9:
+  84              	.L5:
+ 113:EVE_HAL.c     ****             while(go){
+  85              		.loc 1 113 0
+  86 001c 002A     		cmp	r2, #0
+  87 001e F7D1     		bne	.L7
+ 117:EVE_HAL.c     ****             } 
+ 118:EVE_HAL.c     ****         //deselect SPI Slave
+ 119:EVE_HAL.c     ****         SS_EVE_Write(0);
+  88              		.loc 1 119 0
+  89 0020 0020     		movs	r0, #0
+  90              	.LVL10:
+  91 0022 FFF7FEFF 		bl	SS_EVE_Write
+  92              	.LVL11:
+  93 0026 08BD     		pop	{r3, pc}
+  94              	.L12:
+  95              		.align	2
+  96              	.L11:
+  97 0028 40420F00 		.word	1000000
+  98              		.cfi_endproc
+  99              	.LFE1:
+ 100              		.size	SelectChipOnOff, .-SelectChipOnOff
+ 101              		.section	.text.SPI_WRITE,"ax",%progbits
+ 102              		.align	2
+ 103              		.global	SPI_WRITE
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.type	SPI_WRITE, %function
+ 107              	SPI_WRITE:
+ 108              	.LFB2:
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 5
+
+
+ 120:EVE_HAL.c     ****     } 
+ 121:EVE_HAL.c     ****         
+ 122:EVE_HAL.c     **** }
+ 123:EVE_HAL.c     **** 
+ 124:EVE_HAL.c     **** /***********************************************************************
+ 125:EVE_HAL.c     **** *! \fn			void SPI_WRITE (U8 wert)
+ 126:EVE_HAL.c     **** *  \brief		Transmit an 8 Bit value
+ 127:EVE_HAL.c     **** *  \param		U8 wert - value to send
+ 128:EVE_HAL.c     **** *  \exception	none
+ 129:EVE_HAL.c     **** *  \return		none
+ 130:EVE_HAL.c     **** ***********************************************************************/
+ 131:EVE_HAL.c     **** void SPI_WRITE (U8 wert){
+ 109              		.loc 1 131 0
+ 110              		.cfi_startproc
+ 111              		@ args = 0, pretend = 0, frame = 0
+ 112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 113              	.LVL12:
+ 114 0000 08B5     		push	{r3, lr}
+ 115              		.cfi_def_cfa_offset 8
+ 116              		.cfi_offset 3, -8
+ 117              		.cfi_offset 14, -4
+ 132:EVE_HAL.c     ****     //send 8 BIT SPI here
+ 133:EVE_HAL.c     ****     SPI_EVE_WriteTxData(wert);
+ 118              		.loc 1 133 0
+ 119 0002 FFF7FEFF 		bl	SPI_EVE_WriteTxData
+ 120              	.LVL13:
+ 134:EVE_HAL.c     ****     //read 8 BIT SPI here
+ 135:EVE_HAL.c     ****     SPI_EVE_ReadRxData();
+ 121              		.loc 1 135 0
+ 122 0006 FFF7FEFF 		bl	SPI_EVE_ReadRxData
+ 123              	.LVL14:
+ 124 000a 08BD     		pop	{r3, pc}
+ 125              		.cfi_endproc
+ 126              	.LFE2:
+ 127              		.size	SPI_WRITE, .-SPI_WRITE
+ 128              		.section	.text.SPI_READ,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	SPI_READ
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.type	SPI_READ, %function
+ 134              	SPI_READ:
+ 135              	.LFB3:
+ 136:EVE_HAL.c     **** }  
+ 137:EVE_HAL.c     **** 
+ 138:EVE_HAL.c     **** /***********************************************************************
+ 139:EVE_HAL.c     **** *! \fn			U8 SPI_READ(void)
+ 140:EVE_HAL.c     **** *  \brief		read an 8 Bit value
+ 141:EVE_HAL.c     **** *  \param		U8 wert - value to send
+ 142:EVE_HAL.c     **** *  \exception	none
+ 143:EVE_HAL.c     **** *  \return		none
+ 144:EVE_HAL.c     **** ***********************************************************************/
+ 145:EVE_HAL.c     **** U8 SPI_READ(void){
+ 136              		.loc 1 145 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 6
+
+
+ 140 0000 08B5     		push	{r3, lr}
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 3, -8
+ 143              		.cfi_offset 14, -4
+ 146:EVE_HAL.c     ****    
+ 147:EVE_HAL.c     ****    //send 8 BIT SPI here
+ 148:EVE_HAL.c     ****    SPI_EVE_WriteTxData(0xFF);
+ 144              		.loc 1 148 0
+ 145 0002 FF20     		movs	r0, #255
+ 146 0004 FFF7FEFF 		bl	SPI_EVE_WriteTxData
+ 147              	.LVL15:
+ 149:EVE_HAL.c     ****    //read 8 BIT SPI here
+ 150:EVE_HAL.c     ****    return (SPI_EVE_ReadRxData());
+ 148              		.loc 1 150 0
+ 149 0008 FFF7FEFF 		bl	SPI_EVE_ReadRxData
+ 150              	.LVL16:
+ 151:EVE_HAL.c     **** }  
+ 151              		.loc 1 151 0
+ 152 000c 08BD     		pop	{r3, pc}
+ 153              		.cfi_endproc
+ 154              	.LFE3:
+ 155              		.size	SPI_READ, .-SPI_READ
+ 156 000e 00BF     		.section	.text.SPI2TransmitWord,"ax",%progbits
+ 157              		.align	2
+ 158              		.global	SPI2TransmitWord
+ 159              		.thumb
+ 160              		.thumb_func
+ 161              		.type	SPI2TransmitWord, %function
+ 162              	SPI2TransmitWord:
+ 163              	.LFB4:
+ 152:EVE_HAL.c     **** 
+ 153:EVE_HAL.c     **** 
+ 154:EVE_HAL.c     **** /***********************************************************************
+ 155:EVE_HAL.c     **** *! \fn			void SPI2TransmitWord(U16 wert)
+ 156:EVE_HAL.c     **** *  \brief		send an 16 Bit value
+ 157:EVE_HAL.c     **** *  \param		U16 wert - value to send
+ 158:EVE_HAL.c     **** *  \exception	none
+ 159:EVE_HAL.c     **** *  \return		none
+ 160:EVE_HAL.c     **** ***********************************************************************/
+ 161:EVE_HAL.c     **** void SPI2TransmitWord(U16 wert){
+ 164              		.loc 1 161 0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168              	.LVL17:
+ 169 0000 10B5     		push	{r4, lr}
+ 170              		.cfi_def_cfa_offset 8
+ 171              		.cfi_offset 4, -8
+ 172              		.cfi_offset 14, -4
+ 173 0002 0446     		mov	r4, r0
+ 162:EVE_HAL.c     ****      //Low byte first
+ 163:EVE_HAL.c     ****     SPI_EVE_WriteTxData(Low_Byte(wert));
+ 174              		.loc 1 163 0
+ 175 0004 C0B2     		uxtb	r0, r0
+ 176              	.LVL18:
+ 177 0006 FFF7FEFF 		bl	SPI_EVE_WriteTxData
+ 178              	.LVL19:
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 7
+
+
+ 164:EVE_HAL.c     ****     SPI_EVE_WriteTxData(High_Byte(wert));
+ 179              		.loc 1 164 0
+ 180 000a C4F30720 		ubfx	r0, r4, #8, #8
+ 181 000e FFF7FEFF 		bl	SPI_EVE_WriteTxData
+ 182              	.LVL20:
+ 183 0012 10BD     		pop	{r4, pc}
+ 184              		.cfi_endproc
+ 185              	.LFE4:
+ 186              		.size	SPI2TransmitWord, .-SPI2TransmitWord
+ 187              		.section	.text.SPI2TransmitByte,"ax",%progbits
+ 188              		.align	2
+ 189              		.global	SPI2TransmitByte
+ 190              		.thumb
+ 191              		.thumb_func
+ 192              		.type	SPI2TransmitByte, %function
+ 193              	SPI2TransmitByte:
+ 194              	.LFB5:
+ 165:EVE_HAL.c     **** }
+ 166:EVE_HAL.c     **** 
+ 167:EVE_HAL.c     **** /***********************************************************************
+ 168:EVE_HAL.c     **** *! \fn			void SPI2TransmitByte(U8 wert)
+ 169:EVE_HAL.c     **** *  \brief		send an read an 8Bit value
+ 170:EVE_HAL.c     **** *  \param		U8 wert - value to send
+ 171:EVE_HAL.c     **** *  \exception	none
+ 172:EVE_HAL.c     **** *  \return		none
+ 173:EVE_HAL.c     **** ***********************************************************************/
+ 174:EVE_HAL.c     **** void SPI2TransmitByte(U8 wert){
+ 195              		.loc 1 174 0
+ 196              		.cfi_startproc
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199              	.LVL21:
+ 200 0000 08B5     		push	{r3, lr}
+ 201              		.cfi_def_cfa_offset 8
+ 202              		.cfi_offset 3, -8
+ 203              		.cfi_offset 14, -4
+ 175:EVE_HAL.c     ****     SPI_WRITE (wert);
+ 204              		.loc 1 175 0
+ 205 0002 FFF7FEFF 		bl	SPI_WRITE
+ 206              	.LVL22:
+ 207 0006 08BD     		pop	{r3, pc}
+ 208              		.cfi_endproc
+ 209              	.LFE5:
+ 210              		.size	SPI2TransmitByte, .-SPI2TransmitByte
+ 211              		.section	.text.SPI2ReceiveByte,"ax",%progbits
+ 212              		.align	2
+ 213              		.global	SPI2ReceiveByte
+ 214              		.thumb
+ 215              		.thumb_func
+ 216              		.type	SPI2ReceiveByte, %function
+ 217              	SPI2ReceiveByte:
+ 218              	.LFB6:
+ 176:EVE_HAL.c     **** }
+ 177:EVE_HAL.c     **** 
+ 178:EVE_HAL.c     **** /***********************************************************************
+ 179:EVE_HAL.c     **** *! \fn			U8 SPI2ReceiveByte(void)
+ 180:EVE_HAL.c     **** *  \brief		read an 8Bit value
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 8
+
+
+ 181:EVE_HAL.c     **** *  \param		none
+ 182:EVE_HAL.c     **** *  \exception	none
+ 183:EVE_HAL.c     **** *  \return		8 Bit SPI value
+ 184:EVE_HAL.c     **** ***********************************************************************/
+ 185:EVE_HAL.c     **** U8 SPI2ReceiveByte(void){
+ 219              		.loc 1 185 0
+ 220              		.cfi_startproc
+ 221              		@ args = 0, pretend = 0, frame = 0
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223 0000 08B5     		push	{r3, lr}
+ 224              		.cfi_def_cfa_offset 8
+ 225              		.cfi_offset 3, -8
+ 226              		.cfi_offset 14, -4
+ 186:EVE_HAL.c     ****     SPI_WRITE (0xFF);
+ 227              		.loc 1 186 0
+ 228 0002 FF20     		movs	r0, #255
+ 229 0004 FFF7FEFF 		bl	SPI_WRITE
+ 230              	.LVL23:
+ 187:EVE_HAL.c     ****     return (SPI_EVE_ReadRxData());
+ 231              		.loc 1 187 0
+ 232 0008 FFF7FEFF 		bl	SPI_EVE_ReadRxData
+ 233              	.LVL24:
+ 188:EVE_HAL.c     **** } 
+ 234              		.loc 1 188 0
+ 235 000c 08BD     		pop	{r3, pc}
+ 236              		.cfi_endproc
+ 237              	.LFE6:
+ 238              		.size	SPI2ReceiveByte, .-SPI2ReceiveByte
+ 239 000e 00BF     		.section	.text.host_command,"ax",%progbits
+ 240              		.align	2
+ 241              		.global	host_command
+ 242              		.thumb
+ 243              		.thumb_func
+ 244              		.type	host_command, %function
+ 245              	host_command:
+ 246              	.LFB7:
+ 189:EVE_HAL.c     **** 
+ 190:EVE_HAL.c     **** /***********************************************************************
+ 191:EVE_HAL.c     **** *! \fn			void host_command(U8 cmd)
+ 192:EVE_HAL.c     **** *  \brief		send an command
+ 193:EVE_HAL.c     **** *  \param		U8 cmd - command value
+ 194:EVE_HAL.c     **** *  \exception	none
+ 195:EVE_HAL.c     **** *  \return		none
+ 196:EVE_HAL.c     **** ***********************************************************************/
+ 197:EVE_HAL.c     **** void host_command(U8 cmd){
+ 247              		.loc 1 197 0
+ 248              		.cfi_startproc
+ 249              		@ args = 0, pretend = 0, frame = 0
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251              	.LVL25:
+ 252 0000 10B5     		push	{r4, lr}
+ 253              		.cfi_def_cfa_offset 8
+ 254              		.cfi_offset 4, -8
+ 255              		.cfi_offset 14, -4
+ 256 0002 0446     		mov	r4, r0
+ 198:EVE_HAL.c     ****     SelectChipOnOff(ChipOn);
+ 257              		.loc 1 198 0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 9
+
+
+ 258 0004 0120     		movs	r0, #1
+ 259              	.LVL26:
+ 260 0006 FFF7FEFF 		bl	SelectChipOnOff
+ 261              	.LVL27:
+ 199:EVE_HAL.c     ****     SPI_WRITE(cmd); 
+ 262              		.loc 1 199 0
+ 263 000a 2046     		mov	r0, r4
+ 264 000c FFF7FEFF 		bl	SPI_WRITE
+ 265              	.LVL28:
+ 200:EVE_HAL.c     ****     SPI_WRITE(0);
+ 266              		.loc 1 200 0
+ 267 0010 0020     		movs	r0, #0
+ 268 0012 FFF7FEFF 		bl	SPI_WRITE
+ 269              	.LVL29:
+ 201:EVE_HAL.c     ****     SPI_WRITE(0);
+ 270              		.loc 1 201 0
+ 271 0016 0020     		movs	r0, #0
+ 272 0018 FFF7FEFF 		bl	SPI_WRITE
+ 273              	.LVL30:
+ 202:EVE_HAL.c     ****     SelectChipOnOff(ChipOff);
+ 274              		.loc 1 202 0
+ 275 001c 0020     		movs	r0, #0
+ 276 001e FFF7FEFF 		bl	SelectChipOnOff
+ 277              	.LVL31:
+ 278 0022 10BD     		pop	{r4, pc}
+ 279              		.cfi_endproc
+ 280              	.LFE7:
+ 281              		.size	host_command, .-host_command
+ 282              		.section	.text.wr8,"ax",%progbits
+ 283              		.align	2
+ 284              		.global	wr8
+ 285              		.thumb
+ 286              		.thumb_func
+ 287              		.type	wr8, %function
+ 288              	wr8:
+ 289              	.LFB8:
+ 203:EVE_HAL.c     **** }
+ 204:EVE_HAL.c     **** 
+ 205:EVE_HAL.c     **** /***********************************************************************
+ 206:EVE_HAL.c     **** *! \fn			void wr8(U32 address, U8 data)
+ 207:EVE_HAL.c     **** *  \brief		write an 8 Bit value to an adress
+ 208:EVE_HAL.c     **** *  \param		U32 address - address for the value
+ 209:EVE_HAL.c     **** *  \param		U8 data - data for the address
+ 210:EVE_HAL.c     **** *  \exception	none
+ 211:EVE_HAL.c     **** *  \return		none
+ 212:EVE_HAL.c     **** ***********************************************************************/
+ 213:EVE_HAL.c     **** void wr8(U32 address, U8 data){
+ 290              		.loc 1 213 0
+ 291              		.cfi_startproc
+ 292              		@ args = 0, pretend = 0, frame = 0
+ 293              		@ frame_needed = 0, uses_anonymous_args = 0
+ 294              	.LVL32:
+ 295 0000 38B5     		push	{r3, r4, r5, lr}
+ 296              		.cfi_def_cfa_offset 16
+ 297              		.cfi_offset 3, -16
+ 298              		.cfi_offset 4, -12
+ 299              		.cfi_offset 5, -8
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 10
+
+
+ 300              		.cfi_offset 14, -4
+ 301 0002 0446     		mov	r4, r0
+ 302 0004 0D46     		mov	r5, r1
+ 214:EVE_HAL.c     ****     SelectChipOnOff(ChipOn);
+ 303              		.loc 1 214 0
+ 304 0006 0120     		movs	r0, #1
+ 305              	.LVL33:
+ 306 0008 FFF7FEFF 		bl	SelectChipOnOff
+ 307              	.LVL34:
+ 215:EVE_HAL.c     ****     SPI_WRITE (0x80|(address>>16));
+ 308              		.loc 1 215 0
+ 309 000c 200C     		lsrs	r0, r4, #16
+ 310 000e 60F07F00 		orn	r0, r0, #127
+ 311 0012 C0B2     		uxtb	r0, r0
+ 312 0014 FFF7FEFF 		bl	SPI_WRITE
+ 313              	.LVL35:
+ 216:EVE_HAL.c     ****     SPI_WRITE (address>>8);
+ 314              		.loc 1 216 0
+ 315 0018 C4F30720 		ubfx	r0, r4, #8, #8
+ 316 001c FFF7FEFF 		bl	SPI_WRITE
+ 317              	.LVL36:
+ 217:EVE_HAL.c     ****     SPI_WRITE (address);
+ 318              		.loc 1 217 0
+ 319 0020 E0B2     		uxtb	r0, r4
+ 320 0022 FFF7FEFF 		bl	SPI_WRITE
+ 321              	.LVL37:
+ 218:EVE_HAL.c     ****     SPI_WRITE (data);
+ 322              		.loc 1 218 0
+ 323 0026 2846     		mov	r0, r5
+ 324 0028 FFF7FEFF 		bl	SPI_WRITE
+ 325              	.LVL38:
+ 219:EVE_HAL.c     ****     SelectChipOnOff(ChipOff);
+ 326              		.loc 1 219 0
+ 327 002c 0020     		movs	r0, #0
+ 328 002e FFF7FEFF 		bl	SelectChipOnOff
+ 329              	.LVL39:
+ 330 0032 38BD     		pop	{r3, r4, r5, pc}
+ 331              		.cfi_endproc
+ 332              	.LFE8:
+ 333              		.size	wr8, .-wr8
+ 334              		.section	.text.wr16,"ax",%progbits
+ 335              		.align	2
+ 336              		.global	wr16
+ 337              		.thumb
+ 338              		.thumb_func
+ 339              		.type	wr16, %function
+ 340              	wr16:
+ 341              	.LFB9:
+ 220:EVE_HAL.c     **** }
+ 221:EVE_HAL.c     **** 
+ 222:EVE_HAL.c     **** /***********************************************************************
+ 223:EVE_HAL.c     **** *! \fn			void wr16(U32 address, U16 data)
+ 224:EVE_HAL.c     **** *  \brief		write an 16 Bit value to an adress
+ 225:EVE_HAL.c     **** *  \param		U32 address - address for the value
+ 226:EVE_HAL.c     **** *  \param		U16 data - data for the address
+ 227:EVE_HAL.c     **** *  \exception	none
+ 228:EVE_HAL.c     **** *  \return		none
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 11
+
+
+ 229:EVE_HAL.c     **** ***********************************************************************/
+ 230:EVE_HAL.c     **** void wr16(U32 address, U16 data){
+ 342              		.loc 1 230 0
+ 343              		.cfi_startproc
+ 344              		@ args = 0, pretend = 0, frame = 0
+ 345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346              	.LVL40:
+ 347 0000 38B5     		push	{r3, r4, r5, lr}
+ 348              		.cfi_def_cfa_offset 16
+ 349              		.cfi_offset 3, -16
+ 350              		.cfi_offset 4, -12
+ 351              		.cfi_offset 5, -8
+ 352              		.cfi_offset 14, -4
+ 353 0002 0446     		mov	r4, r0
+ 354 0004 0D46     		mov	r5, r1
+ 231:EVE_HAL.c     ****     SelectChipOnOff(ChipOn);
+ 355              		.loc 1 231 0
+ 356 0006 0120     		movs	r0, #1
+ 357              	.LVL41:
+ 358 0008 FFF7FEFF 		bl	SelectChipOnOff
+ 359              	.LVL42:
+ 232:EVE_HAL.c     ****     SPI_WRITE (0x80|(address>>16));
+ 360              		.loc 1 232 0
+ 361 000c 200C     		lsrs	r0, r4, #16
+ 362 000e 60F07F00 		orn	r0, r0, #127
+ 363 0012 C0B2     		uxtb	r0, r0
+ 364 0014 FFF7FEFF 		bl	SPI_WRITE
+ 365              	.LVL43:
+ 233:EVE_HAL.c     ****     SPI_WRITE (address>>8);
+ 366              		.loc 1 233 0
+ 367 0018 C4F30720 		ubfx	r0, r4, #8, #8
+ 368 001c FFF7FEFF 		bl	SPI_WRITE
+ 369              	.LVL44:
+ 234:EVE_HAL.c     ****     SPI_WRITE (address);
+ 370              		.loc 1 234 0
+ 371 0020 E0B2     		uxtb	r0, r4
+ 372 0022 FFF7FEFF 		bl	SPI_WRITE
+ 373              	.LVL45:
+ 235:EVE_HAL.c     ****     SPI2TransmitWord(data);
+ 374              		.loc 1 235 0
+ 375 0026 2846     		mov	r0, r5
+ 376 0028 FFF7FEFF 		bl	SPI2TransmitWord
+ 377              	.LVL46:
+ 236:EVE_HAL.c     ****     SelectChipOnOff(ChipOff);
+ 378              		.loc 1 236 0
+ 379 002c 0020     		movs	r0, #0
+ 380 002e FFF7FEFF 		bl	SelectChipOnOff
+ 381              	.LVL47:
+ 382 0032 38BD     		pop	{r3, r4, r5, pc}
+ 383              		.cfi_endproc
+ 384              	.LFE9:
+ 385              		.size	wr16, .-wr16
+ 386              		.section	.text.wr32,"ax",%progbits
+ 387              		.align	2
+ 388              		.global	wr32
+ 389              		.thumb
+ 390              		.thumb_func
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 12
+
+
+ 391              		.type	wr32, %function
+ 392              	wr32:
+ 393              	.LFB10:
+ 237:EVE_HAL.c     **** }
+ 238:EVE_HAL.c     **** 
+ 239:EVE_HAL.c     **** /***********************************************************************
+ 240:EVE_HAL.c     **** *! \fn			void wr16(U32 address, U32 data)
+ 241:EVE_HAL.c     **** *  \brief		write an 32 Bit value to an adress
+ 242:EVE_HAL.c     **** *  \param		U32 address - address for the value
+ 243:EVE_HAL.c     **** *  \param		U32 data - data for the address
+ 244:EVE_HAL.c     **** *  \exception	none
+ 245:EVE_HAL.c     **** *  \return		none
+ 246:EVE_HAL.c     **** ***********************************************************************/
+ 247:EVE_HAL.c     **** void wr32(U32 address, U32 data){
+ 394              		.loc 1 247 0
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 0
+ 397              		@ frame_needed = 0, uses_anonymous_args = 0
+ 398              	.LVL48:
+ 399 0000 38B5     		push	{r3, r4, r5, lr}
+ 400              		.cfi_def_cfa_offset 16
+ 401              		.cfi_offset 3, -16
+ 402              		.cfi_offset 4, -12
+ 403              		.cfi_offset 5, -8
+ 404              		.cfi_offset 14, -4
+ 405 0002 0446     		mov	r4, r0
+ 406 0004 0D46     		mov	r5, r1
+ 248:EVE_HAL.c     ****     SelectChipOnOff(ChipOn);
+ 407              		.loc 1 248 0
+ 408 0006 0120     		movs	r0, #1
+ 409              	.LVL49:
+ 410 0008 FFF7FEFF 		bl	SelectChipOnOff
+ 411              	.LVL50:
+ 249:EVE_HAL.c     ****     SPI_WRITE (0x80|(address>>16));
+ 412              		.loc 1 249 0
+ 413 000c 200C     		lsrs	r0, r4, #16
+ 414 000e 60F07F00 		orn	r0, r0, #127
+ 415 0012 C0B2     		uxtb	r0, r0
+ 416 0014 FFF7FEFF 		bl	SPI_WRITE
+ 417              	.LVL51:
+ 250:EVE_HAL.c     ****     SPI_WRITE (address>>8);
+ 418              		.loc 1 250 0
+ 419 0018 C4F30720 		ubfx	r0, r4, #8, #8
+ 420 001c FFF7FEFF 		bl	SPI_WRITE
+ 421              	.LVL52:
+ 251:EVE_HAL.c     ****     SPI_WRITE (address);
+ 422              		.loc 1 251 0
+ 423 0020 E0B2     		uxtb	r0, r4
+ 424 0022 FFF7FEFF 		bl	SPI_WRITE
+ 425              	.LVL53:
+ 252:EVE_HAL.c     ****     SPI2TransmitWord(data);
+ 426              		.loc 1 252 0
+ 427 0026 2846     		mov	r0, r5
+ 428 0028 FFF7FEFF 		bl	SPI2TransmitWord
+ 429              	.LVL54:
+ 253:EVE_HAL.c     ****     SPI2TransmitWord(data>>16);
+ 430              		.loc 1 253 0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 13
+
+
+ 431 002c 280C     		lsrs	r0, r5, #16
+ 432 002e FFF7FEFF 		bl	SPI2TransmitWord
+ 433              	.LVL55:
+ 254:EVE_HAL.c     ****   
+ 255:EVE_HAL.c     ****     SelectChipOnOff(ChipOff);
+ 434              		.loc 1 255 0
+ 435 0032 0020     		movs	r0, #0
+ 436 0034 FFF7FEFF 		bl	SelectChipOnOff
+ 437              	.LVL56:
+ 438 0038 38BD     		pop	{r3, r4, r5, pc}
+ 439              		.cfi_endproc
+ 440              	.LFE10:
+ 441              		.size	wr32, .-wr32
+ 442 003a 00BF     		.section	.text.rd8,"ax",%progbits
+ 443              		.align	2
+ 444              		.global	rd8
+ 445              		.thumb
+ 446              		.thumb_func
+ 447              		.type	rd8, %function
+ 448              	rd8:
+ 449              	.LFB11:
+ 256:EVE_HAL.c     **** }
+ 257:EVE_HAL.c     **** 
+ 258:EVE_HAL.c     **** /***********************************************************************
+ 259:EVE_HAL.c     **** *! \fn			U8 rd8(U32 address)
+ 260:EVE_HAL.c     **** *  \brief		read an 8 Bit value to an adress
+ 261:EVE_HAL.c     **** *  \param		U32 address - address for the value	
+ 262:EVE_HAL.c     **** *  \exception	none
+ 263:EVE_HAL.c     **** *  \return		U8 data - data from the address
+ 264:EVE_HAL.c     **** ***********************************************************************/
+ 265:EVE_HAL.c     **** U8 rd8(U32 address){
+ 450              		.loc 1 265 0
+ 451              		.cfi_startproc
+ 452              		@ args = 0, pretend = 0, frame = 0
+ 453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 454              	.LVL57:
+ 455 0000 10B5     		push	{r4, lr}
+ 456              		.cfi_def_cfa_offset 8
+ 457              		.cfi_offset 4, -8
+ 458              		.cfi_offset 14, -4
+ 459 0002 0446     		mov	r4, r0
+ 460              	.LVL58:
+ 266:EVE_HAL.c     ****     U8 data=0;
+ 267:EVE_HAL.c     ****     SelectChipOnOff(ChipOn);
+ 461              		.loc 1 267 0
+ 462 0004 0120     		movs	r0, #1
+ 463              	.LVL59:
+ 464 0006 FFF7FEFF 		bl	SelectChipOnOff
+ 465              	.LVL60:
+ 268:EVE_HAL.c     ****     SPI_WRITE (0x00|(address>>16));
+ 466              		.loc 1 268 0
+ 467 000a C4F30740 		ubfx	r0, r4, #16, #8
+ 468 000e FFF7FEFF 		bl	SPI_WRITE
+ 469              	.LVL61:
+ 269:EVE_HAL.c     ****     SPI_WRITE (address>>8);
+ 470              		.loc 1 269 0
+ 471 0012 C4F30720 		ubfx	r0, r4, #8, #8
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 14
+
+
+ 472 0016 FFF7FEFF 		bl	SPI_WRITE
+ 473              	.LVL62:
+ 270:EVE_HAL.c     ****     SPI_WRITE (address);
+ 474              		.loc 1 270 0
+ 475 001a E0B2     		uxtb	r0, r4
+ 476 001c FFF7FEFF 		bl	SPI_WRITE
+ 477              	.LVL63:
+ 271:EVE_HAL.c     ****     SPI_WRITE (0x0);    //Dummybyte
+ 478              		.loc 1 271 0
+ 479 0020 0020     		movs	r0, #0
+ 480 0022 FFF7FEFF 		bl	SPI_WRITE
+ 481              	.LVL64:
+ 272:EVE_HAL.c     ****     data=SPI_READ();
+ 482              		.loc 1 272 0
+ 483 0026 FFF7FEFF 		bl	SPI_READ
+ 484              	.LVL65:
+ 485 002a 0446     		mov	r4, r0
+ 486              	.LVL66:
+ 273:EVE_HAL.c     ****   
+ 274:EVE_HAL.c     ****     SelectChipOnOff(ChipOff);
+ 487              		.loc 1 274 0
+ 488 002c 0020     		movs	r0, #0
+ 489 002e FFF7FEFF 		bl	SelectChipOnOff
+ 490              	.LVL67:
+ 275:EVE_HAL.c     ****     return (data);
+ 276:EVE_HAL.c     **** }
+ 491              		.loc 1 276 0
+ 492 0032 2046     		mov	r0, r4
+ 493 0034 10BD     		pop	{r4, pc}
+ 494              		.cfi_endproc
+ 495              	.LFE11:
+ 496              		.size	rd8, .-rd8
+ 497 0036 00BF     		.section	.text.rd16,"ax",%progbits
+ 498              		.align	2
+ 499              		.global	rd16
+ 500              		.thumb
+ 501              		.thumb_func
+ 502              		.type	rd16, %function
+ 503              	rd16:
+ 504              	.LFB12:
+ 277:EVE_HAL.c     **** 
+ 278:EVE_HAL.c     **** /***********************************************************************
+ 279:EVE_HAL.c     **** *! \fn			U16 rd16(U32 address)
+ 280:EVE_HAL.c     **** *  \brief		read an 16 Bit value to an adress
+ 281:EVE_HAL.c     **** *  \param		U16 address - address for the value	
+ 282:EVE_HAL.c     **** *  \exception	none
+ 283:EVE_HAL.c     **** *  \return		U16 data - data from the address
+ 284:EVE_HAL.c     **** ***********************************************************************/
+ 285:EVE_HAL.c     **** U16 rd16(U32 address){
+ 505              		.loc 1 285 0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 0
+ 508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 509              	.LVL68:
+ 510 0000 10B5     		push	{r4, lr}
+ 511              		.cfi_def_cfa_offset 8
+ 512              		.cfi_offset 4, -8
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 15
+
+
+ 513              		.cfi_offset 14, -4
+ 514 0002 0446     		mov	r4, r0
+ 515              	.LVL69:
+ 286:EVE_HAL.c     ****     U32 data=0;
+ 287:EVE_HAL.c     ****     SelectChipOnOff(ChipOn);
+ 516              		.loc 1 287 0
+ 517 0004 0120     		movs	r0, #1
+ 518              	.LVL70:
+ 519 0006 FFF7FEFF 		bl	SelectChipOnOff
+ 520              	.LVL71:
+ 288:EVE_HAL.c     ****     SPI_WRITE (0x00|(address>>16));
+ 521              		.loc 1 288 0
+ 522 000a C4F30740 		ubfx	r0, r4, #16, #8
+ 523 000e FFF7FEFF 		bl	SPI_WRITE
+ 524              	.LVL72:
+ 289:EVE_HAL.c     ****     SPI_WRITE (address>>8);
+ 525              		.loc 1 289 0
+ 526 0012 C4F30720 		ubfx	r0, r4, #8, #8
+ 527 0016 FFF7FEFF 		bl	SPI_WRITE
+ 528              	.LVL73:
+ 290:EVE_HAL.c     ****     SPI_WRITE (address);
+ 529              		.loc 1 290 0
+ 530 001a E0B2     		uxtb	r0, r4
+ 531 001c FFF7FEFF 		bl	SPI_WRITE
+ 532              	.LVL74:
+ 291:EVE_HAL.c     ****     SPI_WRITE (0x0);    //Dummybyte
+ 533              		.loc 1 291 0
+ 534 0020 0020     		movs	r0, #0
+ 535 0022 FFF7FEFF 		bl	SPI_WRITE
+ 536              	.LVL75:
+ 292:EVE_HAL.c     ****     data=SPI_READ();
+ 537              		.loc 1 292 0
+ 538 0026 FFF7FEFF 		bl	SPI_READ
+ 539              	.LVL76:
+ 540 002a 0446     		mov	r4, r0
+ 541              	.LVL77:
+ 293:EVE_HAL.c     ****     data|=SPI_READ()<<8;;
+ 542              		.loc 1 293 0
+ 543 002c FFF7FEFF 		bl	SPI_READ
+ 544              	.LVL78:
+ 545 0030 44EA0024 		orr	r4, r4, r0, lsl #8
+ 546              	.LVL79:
+ 294:EVE_HAL.c     ****   
+ 295:EVE_HAL.c     ****     SelectChipOnOff(ChipOff);
+ 547              		.loc 1 295 0
+ 548 0034 0020     		movs	r0, #0
+ 549 0036 FFF7FEFF 		bl	SelectChipOnOff
+ 550              	.LVL80:
+ 296:EVE_HAL.c     ****     return (data);
+ 297:EVE_HAL.c     **** }
+ 551              		.loc 1 297 0
+ 552 003a 2046     		mov	r0, r4
+ 553 003c 10BD     		pop	{r4, pc}
+ 554              		.cfi_endproc
+ 555              	.LFE12:
+ 556              		.size	rd16, .-rd16
+ 557 003e 00BF     		.section	.text.rd32,"ax",%progbits
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 16
+
+
+ 558              		.align	2
+ 559              		.global	rd32
+ 560              		.thumb
+ 561              		.thumb_func
+ 562              		.type	rd32, %function
+ 563              	rd32:
+ 564              	.LFB13:
+ 298:EVE_HAL.c     **** 
+ 299:EVE_HAL.c     **** /***********************************************************************
+ 300:EVE_HAL.c     **** *! \fn			U32 rd32(U32 address)
+ 301:EVE_HAL.c     **** *  \brief		read an 32 Bit value to an adress
+ 302:EVE_HAL.c     **** *  \param		U16 address - address for the value	
+ 303:EVE_HAL.c     **** *  \exception	none
+ 304:EVE_HAL.c     **** *  \return		U32 data - data from the address
+ 305:EVE_HAL.c     **** ***********************************************************************/
+ 306:EVE_HAL.c     **** U32 rd32(U32 address){
+ 565              		.loc 1 306 0
+ 566              		.cfi_startproc
+ 567              		@ args = 0, pretend = 0, frame = 0
+ 568              		@ frame_needed = 0, uses_anonymous_args = 0
+ 569              	.LVL81:
+ 570 0000 10B5     		push	{r4, lr}
+ 571              		.cfi_def_cfa_offset 8
+ 572              		.cfi_offset 4, -8
+ 573              		.cfi_offset 14, -4
+ 574 0002 0446     		mov	r4, r0
+ 575              	.LVL82:
+ 307:EVE_HAL.c     ****     U32 data=0;
+ 308:EVE_HAL.c     ****     SelectChipOnOff(ChipOn);
+ 576              		.loc 1 308 0
+ 577 0004 0120     		movs	r0, #1
+ 578              	.LVL83:
+ 579 0006 FFF7FEFF 		bl	SelectChipOnOff
+ 580              	.LVL84:
+ 309:EVE_HAL.c     ****     SPI_WRITE (0x00|(address>>16));
+ 581              		.loc 1 309 0
+ 582 000a C4F30740 		ubfx	r0, r4, #16, #8
+ 583 000e FFF7FEFF 		bl	SPI_WRITE
+ 584              	.LVL85:
+ 310:EVE_HAL.c     ****     SPI_WRITE (address>>8);
+ 585              		.loc 1 310 0
+ 586 0012 C4F30720 		ubfx	r0, r4, #8, #8
+ 587 0016 FFF7FEFF 		bl	SPI_WRITE
+ 588              	.LVL86:
+ 311:EVE_HAL.c     ****     SPI_WRITE (address);
+ 589              		.loc 1 311 0
+ 590 001a E0B2     		uxtb	r0, r4
+ 591 001c FFF7FEFF 		bl	SPI_WRITE
+ 592              	.LVL87:
+ 312:EVE_HAL.c     ****     SPI_WRITE (0xFF);    //Dummybyte
+ 593              		.loc 1 312 0
+ 594 0020 FF20     		movs	r0, #255
+ 595 0022 FFF7FEFF 		bl	SPI_WRITE
+ 596              	.LVL88:
+ 313:EVE_HAL.c     ****     data=SPI_READ();
+ 597              		.loc 1 313 0
+ 598 0026 FFF7FEFF 		bl	SPI_READ
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 17
+
+
+ 599              	.LVL89:
+ 600 002a 0446     		mov	r4, r0
+ 601              	.LVL90:
+ 314:EVE_HAL.c     ****     data|=SPI_READ()<<8;;
+ 602              		.loc 1 314 0
+ 603 002c FFF7FEFF 		bl	SPI_READ
+ 604              	.LVL91:
+ 605 0030 44EA0024 		orr	r4, r4, r0, lsl #8
+ 606              	.LVL92:
+ 315:EVE_HAL.c     ****     data|=SPI_READ()<<16;
+ 607              		.loc 1 315 0
+ 608 0034 FFF7FEFF 		bl	SPI_READ
+ 609              	.LVL93:
+ 610 0038 44EA0044 		orr	r4, r4, r0, lsl #16
+ 611              	.LVL94:
+ 316:EVE_HAL.c     ****     data|=SPI_READ()<<24;
+ 612              		.loc 1 316 0
+ 613 003c FFF7FEFF 		bl	SPI_READ
+ 614              	.LVL95:
+ 615 0040 44EA0064 		orr	r4, r4, r0, lsl #24
+ 616              	.LVL96:
+ 317:EVE_HAL.c     ****   
+ 318:EVE_HAL.c     ****     SelectChipOnOff(ChipOff);
+ 617              		.loc 1 318 0
+ 618 0044 0020     		movs	r0, #0
+ 619 0046 FFF7FEFF 		bl	SelectChipOnOff
+ 620              	.LVL97:
+ 319:EVE_HAL.c     ****     return (data);
+ 320:EVE_HAL.c     **** }
+ 621              		.loc 1 320 0
+ 622 004a 2046     		mov	r0, r4
+ 623 004c 10BD     		pop	{r4, pc}
+ 624              		.cfi_endproc
+ 625              	.LFE13:
+ 626              		.size	rd32, .-rd32
+ 627 004e 00BF     		.section	.text.init_EVE_IO,"ax",%progbits
+ 628              		.align	2
+ 629              		.global	init_EVE_IO
+ 630              		.thumb
+ 631              		.thumb_func
+ 632              		.type	init_EVE_IO, %function
+ 633              	init_EVE_IO:
+ 634              	.LFB14:
+ 321:EVE_HAL.c     **** 
+ 322:EVE_HAL.c     **** /***********************************************************************
+ 323:EVE_HAL.c     **** *! \fn			init_EVE_IO(void)
+ 324:EVE_HAL.c     **** *  \brief		init Eve Hardware here
+ 325:EVE_HAL.c     **** *  \param		none	
+ 326:EVE_HAL.c     **** *  \exception	none
+ 327:EVE_HAL.c     **** *  \return		none
+ 328:EVE_HAL.c     **** ***********************************************************************/
+ 329:EVE_HAL.c     **** void init_EVE_IO(void){
+ 635              		.loc 1 329 0
+ 636              		.cfi_startproc
+ 637              		@ args = 0, pretend = 0, frame = 0
+ 638              		@ frame_needed = 0, uses_anonymous_args = 0
+ 639              		@ link register save eliminated.
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 18
+
+
+ 640 0000 7047     		bx	lr
+ 641              		.cfi_endproc
+ 642              	.LFE14:
+ 643              		.size	init_EVE_IO, .-init_EVE_IO
+ 644 0002 00BF     		.section	.text.EVE_Power,"ax",%progbits
+ 645              		.align	2
+ 646              		.global	EVE_Power
+ 647              		.thumb
+ 648              		.thumb_func
+ 649              		.type	EVE_Power, %function
+ 650              	EVE_Power:
+ 651              	.LFB15:
+ 330:EVE_HAL.c     ****     
+ 331:EVE_HAL.c     **** }
+ 332:EVE_HAL.c     **** 
+ 333:EVE_HAL.c     **** /***********************************************************************
+ 334:EVE_HAL.c     **** *! \fn			void EVE_Power(U8 on_off)
+ 335:EVE_HAL.c     **** *  \brief		disable or enable the t800
+ 336:EVE_HAL.c     **** *  \param		none	
+ 337:EVE_HAL.c     **** *  \exception	none
+ 338:EVE_HAL.c     **** *  \return		none
+ 339:EVE_HAL.c     **** ***********************************************************************/
+ 340:EVE_HAL.c     **** void EVE_Power(U8 on_off){
+ 652              		.loc 1 340 0
+ 653              		.cfi_startproc
+ 654              		@ args = 0, pretend = 0, frame = 0
+ 655              		@ frame_needed = 0, uses_anonymous_args = 0
+ 656              	.LVL98:
+ 657              		.loc 1 340 0
+ 658 0000 08B5     		push	{r3, lr}
+ 659              		.cfi_def_cfa_offset 8
+ 660              		.cfi_offset 3, -8
+ 661              		.cfi_offset 14, -4
+ 341:EVE_HAL.c     ****     
+ 342:EVE_HAL.c     ****     nPD_EVE_Write(on_off&0x01);
+ 662              		.loc 1 342 0
+ 663 0002 00F00100 		and	r0, r0, #1
+ 664              	.LVL99:
+ 665 0006 FFF7FEFF 		bl	nPD_EVE_Write
+ 666              	.LVL100:
+ 667 000a 08BD     		pop	{r3, pc}
+ 668              		.cfi_endproc
+ 669              	.LFE15:
+ 670              		.size	EVE_Power, .-EVE_Power
+ 671              		.comm	cli,4,4
+ 672              		.comm	dli,4,4
+ 673              		.global	fdhdgg
+ 674              		.data
+ 675              		.align	2
+ 676              		.type	fdhdgg, %object
+ 677              		.size	fdhdgg, 12
+ 678              	fdhdgg:
+ 679 0000 3C       		.byte	60
+ 680 0001 50       		.byte	80
+ 681 0002 3E       		.byte	62
+ 682 0003 50       		.byte	80
+ 683 0004 40       		.byte	64
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 19
+
+
+ 684 0005 50       		.byte	80
+ 685 0006 41       		.byte	65
+ 686 0007 50       		.byte	80
+ 687 0008 43       		.byte	67
+ 688 0009 50       		.byte	80
+ 689 000a 00       		.byte	0
+ 690 000b 00       		.byte	0
+ 691              		.text
+ 692              	.Letext0:
+ 693              		.file 2 "Generated_Source\\PSoC5/SS_EVE.h"
+ 694              		.file 3 "Generated_Source\\PSoC5/SPI_EVE.h"
+ 695              		.file 4 "Generated_Source\\PSoC5/nPD_EVE.h"
+ 696              		.file 5 "EVE_Config.h"
+ 697              		.section	.debug_info,"",%progbits
+ 698              	.Ldebug_info0:
+ 699 0000 FF070000 		.4byte	0x7ff
+ 700 0004 0400     		.2byte	0x4
+ 701 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 702 000a 04       		.byte	0x4
+ 703 000b 01       		.uleb128 0x1
+ 704 000c 6E000000 		.4byte	.LASF40
+ 705 0010 0C       		.byte	0xc
+ 706 0011 2E000000 		.4byte	.LASF41
+ 707 0015 99010000 		.4byte	.LASF42
+ 708 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 709 001d 00000000 		.4byte	0
+ 710 0021 00000000 		.4byte	.Ldebug_line0
+ 711 0025 02       		.uleb128 0x2
+ 712 0026 8C010000 		.4byte	.LASF43
+ 713 002a 05       		.byte	0x5
+ 714 002b 32       		.byte	0x32
+ 715 002c 30000000 		.4byte	0x30
+ 716 0030 03       		.uleb128 0x3
+ 717 0031 01       		.byte	0x1
+ 718 0032 02       		.byte	0x2
+ 719 0033 94020000 		.4byte	.LASF0
+ 720 0037 03       		.uleb128 0x3
+ 721 0038 01       		.byte	0x1
+ 722 0039 06       		.byte	0x6
+ 723 003a 7A020000 		.4byte	.LASF1
+ 724 003e 03       		.uleb128 0x3
+ 725 003f 01       		.byte	0x1
+ 726 0040 08       		.byte	0x8
+ 727 0041 60000000 		.4byte	.LASF2
+ 728 0045 03       		.uleb128 0x3
+ 729 0046 02       		.byte	0x2
+ 730 0047 05       		.byte	0x5
+ 731 0048 43020000 		.4byte	.LASF3
+ 732 004c 03       		.uleb128 0x3
+ 733 004d 02       		.byte	0x2
+ 734 004e 07       		.byte	0x7
+ 735 004f 32010000 		.4byte	.LASF4
+ 736 0053 03       		.uleb128 0x3
+ 737 0054 04       		.byte	0x4
+ 738 0055 05       		.byte	0x5
+ 739 0056 60020000 		.4byte	.LASF5
+ 740 005a 03       		.uleb128 0x3
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 20
+
+
+ 741 005b 04       		.byte	0x4
+ 742 005c 07       		.byte	0x7
+ 743 005d 20010000 		.4byte	.LASF6
+ 744 0061 03       		.uleb128 0x3
+ 745 0062 08       		.byte	0x8
+ 746 0063 05       		.byte	0x5
+ 747 0064 2D020000 		.4byte	.LASF7
+ 748 0068 03       		.uleb128 0x3
+ 749 0069 08       		.byte	0x8
+ 750 006a 07       		.byte	0x7
+ 751 006b F0010000 		.4byte	.LASF8
+ 752 006f 04       		.uleb128 0x4
+ 753 0070 04       		.byte	0x4
+ 754 0071 05       		.byte	0x5
+ 755 0072 696E7400 		.ascii	"int\000"
+ 756 0076 03       		.uleb128 0x3
+ 757 0077 04       		.byte	0x4
+ 758 0078 07       		.byte	0x7
+ 759 0079 DB010000 		.4byte	.LASF9
+ 760 007d 03       		.uleb128 0x3
+ 761 007e 04       		.byte	0x4
+ 762 007f 04       		.byte	0x4
+ 763 0080 38000000 		.4byte	.LASF10
+ 764 0084 03       		.uleb128 0x3
+ 765 0085 08       		.byte	0x8
+ 766 0086 04       		.byte	0x4
+ 767 0087 6E010000 		.4byte	.LASF11
+ 768 008b 03       		.uleb128 0x3
+ 769 008c 01       		.byte	0x1
+ 770 008d 08       		.byte	0x8
+ 771 008e 69020000 		.4byte	.LASF12
+ 772 0092 03       		.uleb128 0x3
+ 773 0093 08       		.byte	0x8
+ 774 0094 04       		.byte	0x4
+ 775 0095 6E020000 		.4byte	.LASF13
+ 776 0099 03       		.uleb128 0x3
+ 777 009a 04       		.byte	0x4
+ 778 009b 07       		.byte	0x7
+ 779 009c 24020000 		.4byte	.LASF14
+ 780 00a0 05       		.uleb128 0x5
+ 781 00a1 0D000000 		.4byte	.LASF15
+ 782 00a5 01       		.byte	0x1
+ 783 00a6 56       		.byte	0x56
+ 784 00a7 00000000 		.4byte	.LFB0
+ 785 00ab 02000000 		.4byte	.LFE0-.LFB0
+ 786 00af 01       		.uleb128 0x1
+ 787 00b0 9C       		.byte	0x9c
+ 788 00b1 C3000000 		.4byte	0xc3
+ 789 00b5 06       		.uleb128 0x6
+ 790 00b6 27000000 		.4byte	.LASF17
+ 791 00ba 01       		.byte	0x1
+ 792 00bb 56       		.byte	0x56
+ 793 00bc 25000000 		.4byte	0x25
+ 794 00c0 01       		.uleb128 0x1
+ 795 00c1 50       		.byte	0x50
+ 796 00c2 00       		.byte	0
+ 797 00c3 05       		.uleb128 0x5
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 21
+
+
+ 798 00c4 9A020000 		.4byte	.LASF16
+ 799 00c8 01       		.byte	0x1
+ 800 00c9 68       		.byte	0x68
+ 801 00ca 00000000 		.4byte	.LFB1
+ 802 00ce 2C000000 		.4byte	.LFE1-.LFB1
+ 803 00d2 01       		.uleb128 0x1
+ 804 00d3 9C       		.byte	0x9c
+ 805 00d4 1D010000 		.4byte	0x11d
+ 806 00d8 07       		.uleb128 0x7
+ 807 00d9 16010000 		.4byte	.LASF18
+ 808 00dd 01       		.byte	0x1
+ 809 00de 68       		.byte	0x68
+ 810 00df 3E000000 		.4byte	0x3e
+ 811 00e3 00000000 		.4byte	.LLST0
+ 812 00e7 08       		.uleb128 0x8
+ 813 00e8 676F00   		.ascii	"go\000"
+ 814 00eb 01       		.byte	0x1
+ 815 00ec 69       		.byte	0x69
+ 816 00ed 3E000000 		.4byte	0x3e
+ 817 00f1 3A000000 		.4byte	.LLST1
+ 818 00f5 09       		.uleb128 0x9
+ 819 00f6 3B020000 		.4byte	.LASF19
+ 820 00fa 01       		.byte	0x1
+ 821 00fb 6A       		.byte	0x6a
+ 822 00fc 5A000000 		.4byte	0x5a
+ 823 0100 70000000 		.4byte	.LLST2
+ 824 0104 0A       		.uleb128 0xa
+ 825 0105 0A000000 		.4byte	.LVL3
+ 826 0109 D6070000 		.4byte	0x7d6
+ 827 010d 0B       		.uleb128 0xb
+ 828 010e 26000000 		.4byte	.LVL11
+ 829 0112 D6070000 		.4byte	0x7d6
+ 830 0116 0C       		.uleb128 0xc
+ 831 0117 01       		.uleb128 0x1
+ 832 0118 50       		.byte	0x50
+ 833 0119 01       		.uleb128 0x1
+ 834 011a 30       		.byte	0x30
+ 835 011b 00       		.byte	0
+ 836 011c 00       		.byte	0
+ 837 011d 05       		.uleb128 0x5
+ 838 011e 1D000000 		.4byte	.LASF20
+ 839 0122 01       		.byte	0x1
+ 840 0123 83       		.byte	0x83
+ 841 0124 00000000 		.4byte	.LFB2
+ 842 0128 0C000000 		.4byte	.LFE2-.LFB2
+ 843 012c 01       		.uleb128 0x1
+ 844 012d 9C       		.byte	0x9c
+ 845 012e 54010000 		.4byte	0x154
+ 846 0132 07       		.uleb128 0x7
+ 847 0133 0E020000 		.4byte	.LASF21
+ 848 0137 01       		.byte	0x1
+ 849 0138 83       		.byte	0x83
+ 850 0139 3E000000 		.4byte	0x3e
+ 851 013d BB000000 		.4byte	.LLST3
+ 852 0141 0A       		.uleb128 0xa
+ 853 0142 06000000 		.4byte	.LVL13
+ 854 0146 E1070000 		.4byte	0x7e1
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 22
+
+
+ 855 014a 0A       		.uleb128 0xa
+ 856 014b 0A000000 		.4byte	.LVL14
+ 857 014f EC070000 		.4byte	0x7ec
+ 858 0153 00       		.byte	0
+ 859 0154 0D       		.uleb128 0xd
+ 860 0155 45010000 		.4byte	.LASF24
+ 861 0159 01       		.byte	0x1
+ 862 015a 91       		.byte	0x91
+ 863 015b 3E000000 		.4byte	0x3e
+ 864 015f 00000000 		.4byte	.LFB3
+ 865 0163 0E000000 		.4byte	.LFE3-.LFB3
+ 866 0167 01       		.uleb128 0x1
+ 867 0168 9C       		.byte	0x9c
+ 868 0169 8B010000 		.4byte	0x18b
+ 869 016d 0E       		.uleb128 0xe
+ 870 016e 08000000 		.4byte	.LVL15
+ 871 0172 E1070000 		.4byte	0x7e1
+ 872 0176 81010000 		.4byte	0x181
+ 873 017a 0C       		.uleb128 0xc
+ 874 017b 01       		.uleb128 0x1
+ 875 017c 50       		.byte	0x50
+ 876 017d 02       		.uleb128 0x2
+ 877 017e 09       		.byte	0x9
+ 878 017f FF       		.byte	0xff
+ 879 0180 00       		.byte	0
+ 880 0181 0A       		.uleb128 0xa
+ 881 0182 0C000000 		.4byte	.LVL16
+ 882 0186 EC070000 		.4byte	0x7ec
+ 883 018a 00       		.byte	0
+ 884 018b 05       		.uleb128 0x5
+ 885 018c 13020000 		.4byte	.LASF22
+ 886 0190 01       		.byte	0x1
+ 887 0191 A1       		.byte	0xa1
+ 888 0192 00000000 		.4byte	.LFB4
+ 889 0196 14000000 		.4byte	.LFE4-.LFB4
+ 890 019a 01       		.uleb128 0x1
+ 891 019b 9C       		.byte	0x9c
+ 892 019c DA010000 		.4byte	0x1da
+ 893 01a0 07       		.uleb128 0x7
+ 894 01a1 0E020000 		.4byte	.LASF21
+ 895 01a5 01       		.byte	0x1
+ 896 01a6 A1       		.byte	0xa1
+ 897 01a7 76000000 		.4byte	0x76
+ 898 01ab DC000000 		.4byte	.LLST4
+ 899 01af 0E       		.uleb128 0xe
+ 900 01b0 0A000000 		.4byte	.LVL19
+ 901 01b4 E1070000 		.4byte	0x7e1
+ 902 01b8 C3010000 		.4byte	0x1c3
+ 903 01bc 0C       		.uleb128 0xc
+ 904 01bd 01       		.uleb128 0x1
+ 905 01be 50       		.byte	0x50
+ 906 01bf 02       		.uleb128 0x2
+ 907 01c0 74       		.byte	0x74
+ 908 01c1 00       		.sleb128 0
+ 909 01c2 00       		.byte	0
+ 910 01c3 0B       		.uleb128 0xb
+ 911 01c4 12000000 		.4byte	.LVL20
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 23
+
+
+ 912 01c8 E1070000 		.4byte	0x7e1
+ 913 01cc 0C       		.uleb128 0xc
+ 914 01cd 01       		.uleb128 0x1
+ 915 01ce 50       		.byte	0x50
+ 916 01cf 08       		.uleb128 0x8
+ 917 01d0 74       		.byte	0x74
+ 918 01d1 00       		.sleb128 0
+ 919 01d2 09       		.byte	0x9
+ 920 01d3 F4       		.byte	0xf4
+ 921 01d4 24       		.byte	0x24
+ 922 01d5 09       		.byte	0x9
+ 923 01d6 FC       		.byte	0xfc
+ 924 01d7 25       		.byte	0x25
+ 925 01d8 00       		.byte	0
+ 926 01d9 00       		.byte	0
+ 927 01da 05       		.uleb128 0x5
+ 928 01db 4F000000 		.4byte	.LASF23
+ 929 01df 01       		.byte	0x1
+ 930 01e0 AE       		.byte	0xae
+ 931 01e1 00000000 		.4byte	.LFB5
+ 932 01e5 08000000 		.4byte	.LFE5-.LFB5
+ 933 01e9 01       		.uleb128 0x1
+ 934 01ea 9C       		.byte	0x9c
+ 935 01eb 08020000 		.4byte	0x208
+ 936 01ef 07       		.uleb128 0x7
+ 937 01f0 0E020000 		.4byte	.LASF21
+ 938 01f4 01       		.byte	0x1
+ 939 01f5 AE       		.byte	0xae
+ 940 01f6 3E000000 		.4byte	0x3e
+ 941 01fa FA000000 		.4byte	.LLST5
+ 942 01fe 0A       		.uleb128 0xa
+ 943 01ff 06000000 		.4byte	.LVL22
+ 944 0203 1D010000 		.4byte	0x11d
+ 945 0207 00       		.byte	0
+ 946 0208 0D       		.uleb128 0xd
+ 947 0209 FC000000 		.4byte	.LASF25
+ 948 020d 01       		.byte	0x1
+ 949 020e B9       		.byte	0xb9
+ 950 020f 3E000000 		.4byte	0x3e
+ 951 0213 00000000 		.4byte	.LFB6
+ 952 0217 0E000000 		.4byte	.LFE6-.LFB6
+ 953 021b 01       		.uleb128 0x1
+ 954 021c 9C       		.byte	0x9c
+ 955 021d 3F020000 		.4byte	0x23f
+ 956 0221 0E       		.uleb128 0xe
+ 957 0222 08000000 		.4byte	.LVL23
+ 958 0226 1D010000 		.4byte	0x11d
+ 959 022a 35020000 		.4byte	0x235
+ 960 022e 0C       		.uleb128 0xc
+ 961 022f 01       		.uleb128 0x1
+ 962 0230 50       		.byte	0x50
+ 963 0231 02       		.uleb128 0x2
+ 964 0232 09       		.byte	0x9
+ 965 0233 FF       		.byte	0xff
+ 966 0234 00       		.byte	0
+ 967 0235 0A       		.uleb128 0xa
+ 968 0236 0C000000 		.4byte	.LVL24
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 24
+
+
+ 969 023a EC070000 		.4byte	0x7ec
+ 970 023e 00       		.byte	0
+ 971 023f 05       		.uleb128 0x5
+ 972 0240 00000000 		.4byte	.LASF26
+ 973 0244 01       		.byte	0x1
+ 974 0245 C5       		.byte	0xc5
+ 975 0246 00000000 		.4byte	.LFB7
+ 976 024a 24000000 		.4byte	.LFE7-.LFB7
+ 977 024e 01       		.uleb128 0x1
+ 978 024f 9C       		.byte	0x9c
+ 979 0250 C0020000 		.4byte	0x2c0
+ 980 0254 0F       		.uleb128 0xf
+ 981 0255 636D6400 		.ascii	"cmd\000"
+ 982 0259 01       		.byte	0x1
+ 983 025a C5       		.byte	0xc5
+ 984 025b 3E000000 		.4byte	0x3e
+ 985 025f 1B010000 		.4byte	.LLST6
+ 986 0263 0E       		.uleb128 0xe
+ 987 0264 0A000000 		.4byte	.LVL27
+ 988 0268 C3000000 		.4byte	0xc3
+ 989 026c 76020000 		.4byte	0x276
+ 990 0270 0C       		.uleb128 0xc
+ 991 0271 01       		.uleb128 0x1
+ 992 0272 50       		.byte	0x50
+ 993 0273 01       		.uleb128 0x1
+ 994 0274 31       		.byte	0x31
+ 995 0275 00       		.byte	0
+ 996 0276 0E       		.uleb128 0xe
+ 997 0277 10000000 		.4byte	.LVL28
+ 998 027b 1D010000 		.4byte	0x11d
+ 999 027f 8A020000 		.4byte	0x28a
+ 1000 0283 0C       		.uleb128 0xc
+ 1001 0284 01       		.uleb128 0x1
+ 1002 0285 50       		.byte	0x50
+ 1003 0286 02       		.uleb128 0x2
+ 1004 0287 74       		.byte	0x74
+ 1005 0288 00       		.sleb128 0
+ 1006 0289 00       		.byte	0
+ 1007 028a 0E       		.uleb128 0xe
+ 1008 028b 16000000 		.4byte	.LVL29
+ 1009 028f 1D010000 		.4byte	0x11d
+ 1010 0293 9D020000 		.4byte	0x29d
+ 1011 0297 0C       		.uleb128 0xc
+ 1012 0298 01       		.uleb128 0x1
+ 1013 0299 50       		.byte	0x50
+ 1014 029a 01       		.uleb128 0x1
+ 1015 029b 30       		.byte	0x30
+ 1016 029c 00       		.byte	0
+ 1017 029d 0E       		.uleb128 0xe
+ 1018 029e 1C000000 		.4byte	.LVL30
+ 1019 02a2 1D010000 		.4byte	0x11d
+ 1020 02a6 B0020000 		.4byte	0x2b0
+ 1021 02aa 0C       		.uleb128 0xc
+ 1022 02ab 01       		.uleb128 0x1
+ 1023 02ac 50       		.byte	0x50
+ 1024 02ad 01       		.uleb128 0x1
+ 1025 02ae 30       		.byte	0x30
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 25
+
+
+ 1026 02af 00       		.byte	0
+ 1027 02b0 0B       		.uleb128 0xb
+ 1028 02b1 22000000 		.4byte	.LVL31
+ 1029 02b5 C3000000 		.4byte	0xc3
+ 1030 02b9 0C       		.uleb128 0xc
+ 1031 02ba 01       		.uleb128 0x1
+ 1032 02bb 50       		.byte	0x50
+ 1033 02bc 01       		.uleb128 0x1
+ 1034 02bd 30       		.byte	0x30
+ 1035 02be 00       		.byte	0
+ 1036 02bf 00       		.byte	0
+ 1037 02c0 10       		.uleb128 0x10
+ 1038 02c1 77723800 		.ascii	"wr8\000"
+ 1039 02c5 01       		.byte	0x1
+ 1040 02c6 D5       		.byte	0xd5
+ 1041 02c7 00000000 		.4byte	.LFB8
+ 1042 02cb 34000000 		.4byte	.LFE8-.LFB8
+ 1043 02cf 01       		.uleb128 0x1
+ 1044 02d0 9C       		.byte	0x9c
+ 1045 02d1 71030000 		.4byte	0x371
+ 1046 02d5 07       		.uleb128 0x7
+ 1047 02d6 E8010000 		.4byte	.LASF27
+ 1048 02da 01       		.byte	0x1
+ 1049 02db D5       		.byte	0xd5
+ 1050 02dc 5A000000 		.4byte	0x5a
+ 1051 02e0 3C010000 		.4byte	.LLST7
+ 1052 02e4 07       		.uleb128 0x7
+ 1053 02e5 3E000000 		.4byte	.LASF28
+ 1054 02e9 01       		.byte	0x1
+ 1055 02ea D5       		.byte	0xd5
+ 1056 02eb 3E000000 		.4byte	0x3e
+ 1057 02ef 5A010000 		.4byte	.LLST8
+ 1058 02f3 0E       		.uleb128 0xe
+ 1059 02f4 0C000000 		.4byte	.LVL34
+ 1060 02f8 C3000000 		.4byte	0xc3
+ 1061 02fc 06030000 		.4byte	0x306
+ 1062 0300 0C       		.uleb128 0xc
+ 1063 0301 01       		.uleb128 0x1
+ 1064 0302 50       		.byte	0x50
+ 1065 0303 01       		.uleb128 0x1
+ 1066 0304 31       		.byte	0x31
+ 1067 0305 00       		.byte	0
+ 1068 0306 0E       		.uleb128 0xe
+ 1069 0307 18000000 		.4byte	.LVL35
+ 1070 030b 1D010000 		.4byte	0x11d
+ 1071 030f 1F030000 		.4byte	0x31f
+ 1072 0313 0C       		.uleb128 0xc
+ 1073 0314 01       		.uleb128 0x1
+ 1074 0315 50       		.byte	0x50
+ 1075 0316 07       		.uleb128 0x7
+ 1076 0317 74       		.byte	0x74
+ 1077 0318 00       		.sleb128 0
+ 1078 0319 40       		.byte	0x40
+ 1079 031a 25       		.byte	0x25
+ 1080 031b 09       		.byte	0x9
+ 1081 031c 80       		.byte	0x80
+ 1082 031d 21       		.byte	0x21
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 26
+
+
+ 1083 031e 00       		.byte	0
+ 1084 031f 0E       		.uleb128 0xe
+ 1085 0320 20000000 		.4byte	.LVL36
+ 1086 0324 1D010000 		.4byte	0x11d
+ 1087 0328 39030000 		.4byte	0x339
+ 1088 032c 0C       		.uleb128 0xc
+ 1089 032d 01       		.uleb128 0x1
+ 1090 032e 50       		.byte	0x50
+ 1091 032f 08       		.uleb128 0x8
+ 1092 0330 74       		.byte	0x74
+ 1093 0331 00       		.sleb128 0
+ 1094 0332 09       		.byte	0x9
+ 1095 0333 F4       		.byte	0xf4
+ 1096 0334 24       		.byte	0x24
+ 1097 0335 09       		.byte	0x9
+ 1098 0336 FC       		.byte	0xfc
+ 1099 0337 25       		.byte	0x25
+ 1100 0338 00       		.byte	0
+ 1101 0339 0E       		.uleb128 0xe
+ 1102 033a 26000000 		.4byte	.LVL37
+ 1103 033e 1D010000 		.4byte	0x11d
+ 1104 0342 4D030000 		.4byte	0x34d
+ 1105 0346 0C       		.uleb128 0xc
+ 1106 0347 01       		.uleb128 0x1
+ 1107 0348 50       		.byte	0x50
+ 1108 0349 02       		.uleb128 0x2
+ 1109 034a 74       		.byte	0x74
+ 1110 034b 00       		.sleb128 0
+ 1111 034c 00       		.byte	0
+ 1112 034d 0E       		.uleb128 0xe
+ 1113 034e 2C000000 		.4byte	.LVL38
+ 1114 0352 1D010000 		.4byte	0x11d
+ 1115 0356 61030000 		.4byte	0x361
+ 1116 035a 0C       		.uleb128 0xc
+ 1117 035b 01       		.uleb128 0x1
+ 1118 035c 50       		.byte	0x50
+ 1119 035d 02       		.uleb128 0x2
+ 1120 035e 75       		.byte	0x75
+ 1121 035f 00       		.sleb128 0
+ 1122 0360 00       		.byte	0
+ 1123 0361 0B       		.uleb128 0xb
+ 1124 0362 32000000 		.4byte	.LVL39
+ 1125 0366 C3000000 		.4byte	0xc3
+ 1126 036a 0C       		.uleb128 0xc
+ 1127 036b 01       		.uleb128 0x1
+ 1128 036c 50       		.byte	0x50
+ 1129 036d 01       		.uleb128 0x1
+ 1130 036e 30       		.byte	0x30
+ 1131 036f 00       		.byte	0
+ 1132 0370 00       		.byte	0
+ 1133 0371 05       		.uleb128 0x5
+ 1134 0372 18000000 		.4byte	.LASF29
+ 1135 0376 01       		.byte	0x1
+ 1136 0377 E6       		.byte	0xe6
+ 1137 0378 00000000 		.4byte	.LFB9
+ 1138 037c 34000000 		.4byte	.LFE9-.LFB9
+ 1139 0380 01       		.uleb128 0x1
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 27
+
+
+ 1140 0381 9C       		.byte	0x9c
+ 1141 0382 22040000 		.4byte	0x422
+ 1142 0386 07       		.uleb128 0x7
+ 1143 0387 E8010000 		.4byte	.LASF27
+ 1144 038b 01       		.byte	0x1
+ 1145 038c E6       		.byte	0xe6
+ 1146 038d 5A000000 		.4byte	0x5a
+ 1147 0391 7B010000 		.4byte	.LLST9
+ 1148 0395 07       		.uleb128 0x7
+ 1149 0396 3E000000 		.4byte	.LASF28
+ 1150 039a 01       		.byte	0x1
+ 1151 039b E6       		.byte	0xe6
+ 1152 039c 76000000 		.4byte	0x76
+ 1153 03a0 99010000 		.4byte	.LLST10
+ 1154 03a4 0E       		.uleb128 0xe
+ 1155 03a5 0C000000 		.4byte	.LVL42
+ 1156 03a9 C3000000 		.4byte	0xc3
+ 1157 03ad B7030000 		.4byte	0x3b7
+ 1158 03b1 0C       		.uleb128 0xc
+ 1159 03b2 01       		.uleb128 0x1
+ 1160 03b3 50       		.byte	0x50
+ 1161 03b4 01       		.uleb128 0x1
+ 1162 03b5 31       		.byte	0x31
+ 1163 03b6 00       		.byte	0
+ 1164 03b7 0E       		.uleb128 0xe
+ 1165 03b8 18000000 		.4byte	.LVL43
+ 1166 03bc 1D010000 		.4byte	0x11d
+ 1167 03c0 D0030000 		.4byte	0x3d0
+ 1168 03c4 0C       		.uleb128 0xc
+ 1169 03c5 01       		.uleb128 0x1
+ 1170 03c6 50       		.byte	0x50
+ 1171 03c7 07       		.uleb128 0x7
+ 1172 03c8 74       		.byte	0x74
+ 1173 03c9 00       		.sleb128 0
+ 1174 03ca 40       		.byte	0x40
+ 1175 03cb 25       		.byte	0x25
+ 1176 03cc 09       		.byte	0x9
+ 1177 03cd 80       		.byte	0x80
+ 1178 03ce 21       		.byte	0x21
+ 1179 03cf 00       		.byte	0
+ 1180 03d0 0E       		.uleb128 0xe
+ 1181 03d1 20000000 		.4byte	.LVL44
+ 1182 03d5 1D010000 		.4byte	0x11d
+ 1183 03d9 EA030000 		.4byte	0x3ea
+ 1184 03dd 0C       		.uleb128 0xc
+ 1185 03de 01       		.uleb128 0x1
+ 1186 03df 50       		.byte	0x50
+ 1187 03e0 08       		.uleb128 0x8
+ 1188 03e1 74       		.byte	0x74
+ 1189 03e2 00       		.sleb128 0
+ 1190 03e3 09       		.byte	0x9
+ 1191 03e4 F4       		.byte	0xf4
+ 1192 03e5 24       		.byte	0x24
+ 1193 03e6 09       		.byte	0x9
+ 1194 03e7 FC       		.byte	0xfc
+ 1195 03e8 25       		.byte	0x25
+ 1196 03e9 00       		.byte	0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 28
+
+
+ 1197 03ea 0E       		.uleb128 0xe
+ 1198 03eb 26000000 		.4byte	.LVL45
+ 1199 03ef 1D010000 		.4byte	0x11d
+ 1200 03f3 FE030000 		.4byte	0x3fe
+ 1201 03f7 0C       		.uleb128 0xc
+ 1202 03f8 01       		.uleb128 0x1
+ 1203 03f9 50       		.byte	0x50
+ 1204 03fa 02       		.uleb128 0x2
+ 1205 03fb 74       		.byte	0x74
+ 1206 03fc 00       		.sleb128 0
+ 1207 03fd 00       		.byte	0
+ 1208 03fe 0E       		.uleb128 0xe
+ 1209 03ff 2C000000 		.4byte	.LVL46
+ 1210 0403 8B010000 		.4byte	0x18b
+ 1211 0407 12040000 		.4byte	0x412
+ 1212 040b 0C       		.uleb128 0xc
+ 1213 040c 01       		.uleb128 0x1
+ 1214 040d 50       		.byte	0x50
+ 1215 040e 02       		.uleb128 0x2
+ 1216 040f 75       		.byte	0x75
+ 1217 0410 00       		.sleb128 0
+ 1218 0411 00       		.byte	0
+ 1219 0412 0B       		.uleb128 0xb
+ 1220 0413 32000000 		.4byte	.LVL47
+ 1221 0417 C3000000 		.4byte	0xc3
+ 1222 041b 0C       		.uleb128 0xc
+ 1223 041c 01       		.uleb128 0x1
+ 1224 041d 50       		.byte	0x50
+ 1225 041e 01       		.uleb128 0x1
+ 1226 041f 30       		.byte	0x30
+ 1227 0420 00       		.byte	0
+ 1228 0421 00       		.byte	0
+ 1229 0422 05       		.uleb128 0x5
+ 1230 0423 4E010000 		.4byte	.LASF30
+ 1231 0427 01       		.byte	0x1
+ 1232 0428 F7       		.byte	0xf7
+ 1233 0429 00000000 		.4byte	.LFB10
+ 1234 042d 3A000000 		.4byte	.LFE10-.LFB10
+ 1235 0431 01       		.uleb128 0x1
+ 1236 0432 9C       		.byte	0x9c
+ 1237 0433 E9040000 		.4byte	0x4e9
+ 1238 0437 07       		.uleb128 0x7
+ 1239 0438 E8010000 		.4byte	.LASF27
+ 1240 043c 01       		.byte	0x1
+ 1241 043d F7       		.byte	0xf7
+ 1242 043e 5A000000 		.4byte	0x5a
+ 1243 0442 B7010000 		.4byte	.LLST11
+ 1244 0446 07       		.uleb128 0x7
+ 1245 0447 3E000000 		.4byte	.LASF28
+ 1246 044b 01       		.byte	0x1
+ 1247 044c F7       		.byte	0xf7
+ 1248 044d 5A000000 		.4byte	0x5a
+ 1249 0451 D5010000 		.4byte	.LLST12
+ 1250 0455 0E       		.uleb128 0xe
+ 1251 0456 0C000000 		.4byte	.LVL50
+ 1252 045a C3000000 		.4byte	0xc3
+ 1253 045e 68040000 		.4byte	0x468
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 29
+
+
+ 1254 0462 0C       		.uleb128 0xc
+ 1255 0463 01       		.uleb128 0x1
+ 1256 0464 50       		.byte	0x50
+ 1257 0465 01       		.uleb128 0x1
+ 1258 0466 31       		.byte	0x31
+ 1259 0467 00       		.byte	0
+ 1260 0468 0E       		.uleb128 0xe
+ 1261 0469 18000000 		.4byte	.LVL51
+ 1262 046d 1D010000 		.4byte	0x11d
+ 1263 0471 81040000 		.4byte	0x481
+ 1264 0475 0C       		.uleb128 0xc
+ 1265 0476 01       		.uleb128 0x1
+ 1266 0477 50       		.byte	0x50
+ 1267 0478 07       		.uleb128 0x7
+ 1268 0479 74       		.byte	0x74
+ 1269 047a 00       		.sleb128 0
+ 1270 047b 40       		.byte	0x40
+ 1271 047c 25       		.byte	0x25
+ 1272 047d 09       		.byte	0x9
+ 1273 047e 80       		.byte	0x80
+ 1274 047f 21       		.byte	0x21
+ 1275 0480 00       		.byte	0
+ 1276 0481 0E       		.uleb128 0xe
+ 1277 0482 20000000 		.4byte	.LVL52
+ 1278 0486 1D010000 		.4byte	0x11d
+ 1279 048a 9B040000 		.4byte	0x49b
+ 1280 048e 0C       		.uleb128 0xc
+ 1281 048f 01       		.uleb128 0x1
+ 1282 0490 50       		.byte	0x50
+ 1283 0491 08       		.uleb128 0x8
+ 1284 0492 74       		.byte	0x74
+ 1285 0493 00       		.sleb128 0
+ 1286 0494 09       		.byte	0x9
+ 1287 0495 F4       		.byte	0xf4
+ 1288 0496 24       		.byte	0x24
+ 1289 0497 09       		.byte	0x9
+ 1290 0498 FC       		.byte	0xfc
+ 1291 0499 25       		.byte	0x25
+ 1292 049a 00       		.byte	0
+ 1293 049b 0E       		.uleb128 0xe
+ 1294 049c 26000000 		.4byte	.LVL53
+ 1295 04a0 1D010000 		.4byte	0x11d
+ 1296 04a4 AF040000 		.4byte	0x4af
+ 1297 04a8 0C       		.uleb128 0xc
+ 1298 04a9 01       		.uleb128 0x1
+ 1299 04aa 50       		.byte	0x50
+ 1300 04ab 02       		.uleb128 0x2
+ 1301 04ac 74       		.byte	0x74
+ 1302 04ad 00       		.sleb128 0
+ 1303 04ae 00       		.byte	0
+ 1304 04af 0E       		.uleb128 0xe
+ 1305 04b0 2C000000 		.4byte	.LVL54
+ 1306 04b4 8B010000 		.4byte	0x18b
+ 1307 04b8 C3040000 		.4byte	0x4c3
+ 1308 04bc 0C       		.uleb128 0xc
+ 1309 04bd 01       		.uleb128 0x1
+ 1310 04be 50       		.byte	0x50
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 30
+
+
+ 1311 04bf 02       		.uleb128 0x2
+ 1312 04c0 75       		.byte	0x75
+ 1313 04c1 00       		.sleb128 0
+ 1314 04c2 00       		.byte	0
+ 1315 04c3 0E       		.uleb128 0xe
+ 1316 04c4 32000000 		.4byte	.LVL55
+ 1317 04c8 8B010000 		.4byte	0x18b
+ 1318 04cc D9040000 		.4byte	0x4d9
+ 1319 04d0 0C       		.uleb128 0xc
+ 1320 04d1 01       		.uleb128 0x1
+ 1321 04d2 50       		.byte	0x50
+ 1322 04d3 04       		.uleb128 0x4
+ 1323 04d4 75       		.byte	0x75
+ 1324 04d5 00       		.sleb128 0
+ 1325 04d6 40       		.byte	0x40
+ 1326 04d7 25       		.byte	0x25
+ 1327 04d8 00       		.byte	0
+ 1328 04d9 0B       		.uleb128 0xb
+ 1329 04da 38000000 		.4byte	.LVL56
+ 1330 04de C3000000 		.4byte	0xc3
+ 1331 04e2 0C       		.uleb128 0xc
+ 1332 04e3 01       		.uleb128 0x1
+ 1333 04e4 50       		.byte	0x50
+ 1334 04e5 01       		.uleb128 0x1
+ 1335 04e6 30       		.byte	0x30
+ 1336 04e7 00       		.byte	0
+ 1337 04e8 00       		.byte	0
+ 1338 04e9 11       		.uleb128 0x11
+ 1339 04ea 72643800 		.ascii	"rd8\000"
+ 1340 04ee 01       		.byte	0x1
+ 1341 04ef 0901     		.2byte	0x109
+ 1342 04f1 3E000000 		.4byte	0x3e
+ 1343 04f5 00000000 		.4byte	.LFB11
+ 1344 04f9 36000000 		.4byte	.LFE11-.LFB11
+ 1345 04fd 01       		.uleb128 0x1
+ 1346 04fe 9C       		.byte	0x9c
+ 1347 04ff AA050000 		.4byte	0x5aa
+ 1348 0503 12       		.uleb128 0x12
+ 1349 0504 E8010000 		.4byte	.LASF27
+ 1350 0508 01       		.byte	0x1
+ 1351 0509 0901     		.2byte	0x109
+ 1352 050b 5A000000 		.4byte	0x5a
+ 1353 050f F3010000 		.4byte	.LLST13
+ 1354 0513 13       		.uleb128 0x13
+ 1355 0514 3E000000 		.4byte	.LASF28
+ 1356 0518 01       		.byte	0x1
+ 1357 0519 0A01     		.2byte	0x10a
+ 1358 051b 3E000000 		.4byte	0x3e
+ 1359 051f 1F020000 		.4byte	.LLST14
+ 1360 0523 0E       		.uleb128 0xe
+ 1361 0524 0A000000 		.4byte	.LVL60
+ 1362 0528 C3000000 		.4byte	0xc3
+ 1363 052c 36050000 		.4byte	0x536
+ 1364 0530 0C       		.uleb128 0xc
+ 1365 0531 01       		.uleb128 0x1
+ 1366 0532 50       		.byte	0x50
+ 1367 0533 01       		.uleb128 0x1
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 31
+
+
+ 1368 0534 31       		.byte	0x31
+ 1369 0535 00       		.byte	0
+ 1370 0536 0E       		.uleb128 0xe
+ 1371 0537 12000000 		.4byte	.LVL61
+ 1372 053b 1D010000 		.4byte	0x11d
+ 1373 053f 50050000 		.4byte	0x550
+ 1374 0543 0C       		.uleb128 0xc
+ 1375 0544 01       		.uleb128 0x1
+ 1376 0545 50       		.byte	0x50
+ 1377 0546 08       		.uleb128 0x8
+ 1378 0547 74       		.byte	0x74
+ 1379 0548 00       		.sleb128 0
+ 1380 0549 09       		.byte	0x9
+ 1381 054a EC       		.byte	0xec
+ 1382 054b 24       		.byte	0x24
+ 1383 054c 09       		.byte	0x9
+ 1384 054d FC       		.byte	0xfc
+ 1385 054e 25       		.byte	0x25
+ 1386 054f 00       		.byte	0
+ 1387 0550 0E       		.uleb128 0xe
+ 1388 0551 1A000000 		.4byte	.LVL62
+ 1389 0555 1D010000 		.4byte	0x11d
+ 1390 0559 6A050000 		.4byte	0x56a
+ 1391 055d 0C       		.uleb128 0xc
+ 1392 055e 01       		.uleb128 0x1
+ 1393 055f 50       		.byte	0x50
+ 1394 0560 08       		.uleb128 0x8
+ 1395 0561 74       		.byte	0x74
+ 1396 0562 00       		.sleb128 0
+ 1397 0563 09       		.byte	0x9
+ 1398 0564 F4       		.byte	0xf4
+ 1399 0565 24       		.byte	0x24
+ 1400 0566 09       		.byte	0x9
+ 1401 0567 FC       		.byte	0xfc
+ 1402 0568 25       		.byte	0x25
+ 1403 0569 00       		.byte	0
+ 1404 056a 0E       		.uleb128 0xe
+ 1405 056b 20000000 		.4byte	.LVL63
+ 1406 056f 1D010000 		.4byte	0x11d
+ 1407 0573 7E050000 		.4byte	0x57e
+ 1408 0577 0C       		.uleb128 0xc
+ 1409 0578 01       		.uleb128 0x1
+ 1410 0579 50       		.byte	0x50
+ 1411 057a 02       		.uleb128 0x2
+ 1412 057b 74       		.byte	0x74
+ 1413 057c 00       		.sleb128 0
+ 1414 057d 00       		.byte	0
+ 1415 057e 0E       		.uleb128 0xe
+ 1416 057f 26000000 		.4byte	.LVL64
+ 1417 0583 1D010000 		.4byte	0x11d
+ 1418 0587 91050000 		.4byte	0x591
+ 1419 058b 0C       		.uleb128 0xc
+ 1420 058c 01       		.uleb128 0x1
+ 1421 058d 50       		.byte	0x50
+ 1422 058e 01       		.uleb128 0x1
+ 1423 058f 30       		.byte	0x30
+ 1424 0590 00       		.byte	0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 32
+
+
+ 1425 0591 0A       		.uleb128 0xa
+ 1426 0592 2A000000 		.4byte	.LVL65
+ 1427 0596 54010000 		.4byte	0x154
+ 1428 059a 0B       		.uleb128 0xb
+ 1429 059b 32000000 		.4byte	.LVL67
+ 1430 059f C3000000 		.4byte	0xc3
+ 1431 05a3 0C       		.uleb128 0xc
+ 1432 05a4 01       		.uleb128 0x1
+ 1433 05a5 50       		.byte	0x50
+ 1434 05a6 01       		.uleb128 0x1
+ 1435 05a7 30       		.byte	0x30
+ 1436 05a8 00       		.byte	0
+ 1437 05a9 00       		.byte	0
+ 1438 05aa 14       		.uleb128 0x14
+ 1439 05ab 75010000 		.4byte	.LASF31
+ 1440 05af 01       		.byte	0x1
+ 1441 05b0 1D01     		.2byte	0x11d
+ 1442 05b2 76000000 		.4byte	0x76
+ 1443 05b6 00000000 		.4byte	.LFB12
+ 1444 05ba 3E000000 		.4byte	.LFE12-.LFB12
+ 1445 05be 01       		.uleb128 0x1
+ 1446 05bf 9C       		.byte	0x9c
+ 1447 05c0 74060000 		.4byte	0x674
+ 1448 05c4 12       		.uleb128 0x12
+ 1449 05c5 E8010000 		.4byte	.LASF27
+ 1450 05c9 01       		.byte	0x1
+ 1451 05ca 1D01     		.2byte	0x11d
+ 1452 05cc 5A000000 		.4byte	0x5a
+ 1453 05d0 3E020000 		.4byte	.LLST15
+ 1454 05d4 13       		.uleb128 0x13
+ 1455 05d5 3E000000 		.4byte	.LASF28
+ 1456 05d9 01       		.byte	0x1
+ 1457 05da 1E01     		.2byte	0x11e
+ 1458 05dc 5A000000 		.4byte	0x5a
+ 1459 05e0 6A020000 		.4byte	.LLST16
+ 1460 05e4 0E       		.uleb128 0xe
+ 1461 05e5 0A000000 		.4byte	.LVL71
+ 1462 05e9 C3000000 		.4byte	0xc3
+ 1463 05ed F7050000 		.4byte	0x5f7
+ 1464 05f1 0C       		.uleb128 0xc
+ 1465 05f2 01       		.uleb128 0x1
+ 1466 05f3 50       		.byte	0x50
+ 1467 05f4 01       		.uleb128 0x1
+ 1468 05f5 31       		.byte	0x31
+ 1469 05f6 00       		.byte	0
+ 1470 05f7 0E       		.uleb128 0xe
+ 1471 05f8 12000000 		.4byte	.LVL72
+ 1472 05fc 1D010000 		.4byte	0x11d
+ 1473 0600 11060000 		.4byte	0x611
+ 1474 0604 0C       		.uleb128 0xc
+ 1475 0605 01       		.uleb128 0x1
+ 1476 0606 50       		.byte	0x50
+ 1477 0607 08       		.uleb128 0x8
+ 1478 0608 74       		.byte	0x74
+ 1479 0609 00       		.sleb128 0
+ 1480 060a 09       		.byte	0x9
+ 1481 060b EC       		.byte	0xec
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 33
+
+
+ 1482 060c 24       		.byte	0x24
+ 1483 060d 09       		.byte	0x9
+ 1484 060e FC       		.byte	0xfc
+ 1485 060f 25       		.byte	0x25
+ 1486 0610 00       		.byte	0
+ 1487 0611 0E       		.uleb128 0xe
+ 1488 0612 1A000000 		.4byte	.LVL73
+ 1489 0616 1D010000 		.4byte	0x11d
+ 1490 061a 2B060000 		.4byte	0x62b
+ 1491 061e 0C       		.uleb128 0xc
+ 1492 061f 01       		.uleb128 0x1
+ 1493 0620 50       		.byte	0x50
+ 1494 0621 08       		.uleb128 0x8
+ 1495 0622 74       		.byte	0x74
+ 1496 0623 00       		.sleb128 0
+ 1497 0624 09       		.byte	0x9
+ 1498 0625 F4       		.byte	0xf4
+ 1499 0626 24       		.byte	0x24
+ 1500 0627 09       		.byte	0x9
+ 1501 0628 FC       		.byte	0xfc
+ 1502 0629 25       		.byte	0x25
+ 1503 062a 00       		.byte	0
+ 1504 062b 0E       		.uleb128 0xe
+ 1505 062c 20000000 		.4byte	.LVL74
+ 1506 0630 1D010000 		.4byte	0x11d
+ 1507 0634 3F060000 		.4byte	0x63f
+ 1508 0638 0C       		.uleb128 0xc
+ 1509 0639 01       		.uleb128 0x1
+ 1510 063a 50       		.byte	0x50
+ 1511 063b 02       		.uleb128 0x2
+ 1512 063c 74       		.byte	0x74
+ 1513 063d 00       		.sleb128 0
+ 1514 063e 00       		.byte	0
+ 1515 063f 0E       		.uleb128 0xe
+ 1516 0640 26000000 		.4byte	.LVL75
+ 1517 0644 1D010000 		.4byte	0x11d
+ 1518 0648 52060000 		.4byte	0x652
+ 1519 064c 0C       		.uleb128 0xc
+ 1520 064d 01       		.uleb128 0x1
+ 1521 064e 50       		.byte	0x50
+ 1522 064f 01       		.uleb128 0x1
+ 1523 0650 30       		.byte	0x30
+ 1524 0651 00       		.byte	0
+ 1525 0652 0A       		.uleb128 0xa
+ 1526 0653 2A000000 		.4byte	.LVL76
+ 1527 0657 54010000 		.4byte	0x154
+ 1528 065b 0A       		.uleb128 0xa
+ 1529 065c 30000000 		.4byte	.LVL78
+ 1530 0660 54010000 		.4byte	0x154
+ 1531 0664 0B       		.uleb128 0xb
+ 1532 0665 3A000000 		.4byte	.LVL80
+ 1533 0669 C3000000 		.4byte	0xc3
+ 1534 066d 0C       		.uleb128 0xc
+ 1535 066e 01       		.uleb128 0x1
+ 1536 066f 50       		.byte	0x50
+ 1537 0670 01       		.uleb128 0x1
+ 1538 0671 30       		.byte	0x30
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 34
+
+
+ 1539 0672 00       		.byte	0
+ 1540 0673 00       		.byte	0
+ 1541 0674 14       		.uleb128 0x14
+ 1542 0675 7A010000 		.4byte	.LASF32
+ 1543 0679 01       		.byte	0x1
+ 1544 067a 3201     		.2byte	0x132
+ 1545 067c 5A000000 		.4byte	0x5a
+ 1546 0680 00000000 		.4byte	.LFB13
+ 1547 0684 4E000000 		.4byte	.LFE13-.LFB13
+ 1548 0688 01       		.uleb128 0x1
+ 1549 0689 9C       		.byte	0x9c
+ 1550 068a 51070000 		.4byte	0x751
+ 1551 068e 12       		.uleb128 0x12
+ 1552 068f E8010000 		.4byte	.LASF27
+ 1553 0693 01       		.byte	0x1
+ 1554 0694 3201     		.2byte	0x132
+ 1555 0696 5A000000 		.4byte	0x5a
+ 1556 069a 94020000 		.4byte	.LLST17
+ 1557 069e 13       		.uleb128 0x13
+ 1558 069f 3E000000 		.4byte	.LASF28
+ 1559 06a3 01       		.byte	0x1
+ 1560 06a4 3301     		.2byte	0x133
+ 1561 06a6 5A000000 		.4byte	0x5a
+ 1562 06aa C0020000 		.4byte	.LLST18
+ 1563 06ae 0E       		.uleb128 0xe
+ 1564 06af 0A000000 		.4byte	.LVL84
+ 1565 06b3 C3000000 		.4byte	0xc3
+ 1566 06b7 C1060000 		.4byte	0x6c1
+ 1567 06bb 0C       		.uleb128 0xc
+ 1568 06bc 01       		.uleb128 0x1
+ 1569 06bd 50       		.byte	0x50
+ 1570 06be 01       		.uleb128 0x1
+ 1571 06bf 31       		.byte	0x31
+ 1572 06c0 00       		.byte	0
+ 1573 06c1 0E       		.uleb128 0xe
+ 1574 06c2 12000000 		.4byte	.LVL85
+ 1575 06c6 1D010000 		.4byte	0x11d
+ 1576 06ca DB060000 		.4byte	0x6db
+ 1577 06ce 0C       		.uleb128 0xc
+ 1578 06cf 01       		.uleb128 0x1
+ 1579 06d0 50       		.byte	0x50
+ 1580 06d1 08       		.uleb128 0x8
+ 1581 06d2 74       		.byte	0x74
+ 1582 06d3 00       		.sleb128 0
+ 1583 06d4 09       		.byte	0x9
+ 1584 06d5 EC       		.byte	0xec
+ 1585 06d6 24       		.byte	0x24
+ 1586 06d7 09       		.byte	0x9
+ 1587 06d8 FC       		.byte	0xfc
+ 1588 06d9 25       		.byte	0x25
+ 1589 06da 00       		.byte	0
+ 1590 06db 0E       		.uleb128 0xe
+ 1591 06dc 1A000000 		.4byte	.LVL86
+ 1592 06e0 1D010000 		.4byte	0x11d
+ 1593 06e4 F5060000 		.4byte	0x6f5
+ 1594 06e8 0C       		.uleb128 0xc
+ 1595 06e9 01       		.uleb128 0x1
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 35
+
+
+ 1596 06ea 50       		.byte	0x50
+ 1597 06eb 08       		.uleb128 0x8
+ 1598 06ec 74       		.byte	0x74
+ 1599 06ed 00       		.sleb128 0
+ 1600 06ee 09       		.byte	0x9
+ 1601 06ef F4       		.byte	0xf4
+ 1602 06f0 24       		.byte	0x24
+ 1603 06f1 09       		.byte	0x9
+ 1604 06f2 FC       		.byte	0xfc
+ 1605 06f3 25       		.byte	0x25
+ 1606 06f4 00       		.byte	0
+ 1607 06f5 0E       		.uleb128 0xe
+ 1608 06f6 20000000 		.4byte	.LVL87
+ 1609 06fa 1D010000 		.4byte	0x11d
+ 1610 06fe 09070000 		.4byte	0x709
+ 1611 0702 0C       		.uleb128 0xc
+ 1612 0703 01       		.uleb128 0x1
+ 1613 0704 50       		.byte	0x50
+ 1614 0705 02       		.uleb128 0x2
+ 1615 0706 74       		.byte	0x74
+ 1616 0707 00       		.sleb128 0
+ 1617 0708 00       		.byte	0
+ 1618 0709 0E       		.uleb128 0xe
+ 1619 070a 26000000 		.4byte	.LVL88
+ 1620 070e 1D010000 		.4byte	0x11d
+ 1621 0712 1D070000 		.4byte	0x71d
+ 1622 0716 0C       		.uleb128 0xc
+ 1623 0717 01       		.uleb128 0x1
+ 1624 0718 50       		.byte	0x50
+ 1625 0719 02       		.uleb128 0x2
+ 1626 071a 09       		.byte	0x9
+ 1627 071b FF       		.byte	0xff
+ 1628 071c 00       		.byte	0
+ 1629 071d 0A       		.uleb128 0xa
+ 1630 071e 2A000000 		.4byte	.LVL89
+ 1631 0722 54010000 		.4byte	0x154
+ 1632 0726 0A       		.uleb128 0xa
+ 1633 0727 30000000 		.4byte	.LVL91
+ 1634 072b 54010000 		.4byte	0x154
+ 1635 072f 0A       		.uleb128 0xa
+ 1636 0730 38000000 		.4byte	.LVL93
+ 1637 0734 54010000 		.4byte	0x154
+ 1638 0738 0A       		.uleb128 0xa
+ 1639 0739 40000000 		.4byte	.LVL95
+ 1640 073d 54010000 		.4byte	0x154
+ 1641 0741 0B       		.uleb128 0xb
+ 1642 0742 4A000000 		.4byte	.LVL97
+ 1643 0746 C3000000 		.4byte	0xc3
+ 1644 074a 0C       		.uleb128 0xc
+ 1645 074b 01       		.uleb128 0x1
+ 1646 074c 50       		.byte	0x50
+ 1647 074d 01       		.uleb128 0x1
+ 1648 074e 30       		.byte	0x30
+ 1649 074f 00       		.byte	0
+ 1650 0750 00       		.byte	0
+ 1651 0751 15       		.uleb128 0x15
+ 1652 0752 43000000 		.4byte	.LASF44
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 36
+
+
+ 1653 0756 01       		.byte	0x1
+ 1654 0757 4901     		.2byte	0x149
+ 1655 0759 00000000 		.4byte	.LFB14
+ 1656 075d 02000000 		.4byte	.LFE14-.LFB14
+ 1657 0761 01       		.uleb128 0x1
+ 1658 0762 9C       		.byte	0x9c
+ 1659 0763 16       		.uleb128 0x16
+ 1660 0764 0C010000 		.4byte	.LASF33
+ 1661 0768 01       		.byte	0x1
+ 1662 0769 5401     		.2byte	0x154
+ 1663 076b 00000000 		.4byte	.LFB15
+ 1664 076f 0C000000 		.4byte	.LFE15-.LFB15
+ 1665 0773 01       		.uleb128 0x1
+ 1666 0774 9C       		.byte	0x9c
+ 1667 0775 93070000 		.4byte	0x793
+ 1668 0779 12       		.uleb128 0x12
+ 1669 077a 53010000 		.4byte	.LASF34
+ 1670 077e 01       		.byte	0x1
+ 1671 077f 5401     		.2byte	0x154
+ 1672 0781 3E000000 		.4byte	0x3e
+ 1673 0785 EA020000 		.4byte	.LLST19
+ 1674 0789 0A       		.uleb128 0xa
+ 1675 078a 0A000000 		.4byte	.LVL100
+ 1676 078e F7070000 		.4byte	0x7f7
+ 1677 0792 00       		.byte	0
+ 1678 0793 17       		.uleb128 0x17
+ 1679 0794 646C6900 		.ascii	"dli\000"
+ 1680 0798 01       		.byte	0x1
+ 1681 0799 4B       		.byte	0x4b
+ 1682 079a 76000000 		.4byte	0x76
+ 1683 079e 05       		.uleb128 0x5
+ 1684 079f 03       		.byte	0x3
+ 1685 07a0 00000000 		.4byte	dli
+ 1686 07a4 17       		.uleb128 0x17
+ 1687 07a5 636C6900 		.ascii	"cli\000"
+ 1688 07a9 01       		.byte	0x1
+ 1689 07aa 4B       		.byte	0x4b
+ 1690 07ab 76000000 		.4byte	0x76
+ 1691 07af 05       		.uleb128 0x5
+ 1692 07b0 03       		.byte	0x3
+ 1693 07b1 00000000 		.4byte	cli
+ 1694 07b5 18       		.uleb128 0x18
+ 1695 07b6 3E000000 		.4byte	0x3e
+ 1696 07ba C5070000 		.4byte	0x7c5
+ 1697 07be 19       		.uleb128 0x19
+ 1698 07bf 99000000 		.4byte	0x99
+ 1699 07c3 0B       		.byte	0xb
+ 1700 07c4 00       		.byte	0
+ 1701 07c5 1A       		.uleb128 0x1a
+ 1702 07c6 07020000 		.4byte	.LASF35
+ 1703 07ca 01       		.byte	0x1
+ 1704 07cb 4A       		.byte	0x4a
+ 1705 07cc B5070000 		.4byte	0x7b5
+ 1706 07d0 05       		.uleb128 0x5
+ 1707 07d1 03       		.byte	0x3
+ 1708 07d2 00000000 		.4byte	fdhdgg
+ 1709 07d6 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 37
+
+
+ 1710 07d7 7F010000 		.4byte	.LASF36
+ 1711 07db 7F010000 		.4byte	.LASF36
+ 1712 07df 02       		.byte	0x2
+ 1713 07e0 26       		.byte	0x26
+ 1714 07e1 1B       		.uleb128 0x1b
+ 1715 07e2 5A010000 		.4byte	.LASF37
+ 1716 07e6 5A010000 		.4byte	.LASF37
+ 1717 07ea 03       		.byte	0x3
+ 1718 07eb 5E       		.byte	0x5e
+ 1719 07ec 1B       		.uleb128 0x1b
+ 1720 07ed 4D020000 		.4byte	.LASF38
+ 1721 07f1 4D020000 		.4byte	.LASF38
+ 1722 07f5 03       		.byte	0x3
+ 1723 07f6 60       		.byte	0x60
+ 1724 07f7 1B       		.uleb128 0x1b
+ 1725 07f8 86020000 		.4byte	.LASF39
+ 1726 07fc 86020000 		.4byte	.LASF39
+ 1727 0800 04       		.byte	0x4
+ 1728 0801 26       		.byte	0x26
+ 1729 0802 00       		.byte	0
+ 1730              		.section	.debug_abbrev,"",%progbits
+ 1731              	.Ldebug_abbrev0:
+ 1732 0000 01       		.uleb128 0x1
+ 1733 0001 11       		.uleb128 0x11
+ 1734 0002 01       		.byte	0x1
+ 1735 0003 25       		.uleb128 0x25
+ 1736 0004 0E       		.uleb128 0xe
+ 1737 0005 13       		.uleb128 0x13
+ 1738 0006 0B       		.uleb128 0xb
+ 1739 0007 03       		.uleb128 0x3
+ 1740 0008 0E       		.uleb128 0xe
+ 1741 0009 1B       		.uleb128 0x1b
+ 1742 000a 0E       		.uleb128 0xe
+ 1743 000b 55       		.uleb128 0x55
+ 1744 000c 17       		.uleb128 0x17
+ 1745 000d 11       		.uleb128 0x11
+ 1746 000e 01       		.uleb128 0x1
+ 1747 000f 10       		.uleb128 0x10
+ 1748 0010 17       		.uleb128 0x17
+ 1749 0011 00       		.byte	0
+ 1750 0012 00       		.byte	0
+ 1751 0013 02       		.uleb128 0x2
+ 1752 0014 16       		.uleb128 0x16
+ 1753 0015 00       		.byte	0
+ 1754 0016 03       		.uleb128 0x3
+ 1755 0017 0E       		.uleb128 0xe
+ 1756 0018 3A       		.uleb128 0x3a
+ 1757 0019 0B       		.uleb128 0xb
+ 1758 001a 3B       		.uleb128 0x3b
+ 1759 001b 0B       		.uleb128 0xb
+ 1760 001c 49       		.uleb128 0x49
+ 1761 001d 13       		.uleb128 0x13
+ 1762 001e 00       		.byte	0
+ 1763 001f 00       		.byte	0
+ 1764 0020 03       		.uleb128 0x3
+ 1765 0021 24       		.uleb128 0x24
+ 1766 0022 00       		.byte	0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 38
+
+
+ 1767 0023 0B       		.uleb128 0xb
+ 1768 0024 0B       		.uleb128 0xb
+ 1769 0025 3E       		.uleb128 0x3e
+ 1770 0026 0B       		.uleb128 0xb
+ 1771 0027 03       		.uleb128 0x3
+ 1772 0028 0E       		.uleb128 0xe
+ 1773 0029 00       		.byte	0
+ 1774 002a 00       		.byte	0
+ 1775 002b 04       		.uleb128 0x4
+ 1776 002c 24       		.uleb128 0x24
+ 1777 002d 00       		.byte	0
+ 1778 002e 0B       		.uleb128 0xb
+ 1779 002f 0B       		.uleb128 0xb
+ 1780 0030 3E       		.uleb128 0x3e
+ 1781 0031 0B       		.uleb128 0xb
+ 1782 0032 03       		.uleb128 0x3
+ 1783 0033 08       		.uleb128 0x8
+ 1784 0034 00       		.byte	0
+ 1785 0035 00       		.byte	0
+ 1786 0036 05       		.uleb128 0x5
+ 1787 0037 2E       		.uleb128 0x2e
+ 1788 0038 01       		.byte	0x1
+ 1789 0039 3F       		.uleb128 0x3f
+ 1790 003a 19       		.uleb128 0x19
+ 1791 003b 03       		.uleb128 0x3
+ 1792 003c 0E       		.uleb128 0xe
+ 1793 003d 3A       		.uleb128 0x3a
+ 1794 003e 0B       		.uleb128 0xb
+ 1795 003f 3B       		.uleb128 0x3b
+ 1796 0040 0B       		.uleb128 0xb
+ 1797 0041 27       		.uleb128 0x27
+ 1798 0042 19       		.uleb128 0x19
+ 1799 0043 11       		.uleb128 0x11
+ 1800 0044 01       		.uleb128 0x1
+ 1801 0045 12       		.uleb128 0x12
+ 1802 0046 06       		.uleb128 0x6
+ 1803 0047 40       		.uleb128 0x40
+ 1804 0048 18       		.uleb128 0x18
+ 1805 0049 9742     		.uleb128 0x2117
+ 1806 004b 19       		.uleb128 0x19
+ 1807 004c 01       		.uleb128 0x1
+ 1808 004d 13       		.uleb128 0x13
+ 1809 004e 00       		.byte	0
+ 1810 004f 00       		.byte	0
+ 1811 0050 06       		.uleb128 0x6
+ 1812 0051 05       		.uleb128 0x5
+ 1813 0052 00       		.byte	0
+ 1814 0053 03       		.uleb128 0x3
+ 1815 0054 0E       		.uleb128 0xe
+ 1816 0055 3A       		.uleb128 0x3a
+ 1817 0056 0B       		.uleb128 0xb
+ 1818 0057 3B       		.uleb128 0x3b
+ 1819 0058 0B       		.uleb128 0xb
+ 1820 0059 49       		.uleb128 0x49
+ 1821 005a 13       		.uleb128 0x13
+ 1822 005b 02       		.uleb128 0x2
+ 1823 005c 18       		.uleb128 0x18
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 39
+
+
+ 1824 005d 00       		.byte	0
+ 1825 005e 00       		.byte	0
+ 1826 005f 07       		.uleb128 0x7
+ 1827 0060 05       		.uleb128 0x5
+ 1828 0061 00       		.byte	0
+ 1829 0062 03       		.uleb128 0x3
+ 1830 0063 0E       		.uleb128 0xe
+ 1831 0064 3A       		.uleb128 0x3a
+ 1832 0065 0B       		.uleb128 0xb
+ 1833 0066 3B       		.uleb128 0x3b
+ 1834 0067 0B       		.uleb128 0xb
+ 1835 0068 49       		.uleb128 0x49
+ 1836 0069 13       		.uleb128 0x13
+ 1837 006a 02       		.uleb128 0x2
+ 1838 006b 17       		.uleb128 0x17
+ 1839 006c 00       		.byte	0
+ 1840 006d 00       		.byte	0
+ 1841 006e 08       		.uleb128 0x8
+ 1842 006f 34       		.uleb128 0x34
+ 1843 0070 00       		.byte	0
+ 1844 0071 03       		.uleb128 0x3
+ 1845 0072 08       		.uleb128 0x8
+ 1846 0073 3A       		.uleb128 0x3a
+ 1847 0074 0B       		.uleb128 0xb
+ 1848 0075 3B       		.uleb128 0x3b
+ 1849 0076 0B       		.uleb128 0xb
+ 1850 0077 49       		.uleb128 0x49
+ 1851 0078 13       		.uleb128 0x13
+ 1852 0079 02       		.uleb128 0x2
+ 1853 007a 17       		.uleb128 0x17
+ 1854 007b 00       		.byte	0
+ 1855 007c 00       		.byte	0
+ 1856 007d 09       		.uleb128 0x9
+ 1857 007e 34       		.uleb128 0x34
+ 1858 007f 00       		.byte	0
+ 1859 0080 03       		.uleb128 0x3
+ 1860 0081 0E       		.uleb128 0xe
+ 1861 0082 3A       		.uleb128 0x3a
+ 1862 0083 0B       		.uleb128 0xb
+ 1863 0084 3B       		.uleb128 0x3b
+ 1864 0085 0B       		.uleb128 0xb
+ 1865 0086 49       		.uleb128 0x49
+ 1866 0087 13       		.uleb128 0x13
+ 1867 0088 02       		.uleb128 0x2
+ 1868 0089 17       		.uleb128 0x17
+ 1869 008a 00       		.byte	0
+ 1870 008b 00       		.byte	0
+ 1871 008c 0A       		.uleb128 0xa
+ 1872 008d 898201   		.uleb128 0x4109
+ 1873 0090 00       		.byte	0
+ 1874 0091 11       		.uleb128 0x11
+ 1875 0092 01       		.uleb128 0x1
+ 1876 0093 31       		.uleb128 0x31
+ 1877 0094 13       		.uleb128 0x13
+ 1878 0095 00       		.byte	0
+ 1879 0096 00       		.byte	0
+ 1880 0097 0B       		.uleb128 0xb
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 40
+
+
+ 1881 0098 898201   		.uleb128 0x4109
+ 1882 009b 01       		.byte	0x1
+ 1883 009c 11       		.uleb128 0x11
+ 1884 009d 01       		.uleb128 0x1
+ 1885 009e 31       		.uleb128 0x31
+ 1886 009f 13       		.uleb128 0x13
+ 1887 00a0 00       		.byte	0
+ 1888 00a1 00       		.byte	0
+ 1889 00a2 0C       		.uleb128 0xc
+ 1890 00a3 8A8201   		.uleb128 0x410a
+ 1891 00a6 00       		.byte	0
+ 1892 00a7 02       		.uleb128 0x2
+ 1893 00a8 18       		.uleb128 0x18
+ 1894 00a9 9142     		.uleb128 0x2111
+ 1895 00ab 18       		.uleb128 0x18
+ 1896 00ac 00       		.byte	0
+ 1897 00ad 00       		.byte	0
+ 1898 00ae 0D       		.uleb128 0xd
+ 1899 00af 2E       		.uleb128 0x2e
+ 1900 00b0 01       		.byte	0x1
+ 1901 00b1 3F       		.uleb128 0x3f
+ 1902 00b2 19       		.uleb128 0x19
+ 1903 00b3 03       		.uleb128 0x3
+ 1904 00b4 0E       		.uleb128 0xe
+ 1905 00b5 3A       		.uleb128 0x3a
+ 1906 00b6 0B       		.uleb128 0xb
+ 1907 00b7 3B       		.uleb128 0x3b
+ 1908 00b8 0B       		.uleb128 0xb
+ 1909 00b9 27       		.uleb128 0x27
+ 1910 00ba 19       		.uleb128 0x19
+ 1911 00bb 49       		.uleb128 0x49
+ 1912 00bc 13       		.uleb128 0x13
+ 1913 00bd 11       		.uleb128 0x11
+ 1914 00be 01       		.uleb128 0x1
+ 1915 00bf 12       		.uleb128 0x12
+ 1916 00c0 06       		.uleb128 0x6
+ 1917 00c1 40       		.uleb128 0x40
+ 1918 00c2 18       		.uleb128 0x18
+ 1919 00c3 9742     		.uleb128 0x2117
+ 1920 00c5 19       		.uleb128 0x19
+ 1921 00c6 01       		.uleb128 0x1
+ 1922 00c7 13       		.uleb128 0x13
+ 1923 00c8 00       		.byte	0
+ 1924 00c9 00       		.byte	0
+ 1925 00ca 0E       		.uleb128 0xe
+ 1926 00cb 898201   		.uleb128 0x4109
+ 1927 00ce 01       		.byte	0x1
+ 1928 00cf 11       		.uleb128 0x11
+ 1929 00d0 01       		.uleb128 0x1
+ 1930 00d1 31       		.uleb128 0x31
+ 1931 00d2 13       		.uleb128 0x13
+ 1932 00d3 01       		.uleb128 0x1
+ 1933 00d4 13       		.uleb128 0x13
+ 1934 00d5 00       		.byte	0
+ 1935 00d6 00       		.byte	0
+ 1936 00d7 0F       		.uleb128 0xf
+ 1937 00d8 05       		.uleb128 0x5
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 41
+
+
+ 1938 00d9 00       		.byte	0
+ 1939 00da 03       		.uleb128 0x3
+ 1940 00db 08       		.uleb128 0x8
+ 1941 00dc 3A       		.uleb128 0x3a
+ 1942 00dd 0B       		.uleb128 0xb
+ 1943 00de 3B       		.uleb128 0x3b
+ 1944 00df 0B       		.uleb128 0xb
+ 1945 00e0 49       		.uleb128 0x49
+ 1946 00e1 13       		.uleb128 0x13
+ 1947 00e2 02       		.uleb128 0x2
+ 1948 00e3 17       		.uleb128 0x17
+ 1949 00e4 00       		.byte	0
+ 1950 00e5 00       		.byte	0
+ 1951 00e6 10       		.uleb128 0x10
+ 1952 00e7 2E       		.uleb128 0x2e
+ 1953 00e8 01       		.byte	0x1
+ 1954 00e9 3F       		.uleb128 0x3f
+ 1955 00ea 19       		.uleb128 0x19
+ 1956 00eb 03       		.uleb128 0x3
+ 1957 00ec 08       		.uleb128 0x8
+ 1958 00ed 3A       		.uleb128 0x3a
+ 1959 00ee 0B       		.uleb128 0xb
+ 1960 00ef 3B       		.uleb128 0x3b
+ 1961 00f0 0B       		.uleb128 0xb
+ 1962 00f1 27       		.uleb128 0x27
+ 1963 00f2 19       		.uleb128 0x19
+ 1964 00f3 11       		.uleb128 0x11
+ 1965 00f4 01       		.uleb128 0x1
+ 1966 00f5 12       		.uleb128 0x12
+ 1967 00f6 06       		.uleb128 0x6
+ 1968 00f7 40       		.uleb128 0x40
+ 1969 00f8 18       		.uleb128 0x18
+ 1970 00f9 9742     		.uleb128 0x2117
+ 1971 00fb 19       		.uleb128 0x19
+ 1972 00fc 01       		.uleb128 0x1
+ 1973 00fd 13       		.uleb128 0x13
+ 1974 00fe 00       		.byte	0
+ 1975 00ff 00       		.byte	0
+ 1976 0100 11       		.uleb128 0x11
+ 1977 0101 2E       		.uleb128 0x2e
+ 1978 0102 01       		.byte	0x1
+ 1979 0103 3F       		.uleb128 0x3f
+ 1980 0104 19       		.uleb128 0x19
+ 1981 0105 03       		.uleb128 0x3
+ 1982 0106 08       		.uleb128 0x8
+ 1983 0107 3A       		.uleb128 0x3a
+ 1984 0108 0B       		.uleb128 0xb
+ 1985 0109 3B       		.uleb128 0x3b
+ 1986 010a 05       		.uleb128 0x5
+ 1987 010b 27       		.uleb128 0x27
+ 1988 010c 19       		.uleb128 0x19
+ 1989 010d 49       		.uleb128 0x49
+ 1990 010e 13       		.uleb128 0x13
+ 1991 010f 11       		.uleb128 0x11
+ 1992 0110 01       		.uleb128 0x1
+ 1993 0111 12       		.uleb128 0x12
+ 1994 0112 06       		.uleb128 0x6
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 42
+
+
+ 1995 0113 40       		.uleb128 0x40
+ 1996 0114 18       		.uleb128 0x18
+ 1997 0115 9742     		.uleb128 0x2117
+ 1998 0117 19       		.uleb128 0x19
+ 1999 0118 01       		.uleb128 0x1
+ 2000 0119 13       		.uleb128 0x13
+ 2001 011a 00       		.byte	0
+ 2002 011b 00       		.byte	0
+ 2003 011c 12       		.uleb128 0x12
+ 2004 011d 05       		.uleb128 0x5
+ 2005 011e 00       		.byte	0
+ 2006 011f 03       		.uleb128 0x3
+ 2007 0120 0E       		.uleb128 0xe
+ 2008 0121 3A       		.uleb128 0x3a
+ 2009 0122 0B       		.uleb128 0xb
+ 2010 0123 3B       		.uleb128 0x3b
+ 2011 0124 05       		.uleb128 0x5
+ 2012 0125 49       		.uleb128 0x49
+ 2013 0126 13       		.uleb128 0x13
+ 2014 0127 02       		.uleb128 0x2
+ 2015 0128 17       		.uleb128 0x17
+ 2016 0129 00       		.byte	0
+ 2017 012a 00       		.byte	0
+ 2018 012b 13       		.uleb128 0x13
+ 2019 012c 34       		.uleb128 0x34
+ 2020 012d 00       		.byte	0
+ 2021 012e 03       		.uleb128 0x3
+ 2022 012f 0E       		.uleb128 0xe
+ 2023 0130 3A       		.uleb128 0x3a
+ 2024 0131 0B       		.uleb128 0xb
+ 2025 0132 3B       		.uleb128 0x3b
+ 2026 0133 05       		.uleb128 0x5
+ 2027 0134 49       		.uleb128 0x49
+ 2028 0135 13       		.uleb128 0x13
+ 2029 0136 02       		.uleb128 0x2
+ 2030 0137 17       		.uleb128 0x17
+ 2031 0138 00       		.byte	0
+ 2032 0139 00       		.byte	0
+ 2033 013a 14       		.uleb128 0x14
+ 2034 013b 2E       		.uleb128 0x2e
+ 2035 013c 01       		.byte	0x1
+ 2036 013d 3F       		.uleb128 0x3f
+ 2037 013e 19       		.uleb128 0x19
+ 2038 013f 03       		.uleb128 0x3
+ 2039 0140 0E       		.uleb128 0xe
+ 2040 0141 3A       		.uleb128 0x3a
+ 2041 0142 0B       		.uleb128 0xb
+ 2042 0143 3B       		.uleb128 0x3b
+ 2043 0144 05       		.uleb128 0x5
+ 2044 0145 27       		.uleb128 0x27
+ 2045 0146 19       		.uleb128 0x19
+ 2046 0147 49       		.uleb128 0x49
+ 2047 0148 13       		.uleb128 0x13
+ 2048 0149 11       		.uleb128 0x11
+ 2049 014a 01       		.uleb128 0x1
+ 2050 014b 12       		.uleb128 0x12
+ 2051 014c 06       		.uleb128 0x6
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 43
+
+
+ 2052 014d 40       		.uleb128 0x40
+ 2053 014e 18       		.uleb128 0x18
+ 2054 014f 9742     		.uleb128 0x2117
+ 2055 0151 19       		.uleb128 0x19
+ 2056 0152 01       		.uleb128 0x1
+ 2057 0153 13       		.uleb128 0x13
+ 2058 0154 00       		.byte	0
+ 2059 0155 00       		.byte	0
+ 2060 0156 15       		.uleb128 0x15
+ 2061 0157 2E       		.uleb128 0x2e
+ 2062 0158 00       		.byte	0
+ 2063 0159 3F       		.uleb128 0x3f
+ 2064 015a 19       		.uleb128 0x19
+ 2065 015b 03       		.uleb128 0x3
+ 2066 015c 0E       		.uleb128 0xe
+ 2067 015d 3A       		.uleb128 0x3a
+ 2068 015e 0B       		.uleb128 0xb
+ 2069 015f 3B       		.uleb128 0x3b
+ 2070 0160 05       		.uleb128 0x5
+ 2071 0161 27       		.uleb128 0x27
+ 2072 0162 19       		.uleb128 0x19
+ 2073 0163 11       		.uleb128 0x11
+ 2074 0164 01       		.uleb128 0x1
+ 2075 0165 12       		.uleb128 0x12
+ 2076 0166 06       		.uleb128 0x6
+ 2077 0167 40       		.uleb128 0x40
+ 2078 0168 18       		.uleb128 0x18
+ 2079 0169 9742     		.uleb128 0x2117
+ 2080 016b 19       		.uleb128 0x19
+ 2081 016c 00       		.byte	0
+ 2082 016d 00       		.byte	0
+ 2083 016e 16       		.uleb128 0x16
+ 2084 016f 2E       		.uleb128 0x2e
+ 2085 0170 01       		.byte	0x1
+ 2086 0171 3F       		.uleb128 0x3f
+ 2087 0172 19       		.uleb128 0x19
+ 2088 0173 03       		.uleb128 0x3
+ 2089 0174 0E       		.uleb128 0xe
+ 2090 0175 3A       		.uleb128 0x3a
+ 2091 0176 0B       		.uleb128 0xb
+ 2092 0177 3B       		.uleb128 0x3b
+ 2093 0178 05       		.uleb128 0x5
+ 2094 0179 27       		.uleb128 0x27
+ 2095 017a 19       		.uleb128 0x19
+ 2096 017b 11       		.uleb128 0x11
+ 2097 017c 01       		.uleb128 0x1
+ 2098 017d 12       		.uleb128 0x12
+ 2099 017e 06       		.uleb128 0x6
+ 2100 017f 40       		.uleb128 0x40
+ 2101 0180 18       		.uleb128 0x18
+ 2102 0181 9742     		.uleb128 0x2117
+ 2103 0183 19       		.uleb128 0x19
+ 2104 0184 01       		.uleb128 0x1
+ 2105 0185 13       		.uleb128 0x13
+ 2106 0186 00       		.byte	0
+ 2107 0187 00       		.byte	0
+ 2108 0188 17       		.uleb128 0x17
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 44
+
+
+ 2109 0189 34       		.uleb128 0x34
+ 2110 018a 00       		.byte	0
+ 2111 018b 03       		.uleb128 0x3
+ 2112 018c 08       		.uleb128 0x8
+ 2113 018d 3A       		.uleb128 0x3a
+ 2114 018e 0B       		.uleb128 0xb
+ 2115 018f 3B       		.uleb128 0x3b
+ 2116 0190 0B       		.uleb128 0xb
+ 2117 0191 49       		.uleb128 0x49
+ 2118 0192 13       		.uleb128 0x13
+ 2119 0193 3F       		.uleb128 0x3f
+ 2120 0194 19       		.uleb128 0x19
+ 2121 0195 02       		.uleb128 0x2
+ 2122 0196 18       		.uleb128 0x18
+ 2123 0197 00       		.byte	0
+ 2124 0198 00       		.byte	0
+ 2125 0199 18       		.uleb128 0x18
+ 2126 019a 01       		.uleb128 0x1
+ 2127 019b 01       		.byte	0x1
+ 2128 019c 49       		.uleb128 0x49
+ 2129 019d 13       		.uleb128 0x13
+ 2130 019e 01       		.uleb128 0x1
+ 2131 019f 13       		.uleb128 0x13
+ 2132 01a0 00       		.byte	0
+ 2133 01a1 00       		.byte	0
+ 2134 01a2 19       		.uleb128 0x19
+ 2135 01a3 21       		.uleb128 0x21
+ 2136 01a4 00       		.byte	0
+ 2137 01a5 49       		.uleb128 0x49
+ 2138 01a6 13       		.uleb128 0x13
+ 2139 01a7 2F       		.uleb128 0x2f
+ 2140 01a8 0B       		.uleb128 0xb
+ 2141 01a9 00       		.byte	0
+ 2142 01aa 00       		.byte	0
+ 2143 01ab 1A       		.uleb128 0x1a
+ 2144 01ac 34       		.uleb128 0x34
+ 2145 01ad 00       		.byte	0
+ 2146 01ae 03       		.uleb128 0x3
+ 2147 01af 0E       		.uleb128 0xe
+ 2148 01b0 3A       		.uleb128 0x3a
+ 2149 01b1 0B       		.uleb128 0xb
+ 2150 01b2 3B       		.uleb128 0x3b
+ 2151 01b3 0B       		.uleb128 0xb
+ 2152 01b4 49       		.uleb128 0x49
+ 2153 01b5 13       		.uleb128 0x13
+ 2154 01b6 3F       		.uleb128 0x3f
+ 2155 01b7 19       		.uleb128 0x19
+ 2156 01b8 02       		.uleb128 0x2
+ 2157 01b9 18       		.uleb128 0x18
+ 2158 01ba 00       		.byte	0
+ 2159 01bb 00       		.byte	0
+ 2160 01bc 1B       		.uleb128 0x1b
+ 2161 01bd 2E       		.uleb128 0x2e
+ 2162 01be 00       		.byte	0
+ 2163 01bf 3F       		.uleb128 0x3f
+ 2164 01c0 19       		.uleb128 0x19
+ 2165 01c1 3C       		.uleb128 0x3c
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 45
+
+
+ 2166 01c2 19       		.uleb128 0x19
+ 2167 01c3 6E       		.uleb128 0x6e
+ 2168 01c4 0E       		.uleb128 0xe
+ 2169 01c5 03       		.uleb128 0x3
+ 2170 01c6 0E       		.uleb128 0xe
+ 2171 01c7 3A       		.uleb128 0x3a
+ 2172 01c8 0B       		.uleb128 0xb
+ 2173 01c9 3B       		.uleb128 0x3b
+ 2174 01ca 0B       		.uleb128 0xb
+ 2175 01cb 00       		.byte	0
+ 2176 01cc 00       		.byte	0
+ 2177 01cd 00       		.byte	0
+ 2178              		.section	.debug_loc,"",%progbits
+ 2179              	.Ldebug_loc0:
+ 2180              	.LLST0:
+ 2181 0000 00000000 		.4byte	.LVL1
+ 2182 0004 09000000 		.4byte	.LVL3-1
+ 2183 0008 0100     		.2byte	0x1
+ 2184 000a 50       		.byte	0x50
+ 2185 000b 09000000 		.4byte	.LVL3-1
+ 2186 000f 0C000000 		.4byte	.LVL4
+ 2187 0013 0400     		.2byte	0x4
+ 2188 0015 F3       		.byte	0xf3
+ 2189 0016 01       		.uleb128 0x1
+ 2190 0017 50       		.byte	0x50
+ 2191 0018 9F       		.byte	0x9f
+ 2192 0019 0C000000 		.4byte	.LVL4
+ 2193 001d 22000000 		.4byte	.LVL10
+ 2194 0021 0100     		.2byte	0x1
+ 2195 0023 50       		.byte	0x50
+ 2196 0024 22000000 		.4byte	.LVL10
+ 2197 0028 2C000000 		.4byte	.LFE1
+ 2198 002c 0400     		.2byte	0x4
+ 2199 002e F3       		.byte	0xf3
+ 2200 002f 01       		.uleb128 0x1
+ 2201 0030 50       		.byte	0x50
+ 2202 0031 9F       		.byte	0x9f
+ 2203 0032 00000000 		.4byte	0
+ 2204 0036 00000000 		.4byte	0
+ 2205              	.LLST1:
+ 2206 003a 02000000 		.4byte	.LVL2
+ 2207 003e 10000000 		.4byte	.LVL5
+ 2208 0042 0200     		.2byte	0x2
+ 2209 0044 31       		.byte	0x31
+ 2210 0045 9F       		.byte	0x9f
+ 2211 0046 10000000 		.4byte	.LVL5
+ 2212 004a 16000000 		.4byte	.LVL7
+ 2213 004e 0100     		.2byte	0x1
+ 2214 0050 52       		.byte	0x52
+ 2215 0051 18000000 		.4byte	.LVL8
+ 2216 0055 1C000000 		.4byte	.LVL9
+ 2217 0059 0200     		.2byte	0x2
+ 2218 005b 31       		.byte	0x31
+ 2219 005c 9F       		.byte	0x9f
+ 2220 005d 1C000000 		.4byte	.LVL9
+ 2221 0061 25000000 		.4byte	.LVL11-1
+ 2222 0065 0100     		.2byte	0x1
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 46
+
+
+ 2223 0067 52       		.byte	0x52
+ 2224 0068 00000000 		.4byte	0
+ 2225 006c 00000000 		.4byte	0
+ 2226              	.LLST2:
+ 2227 0070 02000000 		.4byte	.LVL2
+ 2228 0074 10000000 		.4byte	.LVL5
+ 2229 0078 0600     		.2byte	0x6
+ 2230 007a 0C       		.byte	0xc
+ 2231 007b 40420F00 		.4byte	0xf4240
+ 2232 007f 9F       		.byte	0x9f
+ 2233 0080 10000000 		.4byte	.LVL5
+ 2234 0084 12000000 		.4byte	.LVL6
+ 2235 0088 0300     		.2byte	0x3
+ 2236 008a 73       		.byte	0x73
+ 2237 008b 7F       		.sleb128 -1
+ 2238 008c 9F       		.byte	0x9f
+ 2239 008d 12000000 		.4byte	.LVL6
+ 2240 0091 18000000 		.4byte	.LVL8
+ 2241 0095 0100     		.2byte	0x1
+ 2242 0097 53       		.byte	0x53
+ 2243 0098 18000000 		.4byte	.LVL8
+ 2244 009c 1C000000 		.4byte	.LVL9
+ 2245 00a0 0600     		.2byte	0x6
+ 2246 00a2 0C       		.byte	0xc
+ 2247 00a3 40420F00 		.4byte	0xf4240
+ 2248 00a7 9F       		.byte	0x9f
+ 2249 00a8 1C000000 		.4byte	.LVL9
+ 2250 00ac 25000000 		.4byte	.LVL11-1
+ 2251 00b0 0100     		.2byte	0x1
+ 2252 00b2 53       		.byte	0x53
+ 2253 00b3 00000000 		.4byte	0
+ 2254 00b7 00000000 		.4byte	0
+ 2255              	.LLST3:
+ 2256 00bb 00000000 		.4byte	.LVL12
+ 2257 00bf 05000000 		.4byte	.LVL13-1
+ 2258 00c3 0100     		.2byte	0x1
+ 2259 00c5 50       		.byte	0x50
+ 2260 00c6 05000000 		.4byte	.LVL13-1
+ 2261 00ca 0C000000 		.4byte	.LFE2
+ 2262 00ce 0400     		.2byte	0x4
+ 2263 00d0 F3       		.byte	0xf3
+ 2264 00d1 01       		.uleb128 0x1
+ 2265 00d2 50       		.byte	0x50
+ 2266 00d3 9F       		.byte	0x9f
+ 2267 00d4 00000000 		.4byte	0
+ 2268 00d8 00000000 		.4byte	0
+ 2269              	.LLST4:
+ 2270 00dc 00000000 		.4byte	.LVL17
+ 2271 00e0 06000000 		.4byte	.LVL18
+ 2272 00e4 0100     		.2byte	0x1
+ 2273 00e6 50       		.byte	0x50
+ 2274 00e7 06000000 		.4byte	.LVL18
+ 2275 00eb 14000000 		.4byte	.LFE4
+ 2276 00ef 0100     		.2byte	0x1
+ 2277 00f1 54       		.byte	0x54
+ 2278 00f2 00000000 		.4byte	0
+ 2279 00f6 00000000 		.4byte	0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 47
+
+
+ 2280              	.LLST5:
+ 2281 00fa 00000000 		.4byte	.LVL21
+ 2282 00fe 05000000 		.4byte	.LVL22-1
+ 2283 0102 0100     		.2byte	0x1
+ 2284 0104 50       		.byte	0x50
+ 2285 0105 05000000 		.4byte	.LVL22-1
+ 2286 0109 08000000 		.4byte	.LFE5
+ 2287 010d 0400     		.2byte	0x4
+ 2288 010f F3       		.byte	0xf3
+ 2289 0110 01       		.uleb128 0x1
+ 2290 0111 50       		.byte	0x50
+ 2291 0112 9F       		.byte	0x9f
+ 2292 0113 00000000 		.4byte	0
+ 2293 0117 00000000 		.4byte	0
+ 2294              	.LLST6:
+ 2295 011b 00000000 		.4byte	.LVL25
+ 2296 011f 06000000 		.4byte	.LVL26
+ 2297 0123 0100     		.2byte	0x1
+ 2298 0125 50       		.byte	0x50
+ 2299 0126 06000000 		.4byte	.LVL26
+ 2300 012a 24000000 		.4byte	.LFE7
+ 2301 012e 0400     		.2byte	0x4
+ 2302 0130 F3       		.byte	0xf3
+ 2303 0131 01       		.uleb128 0x1
+ 2304 0132 50       		.byte	0x50
+ 2305 0133 9F       		.byte	0x9f
+ 2306 0134 00000000 		.4byte	0
+ 2307 0138 00000000 		.4byte	0
+ 2308              	.LLST7:
+ 2309 013c 00000000 		.4byte	.LVL32
+ 2310 0140 08000000 		.4byte	.LVL33
+ 2311 0144 0100     		.2byte	0x1
+ 2312 0146 50       		.byte	0x50
+ 2313 0147 08000000 		.4byte	.LVL33
+ 2314 014b 34000000 		.4byte	.LFE8
+ 2315 014f 0100     		.2byte	0x1
+ 2316 0151 54       		.byte	0x54
+ 2317 0152 00000000 		.4byte	0
+ 2318 0156 00000000 		.4byte	0
+ 2319              	.LLST8:
+ 2320 015a 00000000 		.4byte	.LVL32
+ 2321 015e 0B000000 		.4byte	.LVL34-1
+ 2322 0162 0100     		.2byte	0x1
+ 2323 0164 51       		.byte	0x51
+ 2324 0165 0B000000 		.4byte	.LVL34-1
+ 2325 0169 34000000 		.4byte	.LFE8
+ 2326 016d 0400     		.2byte	0x4
+ 2327 016f F3       		.byte	0xf3
+ 2328 0170 01       		.uleb128 0x1
+ 2329 0171 51       		.byte	0x51
+ 2330 0172 9F       		.byte	0x9f
+ 2331 0173 00000000 		.4byte	0
+ 2332 0177 00000000 		.4byte	0
+ 2333              	.LLST9:
+ 2334 017b 00000000 		.4byte	.LVL40
+ 2335 017f 08000000 		.4byte	.LVL41
+ 2336 0183 0100     		.2byte	0x1
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 48
+
+
+ 2337 0185 50       		.byte	0x50
+ 2338 0186 08000000 		.4byte	.LVL41
+ 2339 018a 34000000 		.4byte	.LFE9
+ 2340 018e 0100     		.2byte	0x1
+ 2341 0190 54       		.byte	0x54
+ 2342 0191 00000000 		.4byte	0
+ 2343 0195 00000000 		.4byte	0
+ 2344              	.LLST10:
+ 2345 0199 00000000 		.4byte	.LVL40
+ 2346 019d 0B000000 		.4byte	.LVL42-1
+ 2347 01a1 0100     		.2byte	0x1
+ 2348 01a3 51       		.byte	0x51
+ 2349 01a4 0B000000 		.4byte	.LVL42-1
+ 2350 01a8 34000000 		.4byte	.LFE9
+ 2351 01ac 0100     		.2byte	0x1
+ 2352 01ae 55       		.byte	0x55
+ 2353 01af 00000000 		.4byte	0
+ 2354 01b3 00000000 		.4byte	0
+ 2355              	.LLST11:
+ 2356 01b7 00000000 		.4byte	.LVL48
+ 2357 01bb 08000000 		.4byte	.LVL49
+ 2358 01bf 0100     		.2byte	0x1
+ 2359 01c1 50       		.byte	0x50
+ 2360 01c2 08000000 		.4byte	.LVL49
+ 2361 01c6 3A000000 		.4byte	.LFE10
+ 2362 01ca 0100     		.2byte	0x1
+ 2363 01cc 54       		.byte	0x54
+ 2364 01cd 00000000 		.4byte	0
+ 2365 01d1 00000000 		.4byte	0
+ 2366              	.LLST12:
+ 2367 01d5 00000000 		.4byte	.LVL48
+ 2368 01d9 0B000000 		.4byte	.LVL50-1
+ 2369 01dd 0100     		.2byte	0x1
+ 2370 01df 51       		.byte	0x51
+ 2371 01e0 0B000000 		.4byte	.LVL50-1
+ 2372 01e4 3A000000 		.4byte	.LFE10
+ 2373 01e8 0100     		.2byte	0x1
+ 2374 01ea 55       		.byte	0x55
+ 2375 01eb 00000000 		.4byte	0
+ 2376 01ef 00000000 		.4byte	0
+ 2377              	.LLST13:
+ 2378 01f3 00000000 		.4byte	.LVL57
+ 2379 01f7 06000000 		.4byte	.LVL59
+ 2380 01fb 0100     		.2byte	0x1
+ 2381 01fd 50       		.byte	0x50
+ 2382 01fe 06000000 		.4byte	.LVL59
+ 2383 0202 2C000000 		.4byte	.LVL66
+ 2384 0206 0100     		.2byte	0x1
+ 2385 0208 54       		.byte	0x54
+ 2386 0209 2C000000 		.4byte	.LVL66
+ 2387 020d 36000000 		.4byte	.LFE11
+ 2388 0211 0400     		.2byte	0x4
+ 2389 0213 F3       		.byte	0xf3
+ 2390 0214 01       		.uleb128 0x1
+ 2391 0215 50       		.byte	0x50
+ 2392 0216 9F       		.byte	0x9f
+ 2393 0217 00000000 		.4byte	0
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 49
+
+
+ 2394 021b 00000000 		.4byte	0
+ 2395              	.LLST14:
+ 2396 021f 04000000 		.4byte	.LVL58
+ 2397 0223 2C000000 		.4byte	.LVL66
+ 2398 0227 0200     		.2byte	0x2
+ 2399 0229 30       		.byte	0x30
+ 2400 022a 9F       		.byte	0x9f
+ 2401 022b 2C000000 		.4byte	.LVL66
+ 2402 022f 36000000 		.4byte	.LFE11
+ 2403 0233 0100     		.2byte	0x1
+ 2404 0235 54       		.byte	0x54
+ 2405 0236 00000000 		.4byte	0
+ 2406 023a 00000000 		.4byte	0
+ 2407              	.LLST15:
+ 2408 023e 00000000 		.4byte	.LVL68
+ 2409 0242 06000000 		.4byte	.LVL70
+ 2410 0246 0100     		.2byte	0x1
+ 2411 0248 50       		.byte	0x50
+ 2412 0249 06000000 		.4byte	.LVL70
+ 2413 024d 2C000000 		.4byte	.LVL77
+ 2414 0251 0100     		.2byte	0x1
+ 2415 0253 54       		.byte	0x54
+ 2416 0254 2C000000 		.4byte	.LVL77
+ 2417 0258 3E000000 		.4byte	.LFE12
+ 2418 025c 0400     		.2byte	0x4
+ 2419 025e F3       		.byte	0xf3
+ 2420 025f 01       		.uleb128 0x1
+ 2421 0260 50       		.byte	0x50
+ 2422 0261 9F       		.byte	0x9f
+ 2423 0262 00000000 		.4byte	0
+ 2424 0266 00000000 		.4byte	0
+ 2425              	.LLST16:
+ 2426 026a 04000000 		.4byte	.LVL69
+ 2427 026e 2C000000 		.4byte	.LVL77
+ 2428 0272 0200     		.2byte	0x2
+ 2429 0274 30       		.byte	0x30
+ 2430 0275 9F       		.byte	0x9f
+ 2431 0276 2C000000 		.4byte	.LVL77
+ 2432 027a 2F000000 		.4byte	.LVL78-1
+ 2433 027e 0100     		.2byte	0x1
+ 2434 0280 50       		.byte	0x50
+ 2435 0281 2F000000 		.4byte	.LVL78-1
+ 2436 0285 3E000000 		.4byte	.LFE12
+ 2437 0289 0100     		.2byte	0x1
+ 2438 028b 54       		.byte	0x54
+ 2439 028c 00000000 		.4byte	0
+ 2440 0290 00000000 		.4byte	0
+ 2441              	.LLST17:
+ 2442 0294 00000000 		.4byte	.LVL81
+ 2443 0298 06000000 		.4byte	.LVL83
+ 2444 029c 0100     		.2byte	0x1
+ 2445 029e 50       		.byte	0x50
+ 2446 029f 06000000 		.4byte	.LVL83
+ 2447 02a3 2C000000 		.4byte	.LVL90
+ 2448 02a7 0100     		.2byte	0x1
+ 2449 02a9 54       		.byte	0x54
+ 2450 02aa 2C000000 		.4byte	.LVL90
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 50
+
+
+ 2451 02ae 4E000000 		.4byte	.LFE13
+ 2452 02b2 0400     		.2byte	0x4
+ 2453 02b4 F3       		.byte	0xf3
+ 2454 02b5 01       		.uleb128 0x1
+ 2455 02b6 50       		.byte	0x50
+ 2456 02b7 9F       		.byte	0x9f
+ 2457 02b8 00000000 		.4byte	0
+ 2458 02bc 00000000 		.4byte	0
+ 2459              	.LLST18:
+ 2460 02c0 04000000 		.4byte	.LVL82
+ 2461 02c4 2C000000 		.4byte	.LVL90
+ 2462 02c8 0200     		.2byte	0x2
+ 2463 02ca 30       		.byte	0x30
+ 2464 02cb 9F       		.byte	0x9f
+ 2465 02cc 2C000000 		.4byte	.LVL90
+ 2466 02d0 2F000000 		.4byte	.LVL91-1
+ 2467 02d4 0100     		.2byte	0x1
+ 2468 02d6 50       		.byte	0x50
+ 2469 02d7 2F000000 		.4byte	.LVL91-1
+ 2470 02db 4E000000 		.4byte	.LFE13
+ 2471 02df 0100     		.2byte	0x1
+ 2472 02e1 54       		.byte	0x54
+ 2473 02e2 00000000 		.4byte	0
+ 2474 02e6 00000000 		.4byte	0
+ 2475              	.LLST19:
+ 2476 02ea 00000000 		.4byte	.LVL98
+ 2477 02ee 06000000 		.4byte	.LVL99
+ 2478 02f2 0100     		.2byte	0x1
+ 2479 02f4 50       		.byte	0x50
+ 2480 02f5 06000000 		.4byte	.LVL99
+ 2481 02f9 0C000000 		.4byte	.LFE15
+ 2482 02fd 0400     		.2byte	0x4
+ 2483 02ff F3       		.byte	0xf3
+ 2484 0300 01       		.uleb128 0x1
+ 2485 0301 50       		.byte	0x50
+ 2486 0302 9F       		.byte	0x9f
+ 2487 0303 00000000 		.4byte	0
+ 2488 0307 00000000 		.4byte	0
+ 2489              		.section	.debug_aranges,"",%progbits
+ 2490 0000 94000000 		.4byte	0x94
+ 2491 0004 0200     		.2byte	0x2
+ 2492 0006 00000000 		.4byte	.Ldebug_info0
+ 2493 000a 04       		.byte	0x4
+ 2494 000b 00       		.byte	0
+ 2495 000c 0000     		.2byte	0
+ 2496 000e 0000     		.2byte	0
+ 2497 0010 00000000 		.4byte	.LFB0
+ 2498 0014 02000000 		.4byte	.LFE0-.LFB0
+ 2499 0018 00000000 		.4byte	.LFB1
+ 2500 001c 2C000000 		.4byte	.LFE1-.LFB1
+ 2501 0020 00000000 		.4byte	.LFB2
+ 2502 0024 0C000000 		.4byte	.LFE2-.LFB2
+ 2503 0028 00000000 		.4byte	.LFB3
+ 2504 002c 0E000000 		.4byte	.LFE3-.LFB3
+ 2505 0030 00000000 		.4byte	.LFB4
+ 2506 0034 14000000 		.4byte	.LFE4-.LFB4
+ 2507 0038 00000000 		.4byte	.LFB5
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 51
+
+
+ 2508 003c 08000000 		.4byte	.LFE5-.LFB5
+ 2509 0040 00000000 		.4byte	.LFB6
+ 2510 0044 0E000000 		.4byte	.LFE6-.LFB6
+ 2511 0048 00000000 		.4byte	.LFB7
+ 2512 004c 24000000 		.4byte	.LFE7-.LFB7
+ 2513 0050 00000000 		.4byte	.LFB8
+ 2514 0054 34000000 		.4byte	.LFE8-.LFB8
+ 2515 0058 00000000 		.4byte	.LFB9
+ 2516 005c 34000000 		.4byte	.LFE9-.LFB9
+ 2517 0060 00000000 		.4byte	.LFB10
+ 2518 0064 3A000000 		.4byte	.LFE10-.LFB10
+ 2519 0068 00000000 		.4byte	.LFB11
+ 2520 006c 36000000 		.4byte	.LFE11-.LFB11
+ 2521 0070 00000000 		.4byte	.LFB12
+ 2522 0074 3E000000 		.4byte	.LFE12-.LFB12
+ 2523 0078 00000000 		.4byte	.LFB13
+ 2524 007c 4E000000 		.4byte	.LFE13-.LFB13
+ 2525 0080 00000000 		.4byte	.LFB14
+ 2526 0084 02000000 		.4byte	.LFE14-.LFB14
+ 2527 0088 00000000 		.4byte	.LFB15
+ 2528 008c 0C000000 		.4byte	.LFE15-.LFB15
+ 2529 0090 00000000 		.4byte	0
+ 2530 0094 00000000 		.4byte	0
+ 2531              		.section	.debug_ranges,"",%progbits
+ 2532              	.Ldebug_ranges0:
+ 2533 0000 00000000 		.4byte	.LFB0
+ 2534 0004 02000000 		.4byte	.LFE0
+ 2535 0008 00000000 		.4byte	.LFB1
+ 2536 000c 2C000000 		.4byte	.LFE1
+ 2537 0010 00000000 		.4byte	.LFB2
+ 2538 0014 0C000000 		.4byte	.LFE2
+ 2539 0018 00000000 		.4byte	.LFB3
+ 2540 001c 0E000000 		.4byte	.LFE3
+ 2541 0020 00000000 		.4byte	.LFB4
+ 2542 0024 14000000 		.4byte	.LFE4
+ 2543 0028 00000000 		.4byte	.LFB5
+ 2544 002c 08000000 		.4byte	.LFE5
+ 2545 0030 00000000 		.4byte	.LFB6
+ 2546 0034 0E000000 		.4byte	.LFE6
+ 2547 0038 00000000 		.4byte	.LFB7
+ 2548 003c 24000000 		.4byte	.LFE7
+ 2549 0040 00000000 		.4byte	.LFB8
+ 2550 0044 34000000 		.4byte	.LFE8
+ 2551 0048 00000000 		.4byte	.LFB9
+ 2552 004c 34000000 		.4byte	.LFE9
+ 2553 0050 00000000 		.4byte	.LFB10
+ 2554 0054 3A000000 		.4byte	.LFE10
+ 2555 0058 00000000 		.4byte	.LFB11
+ 2556 005c 36000000 		.4byte	.LFE11
+ 2557 0060 00000000 		.4byte	.LFB12
+ 2558 0064 3E000000 		.4byte	.LFE12
+ 2559 0068 00000000 		.4byte	.LFB13
+ 2560 006c 4E000000 		.4byte	.LFE13
+ 2561 0070 00000000 		.4byte	.LFB14
+ 2562 0074 02000000 		.4byte	.LFE14
+ 2563 0078 00000000 		.4byte	.LFB15
+ 2564 007c 0C000000 		.4byte	.LFE15
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 52
+
+
+ 2565 0080 00000000 		.4byte	0
+ 2566 0084 00000000 		.4byte	0
+ 2567              		.section	.debug_line,"",%progbits
+ 2568              	.Ldebug_line0:
+ 2569 0000 BC010000 		.section	.debug_str,"MS",%progbits,1
+ 2569      02006D00 
+ 2569      00000201 
+ 2569      FB0E0D00 
+ 2569      01010101 
+ 2570              	.LASF26:
+ 2571 0000 686F7374 		.ascii	"host_command\000"
+ 2571      5F636F6D 
+ 2571      6D616E64 
+ 2571      00
+ 2572              	.LASF15:
+ 2573 000d 656E6162 		.ascii	"enable_EVE\000"
+ 2573      6C655F45 
+ 2573      564500
+ 2574              	.LASF29:
+ 2575 0018 77723136 		.ascii	"wr16\000"
+ 2575      00
+ 2576              	.LASF20:
+ 2577 001d 5350495F 		.ascii	"SPI_WRITE\000"
+ 2577      57524954 
+ 2577      4500
+ 2578              	.LASF17:
+ 2579 0027 656E6162 		.ascii	"enable\000"
+ 2579      6C6500
+ 2580              	.LASF41:
+ 2581 002e 4556455F 		.ascii	"EVE_HAL.c\000"
+ 2581      48414C2E 
+ 2581      6300
+ 2582              	.LASF10:
+ 2583 0038 666C6F61 		.ascii	"float\000"
+ 2583      7400
+ 2584              	.LASF28:
+ 2585 003e 64617461 		.ascii	"data\000"
+ 2585      00
+ 2586              	.LASF44:
+ 2587 0043 696E6974 		.ascii	"init_EVE_IO\000"
+ 2587      5F455645 
+ 2587      5F494F00 
+ 2588              	.LASF23:
+ 2589 004f 53504932 		.ascii	"SPI2TransmitByte\000"
+ 2589      5472616E 
+ 2589      736D6974 
+ 2589      42797465 
+ 2589      00
+ 2590              	.LASF2:
+ 2591 0060 756E7369 		.ascii	"unsigned char\000"
+ 2591      676E6564 
+ 2591      20636861 
+ 2591      7200
+ 2592              	.LASF40:
+ 2593 006e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2593      43313120 
+ 2593      352E342E 
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 53
+
+
+ 2593      31203230 
+ 2593      31363036 
+ 2594 00a1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2594      20726576 
+ 2594      6973696F 
+ 2594      6E203233 
+ 2594      37373135 
+ 2595 00d4 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2595      66756E63 
+ 2595      74696F6E 
+ 2595      2D736563 
+ 2595      74696F6E 
+ 2596              	.LASF25:
+ 2597 00fc 53504932 		.ascii	"SPI2ReceiveByte\000"
+ 2597      52656365 
+ 2597      69766542 
+ 2597      79746500 
+ 2598              	.LASF33:
+ 2599 010c 4556455F 		.ascii	"EVE_Power\000"
+ 2599      506F7765 
+ 2599      7200
+ 2600              	.LASF18:
+ 2601 0116 43686970 		.ascii	"ChipOnOff\000"
+ 2601      4F6E4F66 
+ 2601      6600
+ 2602              	.LASF6:
+ 2603 0120 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2603      20756E73 
+ 2603      69676E65 
+ 2603      6420696E 
+ 2603      7400
+ 2604              	.LASF4:
+ 2605 0132 73686F72 		.ascii	"short unsigned int\000"
+ 2605      7420756E 
+ 2605      7369676E 
+ 2605      65642069 
+ 2605      6E7400
+ 2606              	.LASF24:
+ 2607 0145 5350495F 		.ascii	"SPI_READ\000"
+ 2607      52454144 
+ 2607      00
+ 2608              	.LASF30:
+ 2609 014e 77723332 		.ascii	"wr32\000"
+ 2609      00
+ 2610              	.LASF34:
+ 2611 0153 6F6E5F6F 		.ascii	"on_off\000"
+ 2611      666600
+ 2612              	.LASF37:
+ 2613 015a 5350495F 		.ascii	"SPI_EVE_WriteTxData\000"
+ 2613      4556455F 
+ 2613      57726974 
+ 2613      65547844 
+ 2613      61746100 
+ 2614              	.LASF11:
+ 2615 016e 646F7562 		.ascii	"double\000"
+ 2615      6C6500
+ 2616              	.LASF31:
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 54
+
+
+ 2617 0175 72643136 		.ascii	"rd16\000"
+ 2617      00
+ 2618              	.LASF32:
+ 2619 017a 72643332 		.ascii	"rd32\000"
+ 2619      00
+ 2620              	.LASF36:
+ 2621 017f 53535F45 		.ascii	"SS_EVE_Write\000"
+ 2621      56455F57 
+ 2621      72697465 
+ 2621      00
+ 2622              	.LASF43:
+ 2623 018c 6576655F 		.ascii	"eve_enable_t\000"
+ 2623      656E6162 
+ 2623      6C655F74 
+ 2623      00
+ 2624              	.LASF42:
+ 2625 0199 433A5C70 		.ascii	"C:\\projekte\\repo\\HomeServer\\Firmware\\Cypress\\"
+ 2625      726F6A65 
+ 2625      6B74655C 
+ 2625      7265706F 
+ 2625      5C486F6D 
+ 2626 01c6 486F6D65 		.ascii	"HomeServer\\EVE.cydsn\000"
+ 2626      53657276 
+ 2626      65725C45 
+ 2626      56452E63 
+ 2626      7964736E 
+ 2627              	.LASF9:
+ 2628 01db 756E7369 		.ascii	"unsigned int\000"
+ 2628      676E6564 
+ 2628      20696E74 
+ 2628      00
+ 2629              	.LASF27:
+ 2630 01e8 61646472 		.ascii	"address\000"
+ 2630      65737300 
+ 2631              	.LASF8:
+ 2632 01f0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2632      206C6F6E 
+ 2632      6720756E 
+ 2632      7369676E 
+ 2632      65642069 
+ 2633              	.LASF35:
+ 2634 0207 66646864 		.ascii	"fdhdgg\000"
+ 2634      676700
+ 2635              	.LASF21:
+ 2636 020e 77657274 		.ascii	"wert\000"
+ 2636      00
+ 2637              	.LASF22:
+ 2638 0213 53504932 		.ascii	"SPI2TransmitWord\000"
+ 2638      5472616E 
+ 2638      736D6974 
+ 2638      576F7264 
+ 2638      00
+ 2639              	.LASF14:
+ 2640 0224 73697A65 		.ascii	"sizetype\000"
+ 2640      74797065 
+ 2640      00
+ 2641              	.LASF7:
+ARM GAS  C:\Users\rene_\AppData\Local\Temp\cctRgEGh.s 			page 55
+
+
+ 2642 022d 6C6F6E67 		.ascii	"long long int\000"
+ 2642      206C6F6E 
+ 2642      6720696E 
+ 2642      7400
+ 2643              	.LASF19:
+ 2644 023b 74696D65 		.ascii	"timeout\000"
+ 2644      6F757400 
+ 2645              	.LASF3:
+ 2646 0243 73686F72 		.ascii	"short int\000"
+ 2646      7420696E 
+ 2646      7400
+ 2647              	.LASF38:
+ 2648 024d 5350495F 		.ascii	"SPI_EVE_ReadRxData\000"
+ 2648      4556455F 
+ 2648      52656164 
+ 2648      52784461 
+ 2648      746100
+ 2649              	.LASF5:
+ 2650 0260 6C6F6E67 		.ascii	"long int\000"
+ 2650      20696E74 
+ 2650      00
+ 2651              	.LASF12:
+ 2652 0269 63686172 		.ascii	"char\000"
+ 2652      00
+ 2653              	.LASF13:
+ 2654 026e 6C6F6E67 		.ascii	"long double\000"
+ 2654      20646F75 
+ 2654      626C6500 
+ 2655              	.LASF1:
+ 2656 027a 7369676E 		.ascii	"signed char\000"
+ 2656      65642063 
+ 2656      68617200 
+ 2657              	.LASF39:
+ 2658 0286 6E50445F 		.ascii	"nPD_EVE_Write\000"
+ 2658      4556455F 
+ 2658      57726974 
+ 2658      6500
+ 2659              	.LASF0:
+ 2660 0294 5F426F6F 		.ascii	"_Bool\000"
+ 2660      6C00
+ 2661              	.LASF16:
+ 2662 029a 53656C65 		.ascii	"SelectChipOnOff\000"
+ 2662      63744368 
+ 2662      69704F6E 
+ 2662      4F666600 
+ 2663              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

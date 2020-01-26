@@ -1,0 +1,730 @@
+   1                             		.file	"EVE_SPI.c"
+   2                             		.section P,"ax"
+   3                             	.Ltext0:
+   4                             		.global	_fdhdgg
+   5                             		.section	.data.fdhdgg,"aw",@progbits
+   8                             	_fdhdgg:
+   9 0000 3C                      		.byte	60
+  10 0001 50                      		.byte	0x50
+  11 0002 3E                      		.byte	62
+  12 0003 50                      		.byte	0x50
+  13 0004 40                      		.byte	64
+  14 0005 50                      		.byte	0x50
+  15 0006 41                      		.byte	0x41
+  16 0007 50                      		.byte	0x50
+  17 0008 43                      		.byte	0x43
+  18 0009 50                      		.byte	0x50
+  19 000a 00                      		.byte	0
+  20 000b 00                      		.byte	0
+  21                             		.section	.text.SelectChipOnOff,"ax",@progbits
+  22                             		.global	_SelectChipOnOff
+  24                             	_SelectChipOnOff:
+  25                             	.LFB0:
+  26                             		.file 1 "../src/EVE/EVE_SPI.c"
+   1:../src/EVE/EVE_SPI.c **** /* THIS SAMPLE CODE IS PROVIDED AS IS        */
+   2:../src/EVE/EVE_SPI.c **** /* AND IS SUBJECT TO ALTERATIONS. GLYN       */
+   3:../src/EVE/EVE_SPI.c **** /* ACCEPTS NO RESPONSIBILITY OR LIABILITY    */
+   4:../src/EVE/EVE_SPI.c **** /* FOR ANY ERRORS OR                         */
+   5:../src/EVE/EVE_SPI.c **** /* ELIGIBILITY FOR ANY PURPOSES.             */
+   6:../src/EVE/EVE_SPI.c **** /* (C) GLYN GmbH & Co. KG                    */
+   7:../src/EVE/EVE_SPI.c **** /*********************************************
+   8:../src/EVE/EVE_SPI.c **** Project : EVE_SPI.c
+   9:../src/EVE/EVE_SPI.c ****           Graphic library
+  10:../src/EVE/EVE_SPI.c ****           EVE with EFM32GG980
+  11:../src/EVE/EVE_SPI.c ****           SPI-Bus
+  12:../src/EVE/EVE_SPI.c ****           Display: ET0430G0DH6
+  13:../src/EVE/EVE_SPI.c **** Version : 0.1 Status: Demo
+  14:../src/EVE/EVE_SPI.c **** Date    : 21.08.2013
+  15:../src/EVE/EVE_SPI.c **** 
+  16:../src/EVE/EVE_SPI.c **** Author  : P.Doerwald / GLYN GmbH & Co. KG
+  17:../src/EVE/EVE_SPI.c **** 
+  18:../src/EVE/EVE_SPI.c **** Releases: V0.1
+  19:../src/EVE/EVE_SPI.c **** 
+  20:../src/EVE/EVE_SPI.c **** Info    : O
+  21:../src/EVE/EVE_SPI.c **** *********************************************/
+  22:../src/EVE/EVE_SPI.c **** 
+  23:../src/EVE/EVE_SPI.c **** #include "EVE_SPI.h" 
+  24:../src/EVE/EVE_SPI.c **** #include "EVE.h" 
+  25:../src/EVE/EVE_SPI.c **** 
+  26:../src/EVE/EVE_SPI.c **** #include "copro_commands.h"
+  27:../src/EVE/EVE_SPI.c **** #include <stdio.h>
+  28:../src/EVE/EVE_SPI.c **** #include <string.h>
+  29:../src/EVE/EVE_SPI.c **** #include <stdlib.h>
+  30:../src/EVE/EVE_SPI.c **** #include "board.h"
+  31:../src/EVE/EVE_SPI.c **** #include "iodefine.h"                  
+  32:../src/EVE/EVE_SPI.c **** 
+  33:../src/EVE/EVE_SPI.c **** 
+  34:../src/EVE/EVE_SPI.c **** #include "FT_Gpu.h"
+  35:../src/EVE/EVE_SPI.c **** 
+  36:../src/EVE/EVE_SPI.c **** #include <math.h>
+  37:../src/EVE/EVE_SPI.c **** 
+  38:../src/EVE/EVE_SPI.c **** 
+  39:../src/EVE/EVE_SPI.c **** 
+  40:../src/EVE/EVE_SPI.c **** 
+  41:../src/EVE/EVE_SPI.c **** 
+  42:../src/EVE/EVE_SPI.c **** ////////////// Values for MEMORY_ACCESS_CONTROL register ///////////////////////
+  43:../src/EVE/EVE_SPI.c **** #define DEG0_NORMAL     0x08
+  44:../src/EVE/EVE_SPI.c **** #define DEG0_BMP        0x88
+  45:../src/EVE/EVE_SPI.c **** #define DEG90_NORMAL    0xA8
+  46:../src/EVE/EVE_SPI.c **** #define DEG90_BMP       0xE8
+  47:../src/EVE/EVE_SPI.c **** #define DEG180_NORMAL   0xC8      
+  48:../src/EVE/EVE_SPI.c **** #define DEG180_BMP      0x48
+  49:../src/EVE/EVE_SPI.c **** #define DEG270_NORMAL   0x68
+  50:../src/EVE/EVE_SPI.c **** #define DEG270_BMP      0x28
+  51:../src/EVE/EVE_SPI.c **** 
+  52:../src/EVE/EVE_SPI.c **** #define U8              unsigned char
+  53:../src/EVE/EVE_SPI.c **** #define U16             unsigned int
+  54:../src/EVE/EVE_SPI.c **** #define U32             unsigned long int
+  55:../src/EVE/EVE_SPI.c **** #define I32             long int
+  56:../src/EVE/EVE_SPI.c **** 
+  57:../src/EVE/EVE_SPI.c **** #define ft_pgm_read_byte(x)        (*(x))
+  58:../src/EVE/EVE_SPI.c **** 
+  59:../src/EVE/EVE_SPI.c **** #define Pi  3.14159
+  60:../src/EVE/EVE_SPI.c **** //////////////////// SPI Transfer description byte /////////////////////////////
+  61:../src/EVE/EVE_SPI.c **** 
+  62:../src/EVE/EVE_SPI.c **** //#define ID 1					// Use this if BS0 is connected to High
+  63:../src/EVE/EVE_SPI.c ****   #define ID 0					// Use this if BS0 is connected to low
+  64:../src/EVE/EVE_SPI.c **** 
+  65:../src/EVE/EVE_SPI.c **** ///////////////////////////////////////////////////////////////////////////////
+  66:../src/EVE/EVE_SPI.c **** 
+  67:../src/EVE/EVE_SPI.c **** #define INDEX_WRITE       (0x70 | DisplayID)
+  68:../src/EVE/EVE_SPI.c **** #define REG_WRITE         (0x72 | DisplayID)
+  69:../src/EVE/EVE_SPI.c **** #define REG_READ          (0x73 | DisplayID)
+  70:../src/EVE/EVE_SPI.c **** #define INDEX_WRITE_WORD  ((INDEX_WRITE)<<8)
+  71:../src/EVE/EVE_SPI.c **** #define REG_WRITE_WORD    ((REG_WRITE)<<8)
+  72:../src/EVE/EVE_SPI.c **** #define REG_READ_WORD     ((REG_READ)<<8)
+  73:../src/EVE/EVE_SPI.c **** 
+  74:../src/EVE/EVE_SPI.c **** #define ChipOn  1      
+  75:../src/EVE/EVE_SPI.c **** #define ChipOff 0 
+  76:../src/EVE/EVE_SPI.c **** 
+  77:../src/EVE/EVE_SPI.c **** ////////////////////////////// Display Variables ///////////////////////////////
+  78:../src/EVE/EVE_SPI.c **** 
+  79:../src/EVE/EVE_SPI.c **** 
+  80:../src/EVE/EVE_SPI.c **** 
+  81:../src/EVE/EVE_SPI.c **** 
+  82:../src/EVE/EVE_SPI.c **** U8 fdhdgg[]={60,80,62,80,64,80,65,80,67,80,0,0};
+  83:../src/EVE/EVE_SPI.c **** 
+  84:../src/EVE/EVE_SPI.c **** /*------------------------------------------------------------------------------
+  85:../src/EVE/EVE_SPI.c **** //::FUNCTION:SelectChip (switch CSN Signal)
+  86:../src/EVE/EVE_SPI.c **** ------------------------------------------------------------------------------*/
+  87:../src/EVE/EVE_SPI.c **** void SelectChipOnOff(U8 ChipOnOff){
+  27                             		.loc 1 87 0
+  28 0000 7E A6                   		push.l	r6
+  29                             	.LCFI0:
+  30 0002 71 06 F4                		add	#-12, r0, r6
+  31                             	.LCFI1:
+  32 0005 EF 60                   		mov.L	r6, r0
+  33                             	.LCFI2:
+  34 0007 82 61                   		mov.B	r1, 8[r6]
+  88:../src/EVE/EVE_SPI.c **** 
+  89:../src/EVE/EVE_SPI.c ****     unsigned char go=1;
+  35                             		.loc 1 89 0
+  36 0009 F8 64 01                		mov.B	#1, [r6]
+  90:../src/EVE/EVE_SPI.c ****     U32 timeout=1000000;
+  37                             		.loc 1 90 0
+  38 000c F9 6E 01 40 42 0F       		mov.L	#0xf4240, 4[r6]
+  91:../src/EVE/EVE_SPI.c ****         if (ChipOnOff == ChipOn)
+  39                             		.loc 1 91 0
+  40 0012 B2 65                   		movu.B	8[r6], r5
+  41 0014 61 15                   		cmp	#1, r5
+  42 0016 21 12                   		bne	.L2
+  92:../src/EVE/EVE_SPI.c ****             EVE_CS_on;
+  43                             		.loc 1 92 0
+  44 0018 FB 5E 02 C0 08          		mov.L	#0x8c002, r5
+  45 001d CD 54 20                		mov.B	32[r5], r4
+  46 0020 75 24 FB                		and	#-5, r4
+  47 0023 C7 54 20                		mov.B	r4, 32[r5]
+  48 0026 2E 37                   		bra	.L1
+  49                             	.L2:
+  93:../src/EVE/EVE_SPI.c ****         else if (ChipOnOff == ChipOff){
+  50                             		.loc 1 93 0
+  51 0028 B2 65                   		movu.B	8[r6], r5
+  52 002a 61 05                   		cmp	#0, r5
+  53 002c 21 31                   		bne	.L1
+  94:../src/EVE/EVE_SPI.c ****             while(go){
+  54                             		.loc 1 94 0
+  55 002e 2E 1C                   		bra	.L4
+  56                             	.L6:
+  57                             	.LBB2:
+  95:../src/EVE/EVE_SPI.c ****                 timeout--;
+  58                             		.loc 1 95 0
+  59 0030 A8 6D                   		mov.L	4[r6], r5
+  60 0032 60 15                   		sub	#1, r5
+  61 0034 A0 6D                   		mov.L	r5, 4[r6]
+  96:../src/EVE/EVE_SPI.c ****              if(timeout==0)
+  62                             		.loc 1 96 0
+  63 0036 A8 6D                   		mov.L	4[r6], r5
+  64 0038 61 05                   		cmp	#0, r5
+  65 003a 1C                      		bne	.L5
+  97:../src/EVE/EVE_SPI.c ****             	 go=0;
+  66                             		.loc 1 97 0
+  67 003b F8 64 00                		mov.B	#0, [r6]
+  68                             	.L5:
+  98:../src/EVE/EVE_SPI.c ****              if(USART_StatusGet())
+  69                             		.loc 1 98 0
+  70 003e 05 00 00 00             		bsr	_USART_StatusGet
+  71 0042 EF 15                   		mov.L	r1, r5
+  72 0044 61 05                   		cmp	#0, r5
+  73 0046 14                      		beq	.L4
+  99:../src/EVE/EVE_SPI.c ****             	 go=0;  //wait until TXC
+  74                             		.loc 1 99 0
+  75 0047 F8 64 00                		mov.B	#0, [r6]
+  76                             	.L4:
+  77                             	.LBE2:
+  94:../src/EVE/EVE_SPI.c ****                 timeout--;
+  78                             		.loc 1 94 0 discriminator 1
+  79 004a 58 65                   		movu.B	[r6], r5
+  80 004c 61 05                   		cmp	#0, r5
+  81 004e 21 E2                   		bne	.L6
+ 100:../src/EVE/EVE_SPI.c ****             }
+ 101:../src/EVE/EVE_SPI.c ****             EVE_CS_off;
+  82                             		.loc 1 101 0
+  83 0050 FB 5E 02 C0 08          		mov.L	#0x8c002, r5
+  84 0055 CD 54 20                		mov.B	32[r5], r4
+  85 0058 65 44                   		or	#4, r4
+  86 005a C7 54 20                		mov.B	r4, 32[r5]
+  87                             	.L1:
+ 102:../src/EVE/EVE_SPI.c ****     }
+ 103:../src/EVE/EVE_SPI.c ****         
+ 104:../src/EVE/EVE_SPI.c **** }
+  88                             		.loc 1 104 0
+  89 005d 3F 66 04                		rtsd	#16, r6-r6
+  90                             	.LFE0:
+  92                             		.section	.text.SPI_WRITE,"ax",@progbits
+  93                             		.global	_SPI_WRITE
+  95                             	_SPI_WRITE:
+  96                             	.LFB1:
+ 105:../src/EVE/EVE_SPI.c **** 
+ 106:../src/EVE/EVE_SPI.c **** void SPI_WRITE (U8 wert){
+  97                             		.loc 1 106 0
+  98 0000 7E A6                   		push.l	r6
+  99                             	.LCFI3:
+ 100 0002 71 06 FC                		add	#-4, r0, r6
+ 101                             	.LCFI4:
+ 102 0005 EF 60                   		mov.L	r6, r0
+ 103                             	.LCFI5:
+ 104 0007 C3 61                   		mov.B	r1, [r6]
+ 107:../src/EVE/EVE_SPI.c **** 
+ 108:../src/EVE/EVE_SPI.c ****     send_SPI(wert);
+ 105                             		.loc 1 108 0
+ 106 0009 58 65                   		movu.B	[r6], r5
+ 107 000b EF 51                   		mov.L	r5, r1
+ 108 000d 05 00 00 00             		bsr	_send_SPI
+ 109:../src/EVE/EVE_SPI.c ****     read_SPI();
+ 109                             		.loc 1 109 0
+ 110 0011 05 00 00 00             		bsr	_read_SPI
+ 110:../src/EVE/EVE_SPI.c **** }  
+ 111                             		.loc 1 110 0
+ 112 0015 3F 66 02                		rtsd	#8, r6-r6
+ 113                             	.LFE1:
+ 115                             		.section	.text.SPI_READ,"ax",@progbits
+ 116                             		.global	_SPI_READ
+ 118                             	_SPI_READ:
+ 119                             	.LFB2:
+ 111:../src/EVE/EVE_SPI.c **** 
+ 112:../src/EVE/EVE_SPI.c **** U8 SPI_READ(void){
+ 120                             		.loc 1 112 0
+ 121 0000 7E A6                   		push.l	r6
+ 122                             	.LCFI6:
+ 123 0002 EF 06                   		mov.L	r0, r6
+ 124                             	.LCFI7:
+ 113:../src/EVE/EVE_SPI.c ****    
+ 114:../src/EVE/EVE_SPI.c ****      send_SPI(0xFF);
+ 125                             		.loc 1 114 0
+ 126 0004 75 41 FF                		mov.L	#0xff, r1
+ 127 0007 05 00 00 00             		bsr	_send_SPI
+ 115:../src/EVE/EVE_SPI.c ****      return (read_SPI());
+ 128                             		.loc 1 115 0
+ 129 000b 05 00 00 00             		bsr	_read_SPI
+ 130 000f EF 15                   		mov.L	r1, r5
+ 131 0011 5B 55                   		movu.B	r5, r5
+ 116:../src/EVE/EVE_SPI.c **** }  
+ 132                             		.loc 1 116 0
+ 133 0013 EF 51                   		mov.L	r5, r1
+ 134 0015 3F 66 01                		rtsd	#4, r6-r6
+ 135                             	.LFE2:
+ 137                             		.section	.text.SPI2TransmitWord,"ax",@progbits
+ 138                             		.global	_SPI2TransmitWord
+ 140                             	_SPI2TransmitWord:
+ 141                             	.LFB3:
+ 117:../src/EVE/EVE_SPI.c **** 
+ 118:../src/EVE/EVE_SPI.c **** void SPI2TransmitWord(U16 wert){
+ 142                             		.loc 1 118 0
+ 143 0000 7E A6                   		push.l	r6
+ 144                             	.LCFI8:
+ 145 0002 71 06 FC                		add	#-4, r0, r6
+ 146                             	.LCFI9:
+ 147 0005 EF 60                   		mov.L	r6, r0
+ 148                             	.LCFI10:
+ 149 0007 E3 61                   		mov.L	r1, [r6]
+ 119:../src/EVE/EVE_SPI.c ****     //Low byte first
+ 120:../src/EVE/EVE_SPI.c ****     SPI_WRITE (Low_Byte(wert));
+ 150                             		.loc 1 120 0
+ 151 0009 EC 65                   		mov.L	[r6], r5
+ 152 000b CF 51                   		mov.B	r5, r1
+ 153 000d 05 00 00 00             		bsr	_SPI_WRITE
+ 121:../src/EVE/EVE_SPI.c ****     SPI_WRITE (High_Byte(wert));
+ 154                             		.loc 1 121 0
+ 155 0011 EC 65                   		mov.L	[r6], r5
+ 156 0013 68 85                   		shlr	#8, r5
+ 157 0015 CF 51                   		mov.B	r5, r1
+ 158 0017 05 00 00 00             		bsr	_SPI_WRITE
+ 122:../src/EVE/EVE_SPI.c **** }
+ 159                             		.loc 1 122 0
+ 160 001b 3F 66 02                		rtsd	#8, r6-r6
+ 161                             	.LFE3:
+ 163                             		.section	.text.SPI2TransmitByte,"ax",@progbits
+ 164                             		.global	_SPI2TransmitByte
+ 166                             	_SPI2TransmitByte:
+ 167                             	.LFB4:
+ 123:../src/EVE/EVE_SPI.c **** void SPI2TransmitByte(U8 wert){
+ 168                             		.loc 1 123 0
+ 169 0000 7E A6                   		push.l	r6
+ 170                             	.LCFI11:
+ 171 0002 71 06 FC                		add	#-4, r0, r6
+ 172                             	.LCFI12:
+ 173 0005 EF 60                   		mov.L	r6, r0
+ 174                             	.LCFI13:
+ 175 0007 C3 61                   		mov.B	r1, [r6]
+ 124:../src/EVE/EVE_SPI.c ****     SPI_WRITE (wert);
+ 176                             		.loc 1 124 0
+ 177 0009 CC 61                   		mov.B	[r6], r1
+ 178 000b 05 00 00 00             		bsr	_SPI_WRITE
+ 125:../src/EVE/EVE_SPI.c **** }
+ 179                             		.loc 1 125 0
+ 180 000f 3F 66 02                		rtsd	#8, r6-r6
+ 181                             	.LFE4:
+ 183                             		.section	.text.SPI2ReceiveByte,"ax",@progbits
+ 184                             		.global	_SPI2ReceiveByte
+ 186                             	_SPI2ReceiveByte:
+ 187                             	.LFB5:
+ 126:../src/EVE/EVE_SPI.c **** 
+ 127:../src/EVE/EVE_SPI.c **** U8 SPI2ReceiveByte(void){
+ 188                             		.loc 1 127 0
+ 189 0000 7E A6                   		push.l	r6
+ 190                             	.LCFI14:
+ 191 0002 EF 06                   		mov.L	r0, r6
+ 192                             	.LCFI15:
+ 128:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0xFF);
+ 193                             		.loc 1 128 0
+ 194 0004 FB 16 FF                		mov	#-1, r1
+ 195 0007 05 00 00 00             		bsr	_SPI_WRITE
+ 129:../src/EVE/EVE_SPI.c ****     return (read_SPI());
+ 196                             		.loc 1 129 0
+ 197 000b 05 00 00 00             		bsr	_read_SPI
+ 198 000f EF 15                   		mov.L	r1, r5
+ 199 0011 5B 55                   		movu.B	r5, r5
+ 130:../src/EVE/EVE_SPI.c **** } 
+ 200                             		.loc 1 130 0
+ 201 0013 EF 51                   		mov.L	r5, r1
+ 202 0015 3F 66 01                		rtsd	#4, r6-r6
+ 203                             	.LFE5:
+ 205                             		.section	.text.host_command,"ax",@progbits
+ 206                             		.global	_host_command
+ 208                             	_host_command:
+ 209                             	.LFB6:
+ 131:../src/EVE/EVE_SPI.c **** 
+ 132:../src/EVE/EVE_SPI.c **** void host_command(U8 cmd){
+ 210                             		.loc 1 132 0
+ 211 0000 7E A6                   		push.l	r6
+ 212                             	.LCFI16:
+ 213 0002 71 06 FC                		add	#-4, r0, r6
+ 214                             	.LCFI17:
+ 215 0005 EF 60                   		mov.L	r6, r0
+ 216                             	.LCFI18:
+ 217 0007 C3 61                   		mov.B	r1, [r6]
+ 133:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOn);
+ 218                             		.loc 1 133 0
+ 219 0009 66 11                   		mov	#1, r1
+ 220 000b 05 00 00 00             		bsr	_SelectChipOnOff
+ 134:../src/EVE/EVE_SPI.c ****     SPI_WRITE(cmd);
+ 221                             		.loc 1 134 0
+ 222 000f CC 61                   		mov.B	[r6], r1
+ 223 0011 05 00 00 00             		bsr	_SPI_WRITE
+ 135:../src/EVE/EVE_SPI.c ****     SPI_WRITE(0);
+ 224                             		.loc 1 135 0
+ 225 0015 66 01                   		mov	#0, r1
+ 226 0017 05 00 00 00             		bsr	_SPI_WRITE
+ 136:../src/EVE/EVE_SPI.c ****     SPI_WRITE(0);
+ 227                             		.loc 1 136 0
+ 228 001b 66 01                   		mov	#0, r1
+ 229 001d 05 00 00 00             		bsr	_SPI_WRITE
+ 137:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOff);
+ 230                             		.loc 1 137 0
+ 231 0021 66 01                   		mov	#0, r1
+ 232 0023 05 00 00 00             		bsr	_SelectChipOnOff
+ 138:../src/EVE/EVE_SPI.c **** }
+ 233                             		.loc 1 138 0
+ 234 0027 3F 66 02                		rtsd	#8, r6-r6
+ 235                             	.LFE6:
+ 237                             		.section	.text.wr8,"ax",@progbits
+ 238                             		.global	_wr8
+ 240                             	_wr8:
+ 241                             	.LFB7:
+ 139:../src/EVE/EVE_SPI.c **** 
+ 140:../src/EVE/EVE_SPI.c **** void wr8(U32 address, U8 data){
+ 242                             		.loc 1 140 0
+ 243 0000 7E A6                   		push.l	r6
+ 244                             	.LCFI19:
+ 245 0002 71 06 F8                		add	#-8, r0, r6
+ 246                             	.LCFI20:
+ 247 0005 EF 60                   		mov.L	r6, r0
+ 248                             	.LCFI21:
+ 249 0007 E3 61                   		mov.L	r1, [r6]
+ 250 0009 81 62                   		mov.B	r2, 4[r6]
+ 141:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOn);
+ 251                             		.loc 1 141 0
+ 252 000b 66 11                   		mov	#1, r1
+ 253 000d 05 00 00 00             		bsr	_SelectChipOnOff
+ 142:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x80|(address>>16));
+ 254                             		.loc 1 142 0
+ 255 0011 EC 65                   		mov.L	[r6], r5
+ 256 0013 69 05                   		shlr	#16, r5
+ 257 0015 75 35 80                		or	#0xffffff80, r5
+ 258 0018 CF 51                   		mov.B	r5, r1
+ 259 001a 05 00 00 00             		bsr	_SPI_WRITE
+ 143:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address>>8);
+ 260                             		.loc 1 143 0
+ 261 001e EC 65                   		mov.L	[r6], r5
+ 262 0020 68 85                   		shlr	#8, r5
+ 263 0022 CF 51                   		mov.B	r5, r1
+ 264 0024 05 00 00 00             		bsr	_SPI_WRITE
+ 144:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address);
+ 265                             		.loc 1 144 0
+ 266 0028 EC 65                   		mov.L	[r6], r5
+ 267 002a CF 51                   		mov.B	r5, r1
+ 268 002c 05 00 00 00             		bsr	_SPI_WRITE
+ 145:../src/EVE/EVE_SPI.c ****     SPI_WRITE (data);
+ 269                             		.loc 1 145 0
+ 270 0030 89 61                   		mov.B	4[r6], r1
+ 271 0032 05 00 00 00             		bsr	_SPI_WRITE
+ 146:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOff);
+ 272                             		.loc 1 146 0
+ 273 0036 66 01                   		mov	#0, r1
+ 274 0038 05 00 00 00             		bsr	_SelectChipOnOff
+ 147:../src/EVE/EVE_SPI.c **** }
+ 275                             		.loc 1 147 0
+ 276 003c 3F 66 03                		rtsd	#12, r6-r6
+ 277                             	.LFE7:
+ 279                             		.section	.text.wr16,"ax",@progbits
+ 280                             		.global	_wr16
+ 282                             	_wr16:
+ 283                             	.LFB8:
+ 148:../src/EVE/EVE_SPI.c **** 
+ 149:../src/EVE/EVE_SPI.c **** void wr16(U32 address, U16 data){
+ 284                             		.loc 1 149 0
+ 285 0000 7E A6                   		push.l	r6
+ 286                             	.LCFI22:
+ 287 0002 71 06 F8                		add	#-8, r0, r6
+ 288                             	.LCFI23:
+ 289 0005 EF 60                   		mov.L	r6, r0
+ 290                             	.LCFI24:
+ 291 0007 E3 61                   		mov.L	r1, [r6]
+ 292 0009 A0 6A                   		mov.L	r2, 4[r6]
+ 150:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOn);
+ 293                             		.loc 1 150 0
+ 294 000b 66 11                   		mov	#1, r1
+ 295 000d 05 00 00 00             		bsr	_SelectChipOnOff
+ 151:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x80|(address>>16));
+ 296                             		.loc 1 151 0
+ 297 0011 EC 65                   		mov.L	[r6], r5
+ 298 0013 69 05                   		shlr	#16, r5
+ 299 0015 75 35 80                		or	#0xffffff80, r5
+ 300 0018 CF 51                   		mov.B	r5, r1
+ 301 001a 05 00 00 00             		bsr	_SPI_WRITE
+ 152:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address>>8);
+ 302                             		.loc 1 152 0
+ 303 001e EC 65                   		mov.L	[r6], r5
+ 304 0020 68 85                   		shlr	#8, r5
+ 305 0022 CF 51                   		mov.B	r5, r1
+ 306 0024 05 00 00 00             		bsr	_SPI_WRITE
+ 153:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address);
+ 307                             		.loc 1 153 0
+ 308 0028 EC 65                   		mov.L	[r6], r5
+ 309 002a CF 51                   		mov.B	r5, r1
+ 310 002c 05 00 00 00             		bsr	_SPI_WRITE
+ 154:../src/EVE/EVE_SPI.c ****     SPI2TransmitWord(data);
+ 311                             		.loc 1 154 0
+ 312 0030 A8 69                   		mov.L	4[r6], r1
+ 313 0032 05 00 00 00             		bsr	_SPI2TransmitWord
+ 155:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOff);
+ 314                             		.loc 1 155 0
+ 315 0036 66 01                   		mov	#0, r1
+ 316 0038 05 00 00 00             		bsr	_SelectChipOnOff
+ 156:../src/EVE/EVE_SPI.c **** }
+ 317                             		.loc 1 156 0
+ 318 003c 3F 66 03                		rtsd	#12, r6-r6
+ 319                             	.LFE8:
+ 321                             		.section	.text.wr32,"ax",@progbits
+ 322                             		.global	_wr32
+ 324                             	_wr32:
+ 325                             	.LFB9:
+ 157:../src/EVE/EVE_SPI.c **** void wr32(U32 address, U32 data){
+ 326                             		.loc 1 157 0
+ 327 0000 7E A6                   		push.l	r6
+ 328                             	.LCFI25:
+ 329 0002 71 06 F8                		add	#-8, r0, r6
+ 330                             	.LCFI26:
+ 331 0005 EF 60                   		mov.L	r6, r0
+ 332                             	.LCFI27:
+ 333 0007 E3 61                   		mov.L	r1, [r6]
+ 334 0009 A0 6A                   		mov.L	r2, 4[r6]
+ 158:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOn);
+ 335                             		.loc 1 158 0
+ 336 000b 66 11                   		mov	#1, r1
+ 337 000d 05 00 00 00             		bsr	_SelectChipOnOff
+ 159:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x80|(address>>16));
+ 338                             		.loc 1 159 0
+ 339 0011 EC 65                   		mov.L	[r6], r5
+ 340 0013 69 05                   		shlr	#16, r5
+ 341 0015 75 35 80                		or	#0xffffff80, r5
+ 342 0018 CF 51                   		mov.B	r5, r1
+ 343 001a 05 00 00 00             		bsr	_SPI_WRITE
+ 160:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address>>8);
+ 344                             		.loc 1 160 0
+ 345 001e EC 65                   		mov.L	[r6], r5
+ 346 0020 68 85                   		shlr	#8, r5
+ 347 0022 CF 51                   		mov.B	r5, r1
+ 348 0024 05 00 00 00             		bsr	_SPI_WRITE
+ 161:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address);
+ 349                             		.loc 1 161 0
+ 350 0028 EC 65                   		mov.L	[r6], r5
+ 351 002a CF 51                   		mov.B	r5, r1
+ 352 002c 05 00 00 00             		bsr	_SPI_WRITE
+ 162:../src/EVE/EVE_SPI.c ****     SPI2TransmitWord(data);
+ 353                             		.loc 1 162 0
+ 354 0030 A8 69                   		mov.L	4[r6], r1
+ 355 0032 05 00 00 00             		bsr	_SPI2TransmitWord
+ 163:../src/EVE/EVE_SPI.c ****     SPI2TransmitWord(data>>16);
+ 356                             		.loc 1 163 0
+ 357 0036 A8 6D                   		mov.L	4[r6], r5
+ 358 0038 69 05                   		shlr	#16, r5
+ 359 003a EF 51                   		mov.L	r5, r1
+ 360 003c 05 00 00 00             		bsr	_SPI2TransmitWord
+ 164:../src/EVE/EVE_SPI.c ****   
+ 165:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOff);
+ 361                             		.loc 1 165 0
+ 362 0040 66 01                   		mov	#0, r1
+ 363 0042 05 00 00 00             		bsr	_SelectChipOnOff
+ 166:../src/EVE/EVE_SPI.c **** }
+ 364                             		.loc 1 166 0
+ 365 0046 3F 66 03                		rtsd	#12, r6-r6
+ 366                             	.LFE9:
+ 368                             		.section	.text.rd8,"ax",@progbits
+ 369                             		.global	_rd8
+ 371                             	_rd8:
+ 372                             	.LFB10:
+ 167:../src/EVE/EVE_SPI.c **** U8 rd8(U32 address){
+ 373                             		.loc 1 167 0
+ 374 0000 7E A6                   		push.l	r6
+ 375                             	.LCFI28:
+ 376 0002 71 06 F8                		add	#-8, r0, r6
+ 377                             	.LCFI29:
+ 378 0005 EF 60                   		mov.L	r6, r0
+ 379                             	.LCFI30:
+ 380 0007 A0 69                   		mov.L	r1, 4[r6]
+ 168:../src/EVE/EVE_SPI.c ****     U8 data=0;
+ 381                             		.loc 1 168 0
+ 382 0009 F8 64 00                		mov.B	#0, [r6]
+ 169:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOn);
+ 383                             		.loc 1 169 0
+ 384 000c 66 11                   		mov	#1, r1
+ 385 000e 05 00 00 00             		bsr	_SelectChipOnOff
+ 170:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x00|(address>>16));
+ 386                             		.loc 1 170 0
+ 387 0012 A8 6D                   		mov.L	4[r6], r5
+ 388 0014 69 05                   		shlr	#16, r5
+ 389 0016 CF 51                   		mov.B	r5, r1
+ 390 0018 05 00 00 00             		bsr	_SPI_WRITE
+ 171:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address>>8);
+ 391                             		.loc 1 171 0
+ 392 001c A8 6D                   		mov.L	4[r6], r5
+ 393 001e 68 85                   		shlr	#8, r5
+ 394 0020 CF 51                   		mov.B	r5, r1
+ 395 0022 05 00 00 00             		bsr	_SPI_WRITE
+ 172:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address);
+ 396                             		.loc 1 172 0
+ 397 0026 A8 6D                   		mov.L	4[r6], r5
+ 398 0028 CF 51                   		mov.B	r5, r1
+ 399 002a 05 00 00 00             		bsr	_SPI_WRITE
+ 173:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x0);    //Dummybyte
+ 400                             		.loc 1 173 0
+ 401 002e 66 01                   		mov	#0, r1
+ 402 0030 05 00 00 00             		bsr	_SPI_WRITE
+ 174:../src/EVE/EVE_SPI.c ****     data=SPI_READ();
+ 403                             		.loc 1 174 0
+ 404 0034 05 00 00 00             		bsr	_SPI_READ
+ 405 0038 EF 15                   		mov.L	r1, r5
+ 406 003a C3 65                   		mov.B	r5, [r6]
+ 175:../src/EVE/EVE_SPI.c ****   
+ 176:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOff);
+ 407                             		.loc 1 176 0
+ 408 003c 66 01                   		mov	#0, r1
+ 409 003e 05 00 00 00             		bsr	_SelectChipOnOff
+ 177:../src/EVE/EVE_SPI.c ****     return (data);
+ 410                             		.loc 1 177 0
+ 411 0042 CC 65                   		mov.B	[r6], r5
+ 412 0044 5B 55                   		movu.B	r5, r5
+ 178:../src/EVE/EVE_SPI.c **** }
+ 413                             		.loc 1 178 0
+ 414 0046 EF 51                   		mov.L	r5, r1
+ 415 0048 3F 66 03                		rtsd	#12, r6-r6
+ 416                             	.LFE10:
+ 418                             		.section	.text.rd16,"ax",@progbits
+ 419                             		.global	_rd16
+ 421                             	_rd16:
+ 422                             	.LFB11:
+ 179:../src/EVE/EVE_SPI.c **** U32 rd16(U32 address){
+ 423                             		.loc 1 179 0
+ 424 0000 7E A6                   		push.l	r6
+ 425                             	.LCFI31:
+ 426 0002 71 06 F8                		add	#-8, r0, r6
+ 427                             	.LCFI32:
+ 428 0005 EF 60                   		mov.L	r6, r0
+ 429                             	.LCFI33:
+ 430 0007 A0 69                   		mov.L	r1, 4[r6]
+ 180:../src/EVE/EVE_SPI.c ****     U32 data=0;
+ 431                             		.loc 1 180 0
+ 432 0009 F8 66 00                		mov.L	#0, [r6]
+ 181:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOn);
+ 433                             		.loc 1 181 0
+ 434 000c 66 11                   		mov	#1, r1
+ 435 000e 05 00 00 00             		bsr	_SelectChipOnOff
+ 182:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x00|(address>>16));
+ 436                             		.loc 1 182 0
+ 437 0012 A8 6D                   		mov.L	4[r6], r5
+ 438 0014 69 05                   		shlr	#16, r5
+ 439 0016 CF 51                   		mov.B	r5, r1
+ 440 0018 05 00 00 00             		bsr	_SPI_WRITE
+ 183:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address>>8);
+ 441                             		.loc 1 183 0
+ 442 001c A8 6D                   		mov.L	4[r6], r5
+ 443 001e 68 85                   		shlr	#8, r5
+ 444 0020 CF 51                   		mov.B	r5, r1
+ 445 0022 05 00 00 00             		bsr	_SPI_WRITE
+ 184:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address);
+ 446                             		.loc 1 184 0
+ 447 0026 A8 6D                   		mov.L	4[r6], r5
+ 448 0028 CF 51                   		mov.B	r5, r1
+ 449 002a 05 00 00 00             		bsr	_SPI_WRITE
+ 185:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x0);    //Dummybyte
+ 450                             		.loc 1 185 0
+ 451 002e 66 01                   		mov	#0, r1
+ 452 0030 05 00 00 00             		bsr	_SPI_WRITE
+ 186:../src/EVE/EVE_SPI.c ****     data=SPI_READ();
+ 453                             		.loc 1 186 0
+ 454 0034 05 00 00 00             		bsr	_SPI_READ
+ 455 0038 EF 15                   		mov.L	r1, r5
+ 456 003a 5B 55                   		movu.B	r5, r5
+ 457 003c E3 65                   		mov.L	r5, [r6]
+ 187:../src/EVE/EVE_SPI.c ****     data|=SPI_READ()<<8;;
+ 458                             		.loc 1 187 0
+ 459 003e 05 00 00 00             		bsr	_SPI_READ
+ 460 0042 EF 15                   		mov.L	r1, r5
+ 461 0044 5B 55                   		movu.B	r5, r5
+ 462 0046 6C 85                   		shll	#8, r5
+ 463 0048 EC 64                   		mov.L	[r6], r4
+ 464 004a 57 45                   		or	r4, r5
+ 465 004c E3 65                   		mov.L	r5, [r6]
+ 188:../src/EVE/EVE_SPI.c ****   
+ 189:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOff);
+ 466                             		.loc 1 189 0
+ 467 004e 66 01                   		mov	#0, r1
+ 468 0050 05 00 00 00             		bsr	_SelectChipOnOff
+ 190:../src/EVE/EVE_SPI.c ****     return (data);
+ 469                             		.loc 1 190 0
+ 470 0054 EC 65                   		mov.L	[r6], r5
+ 191:../src/EVE/EVE_SPI.c **** }
+ 471                             		.loc 1 191 0
+ 472 0056 EF 51                   		mov.L	r5, r1
+ 473 0058 3F 66 03                		rtsd	#12, r6-r6
+ 474                             	.LFE11:
+ 476                             		.section	.text.rd32,"ax",@progbits
+ 477                             		.global	_rd32
+ 479                             	_rd32:
+ 480                             	.LFB12:
+ 192:../src/EVE/EVE_SPI.c **** U32 rd32(U32 address){
+ 481                             		.loc 1 192 0
+ 482 0000 7E A6                   		push.l	r6
+ 483                             	.LCFI34:
+ 484 0002 71 06 F8                		add	#-8, r0, r6
+ 485                             	.LCFI35:
+ 486 0005 EF 60                   		mov.L	r6, r0
+ 487                             	.LCFI36:
+ 488 0007 A0 69                   		mov.L	r1, 4[r6]
+ 193:../src/EVE/EVE_SPI.c ****     U32 data=0;
+ 489                             		.loc 1 193 0
+ 490 0009 F8 66 00                		mov.L	#0, [r6]
+ 194:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOn);
+ 491                             		.loc 1 194 0
+ 492 000c 66 11                   		mov	#1, r1
+ 493 000e 05 00 00 00             		bsr	_SelectChipOnOff
+ 195:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0x00|(address>>16));
+ 494                             		.loc 1 195 0
+ 495 0012 A8 6D                   		mov.L	4[r6], r5
+ 496 0014 69 05                   		shlr	#16, r5
+ 497 0016 CF 51                   		mov.B	r5, r1
+ 498 0018 05 00 00 00             		bsr	_SPI_WRITE
+ 196:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address>>8);
+ 499                             		.loc 1 196 0
+ 500 001c A8 6D                   		mov.L	4[r6], r5
+ 501 001e 68 85                   		shlr	#8, r5
+ 502 0020 CF 51                   		mov.B	r5, r1
+ 503 0022 05 00 00 00             		bsr	_SPI_WRITE
+ 197:../src/EVE/EVE_SPI.c ****     SPI_WRITE (address);
+ 504                             		.loc 1 197 0
+ 505 0026 A8 6D                   		mov.L	4[r6], r5
+ 506 0028 CF 51                   		mov.B	r5, r1
+ 507 002a 05 00 00 00             		bsr	_SPI_WRITE
+ 198:../src/EVE/EVE_SPI.c ****     SPI_WRITE (0xFF);    //Dummybyte
+ 508                             		.loc 1 198 0
+ 509 002e FB 16 FF                		mov	#-1, r1
+ 510 0031 05 00 00 00             		bsr	_SPI_WRITE
+ 199:../src/EVE/EVE_SPI.c ****     data=SPI_READ();
+ 511                             		.loc 1 199 0
+ 512 0035 05 00 00 00             		bsr	_SPI_READ
+ 513 0039 EF 15                   		mov.L	r1, r5
+ 514 003b 5B 55                   		movu.B	r5, r5
+ 515 003d E3 65                   		mov.L	r5, [r6]
+ 200:../src/EVE/EVE_SPI.c ****     data|=SPI_READ()<<8;;
+ 516                             		.loc 1 200 0
+ 517 003f 05 00 00 00             		bsr	_SPI_READ
+ 518 0043 EF 15                   		mov.L	r1, r5
+ 519 0045 5B 55                   		movu.B	r5, r5
+ 520 0047 6C 85                   		shll	#8, r5
+ 521 0049 EC 64                   		mov.L	[r6], r4
+ 522 004b 57 45                   		or	r4, r5
+ 523 004d E3 65                   		mov.L	r5, [r6]
+ 201:../src/EVE/EVE_SPI.c ****     data|=SPI_READ()<<16;
+ 524                             		.loc 1 201 0
+ 525 004f 05 00 00 00             		bsr	_SPI_READ
+ 526 0053 EF 15                   		mov.L	r1, r5
+ 527 0055 5B 55                   		movu.B	r5, r5
+ 528 0057 6D 05                   		shll	#16, r5
+ 529 0059 EC 64                   		mov.L	[r6], r4
+ 530 005b 57 45                   		or	r4, r5
+ 531 005d E3 65                   		mov.L	r5, [r6]
+ 202:../src/EVE/EVE_SPI.c ****     data|=SPI_READ()<<24;
+ 532                             		.loc 1 202 0
+ 533 005f 05 00 00 00             		bsr	_SPI_READ
+ 534 0063 EF 15                   		mov.L	r1, r5
+ 535 0065 5B 55                   		movu.B	r5, r5
+ 536 0067 6D 85                   		shll	#24, r5
+ 537 0069 EC 64                   		mov.L	[r6], r4
+ 538 006b 57 45                   		or	r4, r5
+ 539 006d E3 65                   		mov.L	r5, [r6]
+ 203:../src/EVE/EVE_SPI.c ****   
+ 204:../src/EVE/EVE_SPI.c ****     SelectChipOnOff(ChipOff);
+ 540                             		.loc 1 204 0
+ 541 006f 66 01                   		mov	#0, r1
+ 542 0071 05 00 00 00             		bsr	_SelectChipOnOff
+ 205:../src/EVE/EVE_SPI.c ****     return (data);
+ 543                             		.loc 1 205 0
+ 544 0075 EC 65                   		mov.L	[r6], r5
+ 206:../src/EVE/EVE_SPI.c **** }
+ 545                             		.loc 1 206 0
+ 546 0077 EF 51                   		mov.L	r5, r1
+ 547 0079 3F 66 03                		rtsd	#12, r6-r6
+ 548                             	.LFE12:
+ 857                             	.Letext0:
+ 858                             		.file 2 "C:/projekte/repo/HomeServer/Firmware/Renesas/RX600_EVE_HomeServer/generate/iodefine.h"

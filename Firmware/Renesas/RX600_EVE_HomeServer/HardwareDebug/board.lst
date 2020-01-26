@@ -1,0 +1,811 @@
+   1                             		.file	"board.c"
+   2                             		.section P,"ax"
+   3                             	.Ltext0:
+   4                             		.comm	_ms,4,4
+   5                             		.comm	_sek,4,4
+   6                             		.comm	_hr,4,4
+   7                             		.comm	_min,4,4
+   8                             		.comm	_ms_counter,4,4
+   9                             		.comm	_ms_counter2,4,4
+  10                             		.comm	_delay_counter,4,4
+  11                             		.comm	_day,1,1
+  12                             		.comm	_month,1,1
+  13                             		.comm	_year,1,1
+  14                             		.comm	_day_old,1,1
+  15                             		.comm	_month_old,1,1
+  16                             		.comm	_year_old,1,1
+  17                             		.global	_months
+  18                             		.section	.rodata.months,"a",@progbits
+  21                             	_months:
+  22 0000 1F                      		.byte	31
+  23 0001 1C                      		.byte	28
+  24 0002 1F                      		.byte	31
+  25 0003 1E                      		.byte	30
+  26 0004 1F                      		.byte	31
+  27 0005 1E                      		.byte	30
+  28 0006 1F                      		.byte	31
+  29 0007 1F                      		.byte	31
+  30 0008 1E                      		.byte	30
+  31 0009 1F                      		.byte	31
+  32 000a 1E                      		.byte	30
+  33 000b 1F                      		.byte	31
+  34                             		.section	.text.init_clock,"ax",@progbits
+  35                             		.global	_init_clock
+  37                             	_init_clock:
+  38                             	.LFB0:
+  39                             		.file 1 "../src/board.c"
+   1:../src/board.c **** /*
+   2:../src/board.c ****  * board.c
+   3:../src/board.c ****  *
+   4:../src/board.c ****  *  Created on: 31.10.2018
+   5:../src/board.c ****  *      Author: Besitzer
+   6:../src/board.c ****  */
+   7:../src/board.c **** 
+   8:../src/board.c **** 
+   9:../src/board.c **** /************************************************************************
+  10:../src/board.c ****  * Includes
+  11:../src/board.c ****  ***********************************************************************/
+  12:../src/board.c **** #include "board.h"
+  13:../src/board.c **** 
+  14:../src/board.c **** /************************************************************************
+  15:../src/board.c ****  * Informations
+  16:../src/board.c ****  ***********************************************************************/
+  17:../src/board.c **** 
+  18:../src/board.c **** /************************************************************************
+  19:../src/board.c ****  * Global Variable
+  20:../src/board.c ****  ***********************************************************************/
+  21:../src/board.c **** /* Uhr    */
+  22:../src/board.c **** unsigned int ms,sek,hr,min;
+  23:../src/board.c **** unsigned long int ms_counter,ms_counter2, delay_counter;
+  24:../src/board.c **** volatile char day,month,year,day_old,month_old,year_old;
+  25:../src/board.c **** const char months[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+  26:../src/board.c **** /* Declare the simulated EEPROM data table */
+  27:../src/board.c **** extern uint8_t gSIM_EEPROM_Memory[256];
+  28:../src/board.c **** /************************************************************************
+  29:../src/board.c ****  * Local Variable
+  30:../src/board.c ****  ***********************************************************************/
+  31:../src/board.c **** 
+  32:../src/board.c **** /************************************************************************
+  33:../src/board.c ****  * Constant
+  34:../src/board.c ****  ***********************************************************************/
+  35:../src/board.c **** 
+  36:../src/board.c **** /************************************************************************
+  37:../src/board.c ****  * Local Funtions
+  38:../src/board.c ****  ***********************************************************************/
+  39:../src/board.c **** 
+  40:../src/board.c **** /************************************************************************
+  41:../src/board.c **** *! \fn			init_clock( void )
+  42:../src/board.c **** *  \brief		cpu clock initialization
+  43:../src/board.c **** *  \param		none
+  44:../src/board.c **** *  \exception	none
+  45:../src/board.c **** *  \return		none
+  46:../src/board.c **** ************************************************************************/
+  47:../src/board.c **** void init_clock( void ){
+  40                             		.loc 1 47 0
+  41 0000 7E A6                   		push.l	r6
+  42                             	.LCFI0:
+  43 0002 71 06 FC                		add	#-4, r0, r6
+  44                             	.LCFI1:
+  45 0005 EF 60                   		mov.L	r6, r0
+  46                             	.LCFI2:
+  48:../src/board.c **** 
+  49:../src/board.c **** 	/*
+  50:../src/board.c ****     Clock Description              Frequency
+  51:../src/board.c **** 	----------------------------------------
+  52:../src/board.c **** 	Input Clock Frequency............  12 MHz
+  53:../src/board.c **** 	PLL frequency (x16).............. 192 MHz
+  54:../src/board.c **** 	Internal Clock Frequency.........  96 MHz
+  55:../src/board.c **** 	Peripheral Clock Frequency.......  48 MHz
+  56:../src/board.c **** 	USB Clock Frequency..............  48 MHz
+  57:../src/board.c **** 	External Bus Clock Frequency.....  24 MHz */
+  58:../src/board.c **** 
+  59:../src/board.c **** 	volatile unsigned int i;
+  60:../src/board.c **** 
+  61:../src/board.c **** 	SYSTEM.PRCR.WORD = 0xA50B;			// Protect off.
+  47                             		.loc 1 61 0
+  48 0007 FB 5E 00 00 08          		mov.L	#0x80000, r5
+  49 000c FA 59 FF 01 0B A5       		mov.W	#0xffffa50b, 1022[r5]
+  62:../src/board.c **** 	//SYSTEM.SOSCCR.BYTE = 0x01;        // stop sub-clock // Uncomment if not using sub-clock
+  63:../src/board.c **** 	SYSTEM.SOSCCR.BYTE = 0x00;			// Enable sub-clock for RTC
+  50                             		.loc 1 63 0
+  51 0012 FB 5E 00 00 08          		mov.L	#0x80000, r5
+  52 0017 F9 54 33 00             		mov.B	#0, 51[r5]
+  64:../src/board.c **** 	SYSTEM.MOSCWTCR.BYTE = 0x0D;		// Wait 131,072 cycles * 12 MHz = 10.9 ms
+  53                             		.loc 1 64 0
+  54 001b FB 5E 00 00 08          		mov.L	#0x80000, r5
+  55 0020 F9 54 A2 0D             		mov.B	#13, 162[r5]
+  65:../src/board.c **** 	SYSTEM.PLLWTCR.BYTE = 0x04;			// PLL wait is 4,194,304 cycles (default) * 192 MHz (12 MHz * 16) = 
+  56                             		.loc 1 65 0
+  57 0024 FB 5E 00 00 08          		mov.L	#0x80000, r5
+  58 0029 F9 54 A6 04             		mov.B	#4, 166[r5]
+  66:../src/board.c **** 	SYSTEM.PLLCR.WORD = 0x0F00;			// x16 @PLL */
+  59                             		.loc 1 66 0
+  60 002d FB 5E 00 00 08          		mov.L	#0x80000, r5
+  61 0032 F9 59 14 00 0F          		mov.W	#0xf00, 40[r5]
+  67:../src/board.c **** 	SYSTEM.MOSCCR.BYTE = 0x00;			// EXTAL ON
+  62                             		.loc 1 67 0
+  63 0037 FB 5E 00 00 08          		mov.L	#0x80000, r5
+  64 003c F9 54 32 00             		mov.B	#0, 50[r5]
+  68:../src/board.c **** 	SYSTEM.PLLCR2.BYTE = 0x00;			// PLL ON
+  65                             		.loc 1 68 0
+  66 0040 FB 5E 00 00 08          		mov.L	#0x80000, r5
+  67 0045 F9 54 2A 00             		mov.B	#0, 42[r5]
+  69:../src/board.c ****     for(i = 0;i< 0x168;i++){
+  68                             		.loc 1 69 0
+  69 0049 F8 66 00                		mov.L	#0, [r6]
+  70 004c 08                      		bra	.L2
+  71                             	.L3:
+  70:../src/board.c ****     	asm("nop");        					// Wait over 12ms
+  72                             		.loc 1 70 0 discriminator 2
+  73                             	 ; 70 "../src/board.c" 1
+  74 004d 03                      		nop
+  75                             	 ; 0 "" 2
+  69:../src/board.c ****     for(i = 0;i< 0x168;i++){
+  76                             		.loc 1 69 0 discriminator 2
+  77 004e EC 65                   		mov.L	[r6], r5
+  78 0050 62 15                   		add	#1, r5
+  79 0052 E3 65                   		mov.L	r5, [r6]
+  80                             	.L2:
+  69:../src/board.c ****     for(i = 0;i< 0x168;i++){
+  81                             		.loc 1 69 0 is_stmt 0 discriminator 1
+  82 0054 EC 65                   		mov.L	[r6], r5
+  83 0056 76 05 67 01             		cmp	#0x167, r5
+  84 005a 25 F3                   		bleu	.L3
+  71:../src/board.c **** 	}
+  72:../src/board.c **** 
+  73:../src/board.c **** 	/* Setup system clocks
+  74:../src/board.c **** 	SCKCR - System Clock Control Register
+  75:../src/board.c **** 	b31:b28 FCK[3:0]  0x02 = Flash clock: PLL/4 = (192 / 4) = 48 MHz
+  76:../src/board.c **** 	b27:b24 ICK[3:0]  0x01 = System clock: PLL/2 = (192 / 2) = 96 MHz
+  77:../src/board.c **** 	b23     PSTOP1    0x00 = BCLK pin output is enabled
+  78:../src/board.c **** 	b19:b16 BCK[3:0]  0x03 = BCLK: PLL/8 = 24 MHz
+  79:../src/board.c **** 	b11:b8  PCKB[3:0] 0x02 = Peripheral clock B: PLL/4 = 48 MHz
+  80:../src/board.c **** 	*/
+  81:../src/board.c **** 
+  82:../src/board.c **** 	//	SYSTEM.SCKCR.LONG = 0x22862211;		//Mre 0x21031222;// ICK=PLL/4,BCK,FCK,PCK=PLL/4
+  83:../src/board.c **** 	SYSTEM.SCKCR.LONG = 0x21862211;		//Mre 0x21031222;// ICK=PLL/2,BCK,FCK,PCK=PLL/4
+  85                             		.loc 1 83 0 is_stmt 1
+  86 005c FB 5E 00 00 08          		mov.L	#0x80000, r5
+  87 0061 F9 52 08 11 22 86 21    		mov.L	#0x21862211, 32[r5]
+  84:../src/board.c **** 
+  85:../src/board.c **** 	/* Setup IEBUS and USB clocks
+  86:../src/board.c **** 	SCKCR2 - System Clock Control Register 2
+  87:../src/board.c **** 	b7:b4 UCK[3:0]   0x03 = USB clock is PLL/4 = 48 MHz
+  88:../src/board.c **** 	b3:b0 IEBCK[3:0] 0x01 = IE Bus clock is PLL/2 = 96 MHz
+  89:../src/board.c **** 	*/
+  90:../src/board.c **** 
+  91:../src/board.c **** 	SYSTEM.SCKCR2.WORD = 0x00;//Mre 0x0031;
+  88                             		.loc 1 91 0
+  89 0068 FB 5E 00 00 08          		mov.L	#0x80000, r5
+  90 006d 3D D2 00                		mov.W	#0, 36[r5]
+  92:../src/board.c **** 	SYSTEM.SCKCR3.WORD = 0x0400;				// ICLK, PCLKB, FCLK, BCLK, IECLK, and USBCLK all come from PLL ci
+  91                             		.loc 1 92 0
+  92 0070 FB 5E 00 00 08          		mov.L	#0x80000, r5
+  93 0075 F9 59 13 00 04          		mov.W	#0x400, 38[r5]
+  93:../src/board.c **** 	SYSTEM.PRCR.WORD = 0xA500;					// Protect on.
+  94                             		.loc 1 93 0
+  95 007a FB 5E 00 00 08          		mov.L	#0x80000, r5
+  96 007f FA 59 FF 01 00 A5       		mov.W	#0xffffa500, 1022[r5]
+  94:../src/board.c **** 
+  95:../src/board.c **** }
+  97                             		.loc 1 95 0
+  98 0085 3F 66 02                		rtsd	#8, r6-r6
+  99                             	.LFE0:
+ 101                             		.section	.text.Timer_MTU3_init,"ax",@progbits
+ 102                             		.global	_Timer_MTU3_init
+ 104                             	_Timer_MTU3_init:
+ 105                             	.LFB1:
+  96:../src/board.c **** 
+  97:../src/board.c **** /************************************************************************
+  98:../src/board.c **** *! \fn			Timer_MTU3_init(void)
+  99:../src/board.c **** *  \brief		Function configures the MTU2a's channel 3 using compare match method
+ 100:../src/board.c **** *				  to generate a interrupt function to set the time for the Output.
+ 101:../src/board.c **** *  \param		none
+ 102:../src/board.c **** *  \exception	none
+ 103:../src/board.c **** *  \return		none
+ 104:../src/board.c **** ************************************************************************/
+ 105:../src/board.c **** void Timer_MTU3_init(void){
+ 106                             		.loc 1 105 0
+ 107 0000 7E A6                   		push.l	r6
+ 108                             	.LCFI3:
+ 109 0002 EF 06                   		mov.L	r0, r6
+ 110                             	.LCFI4:
+ 106:../src/board.c ****     SYSTEM.PRCR.WORD 	= 0xA503;		// Protection off
+ 111                             		.loc 1 106 0
+ 112 0004 FB 5E 00 00 08          		mov.L	#0x80000, r5
+ 113 0009 FA 59 FF 01 03 A5       		mov.W	#0xffffa503, 1022[r5]
+ 107:../src/board.c **** 	MSTP_MTU3 			= 0;			// Cancel the MTU0 module clock stop mode
+ 114                             		.loc 1 107 0
+ 115 000f FB 5E 00 00 08          		mov.L	#0x80000, r5
+ 116 0014 A9 54                   		mov.L	16[r5], r4
+ 117 0016 76 24 FF FD             		and	#0xfffffdff, r4
+ 118 001a A1 54                   		mov.L	r4, 16[r5]
+ 108:../src/board.c **** 	SYSTEM.PRCR.WORD 	= 0xA500;		// Protection on
+ 119                             		.loc 1 108 0
+ 120 001c FB 5E 00 00 08          		mov.L	#0x80000, r5
+ 121 0021 FA 59 FF 01 00 A5       		mov.W	#0xffffa500, 1022[r5]
+ 109:../src/board.c **** 
+ 110:../src/board.c **** 	MTU3.TCR.BYTE 		= 0x4D;			// Clock PCLK/1024, count at falling edge, TCNT cleared by TRGB compare 
+ 122                             		.loc 1 110 0
+ 123 0027 FB 5E 00 86 08          		mov.L	#0x88600, r5
+ 124 002c F8 54 4D                		mov.B	#0x4d, [r5]
+ 111:../src/board.c **** 	MTU3.TMDR.BYTE 		= 0;			// Operate timers in normal mode
+ 125                             		.loc 1 111 0
+ 126 002f FB 5E 00 86 08          		mov.L	#0x88600, r5
+ 127 0034 3C 52 00                		mov.B	#0, 2[r5]
+ 112:../src/board.c **** 	MTU3.TIORH.BYTE 	= 0x00;			// Initial output is 0
+ 128                             		.loc 1 112 0
+ 129 0037 FB 5E 00 86 08          		mov.L	#0x88600, r5
+ 130 003c 3C 54 00                		mov.B	#0, 4[r5]
+ 113:../src/board.c **** 	MTU.TRWER.BIT.RWE 	= 0x1;			// Enable access to protected MTU registers
+ 131                             		.loc 1 113 0
+ 132 003f FB 5E 0A 86 08          		mov.L	#0x8860a, r5
+ 133 0044 CD 54 7A                		mov.B	122[r5], r4
+ 134 0047 65 14                   		or	#1, r4
+ 135 0049 C7 54 7A                		mov.B	r4, 122[r5]
+ 114:../src/board.c **** 
+ 115:../src/board.c **** 	MTU3.TGRB	=0x28;
+ 136                             		.loc 1 115 0
+ 137 004c FB 5E 00 86 08          		mov.L	#0x88600, r5
+ 138 0051 3D 5D 28                		mov.W	#40, 26[r5]
+ 116:../src/board.c **** 
+ 117:../src/board.c **** 	IPR(MTU3,TGIB3) = 0x5;				// Set MTU3,TGIB3 interrupt priority level to 5
+ 139                             		.loc 1 117 0
+ 140 0054 FB 5E 00 70 08          		mov.L	#0x87000, r5
+ 141 0059 CE 54 98 03             		mov.B	920[r5], r4
+ 142 005d 75 24 F0                		and	#-16, r4
+ 143 0060 65 54                   		or	#5, r4
+ 144 0062 CB 54 98 03             		mov.B	r4, 920[r5]
+ 118:../src/board.c **** 	IEN(MTU3,TGIB3) = 0x1;				// Enable MTU3,TGIB3 interrupts
+ 145                             		.loc 1 118 0
+ 146 0066 FB 5E 00 70 08          		mov.L	#0x87000, r5
+ 147 006b CE 54 13 02             		mov.B	531[r5], r4
+ 148 006f 65 24                   		or	#2, r4
+ 149 0071 CB 54 13 02             		mov.B	r4, 531[r5]
+ 119:../src/board.c **** 	IR(MTU3,TGIB3) = 0x0;				// Clear MTU3,TGIB3 interrupt flag
+ 150                             		.loc 1 119 0
+ 151 0075 FB 5E 00 70 08          		mov.L	#0x87000, r5
+ 152 007a CD 54 99                		mov.B	153[r5], r4
+ 153 007d 75 24 FE                		and	#-2, r4
+ 154 0080 C7 54 99                		mov.B	r4, 153[r5]
+ 120:../src/board.c ****    	MTU3.TIER.BYTE = 0x02;    			// Enable TGIEA interrupts
+ 155                             		.loc 1 120 0
+ 156 0083 FB 5E 00 86 08          		mov.L	#0x88600, r5
+ 157 0088 3C 58 02                		mov.B	#2, 8[r5]
+ 121:../src/board.c **** 	MTU.TSTR.BIT.CST3 	= 0x1;			// Start MTU3 TCNT counter
+ 158                             		.loc 1 121 0
+ 159 008b FB 5E 0A 86 08          		mov.L	#0x8860a, r5
+ 160 0090 CD 54 76                		mov.B	118[r5], r4
+ 161 0093 75 34 40                		or	#64, r4
+ 162 0096 C7 54 76                		mov.B	r4, 118[r5]
+ 122:../src/board.c **** }
+ 163                             		.loc 1 122 0
+ 164 0099 3F 66 01                		rtsd	#4, r6-r6
+ 165                             	.LFE1:
+ 167                             		.section	.text.init_board,"ax",@progbits
+ 168                             		.global	_init_board
+ 170                             	_init_board:
+ 171                             	.LFB2:
+ 123:../src/board.c **** 
+ 124:../src/board.c **** /************************************************************************
+ 125:../src/board.c ****  * Global Funtions
+ 126:../src/board.c ****  ***********************************************************************/
+ 127:../src/board.c **** 
+ 128:../src/board.c **** /************************************************************************
+ 129:../src/board.c **** *! \fn			void init_board( void )
+ 130:../src/board.c **** *  \brief		initialization from cpu and peripheral
+ 131:../src/board.c **** *  \param		none
+ 132:../src/board.c **** *  \exception	none
+ 133:../src/board.c **** *  \return		none
+ 134:../src/board.c **** ************************************************************************/
+ 135:../src/board.c **** void init_board( void ){
+ 172                             		.loc 1 135 0
+ 173 0000 7E A6                   		push.l	r6
+ 174                             	.LCFI5:
+ 175 0002 EF 06                   		mov.L	r0, r6
+ 176                             	.LCFI6:
+ 136:../src/board.c **** 
+ 137:../src/board.c **** 	init_clock();
+ 177                             		.loc 1 137 0
+ 178 0004 05 00 00 00             		bsr	_init_clock
+ 138:../src/board.c **** 	S_UART_SPI();			// Initialisierung der SPI Schnittstelle
+ 179                             		.loc 1 138 0
+ 180 0008 05 00 00 00             		bsr	_S_UART_SPI
+ 139:../src/board.c **** 	Timer_MTU3_init();		// Timer fpr SysTick
+ 181                             		.loc 1 139 0
+ 182 000c 05 00 00 00             		bsr	_Timer_MTU3_init
+ 140:../src/board.c **** 
+ 141:../src/board.c **** }
+ 183                             		.loc 1 141 0
+ 184 0010 3F 66 01                		rtsd	#4, r6-r6
+ 185                             	.LFE2:
+ 187                             		.section	.text.delay_ms,"ax",@progbits
+ 188                             		.global	_delay_ms
+ 190                             	_delay_ms:
+ 191                             	.LFB3:
+ 142:../src/board.c **** 
+ 143:../src/board.c **** 
+ 144:../src/board.c **** /************************************************************************
+ 145:../src/board.c **** *! \fn			void delay_ms(uint32_t delay_time)
+ 146:../src/board.c **** *  \brief		DelayRotine
+ 147:../src/board.c **** *  \param		none
+ 148:../src/board.c **** *  \exception	none
+ 149:../src/board.c **** *  \return		none
+ 150:../src/board.c **** ************************************************************************/
+ 151:../src/board.c **** void delay_ms(uint32_t delay_time){
+ 192                             		.loc 1 151 0
+ 193 0000 7E A6                   		push.l	r6
+ 194                             	.LCFI7:
+ 195 0002 71 06 FC                		add	#-4, r0, r6
+ 196                             	.LCFI8:
+ 197 0005 EF 60                   		mov.L	r6, r0
+ 198                             	.LCFI9:
+ 199 0007 E3 61                   		mov.L	r1, [r6]
+ 152:../src/board.c **** 
+ 153:../src/board.c **** 	delay_counter = delay_time;
+ 200                             		.loc 1 153 0
+ 201 0009 FB 52 00 00 00 00       		mov.L	#_delay_counter, r5
+ 202 000f EC 64                   		mov.L	[r6], r4
+ 203 0011 E3 54                   		mov.L	r4, [r5]
+ 154:../src/board.c **** 	while(delay_counter){
+ 204                             		.loc 1 154 0
+ 205 0013 2E 03                   		bra	.L7
+ 206                             	.L8:
+ 155:../src/board.c **** 		asm("nop");
+ 207                             		.loc 1 155 0
+ 208                             	 ; 155 "../src/board.c" 1
+ 209 0015 03                      		nop
+ 210                             	 ; 0 "" 2
+ 211                             	.L7:
+ 154:../src/board.c **** 	while(delay_counter){
+ 212                             		.loc 1 154 0 discriminator 1
+ 213 0016 FB 52 00 00 00 00       		mov.L	#_delay_counter, r5
+ 214 001c EC 55                   		mov.L	[r5], r5
+ 215 001e 61 05                   		cmp	#0, r5
+ 216 0020 21 F5                   		bne	.L8
+ 156:../src/board.c **** 	}
+ 157:../src/board.c **** 
+ 158:../src/board.c **** }
+ 217                             		.loc 1 158 0
+ 218 0022 3F 66 02                		rtsd	#8, r6-r6
+ 219                             	.LFE3:
+ 221                             		.section	.text.SysTick_Handler,"ax",@progbits
+ 222                             		.global	_SysTick_Handler
+ 224                             	_SysTick_Handler:
+ 225                             	.LFB4:
+ 159:../src/board.c **** 
+ 160:../src/board.c **** /************************************************************************
+ 161:../src/board.c **** *! \fn			void SysTick_Handler (void)
+ 162:../src/board.c **** *  \brief		System Tick Interrupt Service Routine
+ 163:../src/board.c **** *  \param		none
+ 164:../src/board.c **** *  \exception	none
+ 165:../src/board.c **** *  \return		none
+ 166:../src/board.c **** ************************************************************************/
+ 167:../src/board.c **** void SysTick_Handler (void){
+ 226                             		.loc 1 167 0
+ 227 0000 7E A6                   		push.l	r6
+ 228                             	.LCFI10:
+ 229 0002 EF 06                   		mov.L	r0, r6
+ 230                             	.LCFI11:
+ 168:../src/board.c **** 
+ 169:../src/board.c ****     ms_counter++;
+ 231                             		.loc 1 169 0
+ 232 0004 FB 52 00 00 00 00       		mov.L	#_ms_counter, r5
+ 233 000a EC 55                   		mov.L	[r5], r5
+ 234 000c 71 54 01                		add	#1, r5, r4
+ 235 000f FB 52 00 00 00 00       		mov.L	#_ms_counter, r5
+ 236 0015 E3 54                   		mov.L	r4, [r5]
+ 170:../src/board.c **** 	ms_counter2++;
+ 237                             		.loc 1 170 0
+ 238 0017 FB 52 00 00 00 00       		mov.L	#_ms_counter2, r5
+ 239 001d EC 55                   		mov.L	[r5], r5
+ 240 001f 71 54 01                		add	#1, r5, r4
+ 241 0022 FB 52 00 00 00 00       		mov.L	#_ms_counter2, r5
+ 242 0028 E3 54                   		mov.L	r4, [r5]
+ 171:../src/board.c **** 	if(delay_counter)
+ 243                             		.loc 1 171 0
+ 244 002a FB 52 00 00 00 00       		mov.L	#_delay_counter, r5
+ 245 0030 EC 55                   		mov.L	[r5], r5
+ 246 0032 61 05                   		cmp	#0, r5
+ 247 0034 20 15                   		beq	.L10
+ 172:../src/board.c **** 		delay_counter--;
+ 248                             		.loc 1 172 0
+ 249 0036 FB 52 00 00 00 00       		mov.L	#_delay_counter, r5
+ 250 003c EC 55                   		mov.L	[r5], r5
+ 251 003e 71 54 FF                		add	#-1, r5, r4
+ 252 0041 FB 52 00 00 00 00       		mov.L	#_delay_counter, r5
+ 253 0047 E3 54                   		mov.L	r4, [r5]
+ 254                             	.L10:
+ 173:../src/board.c **** 
+ 174:../src/board.c **** 	ms++;
+ 255                             		.loc 1 174 0
+ 256 0049 FB 52 00 00 00 00       		mov.L	#_ms, r5
+ 257 004f EC 55                   		mov.L	[r5], r5
+ 258 0051 71 54 01                		add	#1, r5, r4
+ 259 0054 FB 52 00 00 00 00       		mov.L	#_ms, r5
+ 260 005a E3 54                   		mov.L	r4, [r5]
+ 175:../src/board.c **** 	if(ms>=1000){
+ 261                             		.loc 1 175 0
+ 262 005c FB 52 00 00 00 00       		mov.L	#_ms, r5
+ 263 0062 EC 55                   		mov.L	[r5], r5
+ 264 0064 76 05 E7 03             		cmp	#0x3e7, r5
+ 265 0068 24 05 38 41 01          		bleu	.L9
+ 176:../src/board.c ****         ms=0;
+ 266                             		.loc 1 176 0
+ 267 006d FB 52 00 00 00 00       		mov.L	#_ms, r5
+ 268 0073 F8 56 00                		mov.L	#0, [r5]
+ 177:../src/board.c **** 		sek++;
+ 269                             		.loc 1 177 0
+ 270 0076 FB 52 00 00 00 00       		mov.L	#_sek, r5
+ 271 007c EC 55                   		mov.L	[r5], r5
+ 272 007e 71 54 01                		add	#1, r5, r4
+ 273 0081 FB 52 00 00 00 00       		mov.L	#_sek, r5
+ 274 0087 E3 54                   		mov.L	r4, [r5]
+ 178:../src/board.c **** 
+ 179:../src/board.c **** 		if(sek>59){
+ 275                             		.loc 1 179 0
+ 276 0089 FB 52 00 00 00 00       		mov.L	#_sek, r5
+ 277 008f EC 55                   		mov.L	[r5], r5
+ 278 0091 75 55 3B                		cmp	#59, r5
+ 279 0094 24 05 38 15 01          		bleu	.L9
+ 180:../src/board.c **** 	        sek=0;
+ 280                             		.loc 1 180 0
+ 281 0099 FB 52 00 00 00 00       		mov.L	#_sek, r5
+ 282 009f F8 56 00                		mov.L	#0, [r5]
+ 181:../src/board.c **** 			min++;
+ 283                             		.loc 1 181 0
+ 284 00a2 FB 52 00 00 00 00       		mov.L	#_min, r5
+ 285 00a8 EC 55                   		mov.L	[r5], r5
+ 286 00aa 71 54 01                		add	#1, r5, r4
+ 287 00ad FB 52 00 00 00 00       		mov.L	#_min, r5
+ 288 00b3 E3 54                   		mov.L	r4, [r5]
+ 182:../src/board.c **** 			if(min>59){
+ 289                             		.loc 1 182 0
+ 290 00b5 FB 52 00 00 00 00       		mov.L	#_min, r5
+ 291 00bb EC 55                   		mov.L	[r5], r5
+ 292 00bd 75 55 3B                		cmp	#59, r5
+ 293 00c0 24 05 38 E9 00          		bleu	.L9
+ 183:../src/board.c **** 		        min=0;
+ 294                             		.loc 1 183 0
+ 295 00c5 FB 52 00 00 00 00       		mov.L	#_min, r5
+ 296 00cb F8 56 00                		mov.L	#0, [r5]
+ 184:../src/board.c **** 				hr++;
+ 297                             		.loc 1 184 0
+ 298 00ce FB 52 00 00 00 00       		mov.L	#_hr, r5
+ 299 00d4 EC 55                   		mov.L	[r5], r5
+ 300 00d6 71 54 01                		add	#1, r5, r4
+ 301 00d9 FB 52 00 00 00 00       		mov.L	#_hr, r5
+ 302 00df E3 54                   		mov.L	r4, [r5]
+ 185:../src/board.c **** 				if(hr>23){
+ 303                             		.loc 1 185 0
+ 304 00e1 FB 52 00 00 00 00       		mov.L	#_hr, r5
+ 305 00e7 EC 55                   		mov.L	[r5], r5
+ 306 00e9 75 55 17                		cmp	#23, r5
+ 307 00ec 24 05 38 BD 00          		bleu	.L9
+ 186:../src/board.c **** 				    hr=0;
+ 308                             		.loc 1 186 0
+ 309 00f1 FB 52 00 00 00 00       		mov.L	#_hr, r5
+ 310 00f7 F8 56 00                		mov.L	#0, [r5]
+ 187:../src/board.c ****                     day_old=day;
+ 311                             		.loc 1 187 0
+ 312 00fa FB 52 00 00 00 00       		mov.L	#_day, r5
+ 313 0100 CC 54                   		mov.B	[r5], r4
+ 314 0102 FB 52 00 00 00 00       		mov.L	#_day_old, r5
+ 315 0108 C3 54                   		mov.B	r4, [r5]
+ 188:../src/board.c ****                     month_old=month;
+ 316                             		.loc 1 188 0
+ 317 010a FB 52 00 00 00 00       		mov.L	#_month, r5
+ 318 0110 CC 54                   		mov.B	[r5], r4
+ 319 0112 FB 52 00 00 00 00       		mov.L	#_month_old, r5
+ 320 0118 C3 54                   		mov.B	r4, [r5]
+ 189:../src/board.c ****                     year_old=year;
+ 321                             		.loc 1 189 0
+ 322 011a FB 52 00 00 00 00       		mov.L	#_year, r5
+ 323 0120 CC 54                   		mov.B	[r5], r4
+ 324 0122 FB 52 00 00 00 00       		mov.L	#_year_old, r5
+ 325 0128 C3 54                   		mov.B	r4, [r5]
+ 190:../src/board.c ****                     day++;
+ 326                             		.loc 1 190 0
+ 327 012a FB 52 00 00 00 00       		mov.L	#_day, r5
+ 328 0130 CC 55                   		mov.B	[r5], r5
+ 329 0132 62 15                   		add	#1, r5
+ 330 0134 CF 54                   		mov.B	r5, r4
+ 331 0136 FB 52 00 00 00 00       		mov.L	#_day, r5
+ 332 013c C3 54                   		mov.B	r4, [r5]
+ 191:../src/board.c ****                     if(day>months[month-1]){  //Achtung kein Schaltjahr  Korrektur 24.04.13
+ 333                             		.loc 1 191 0
+ 334 013e FB 52 00 00 00 00       		mov.L	#_month, r5
+ 335 0144 CC 55                   		mov.B	[r5], r5
+ 336 0146 5B 55                   		movu.B	r5, r5
+ 337 0148 60 15                   		sub	#1, r5
+ 338 014a FB 42 00 00 00 00       		mov.L	#_months, r4
+ 339 0150 FE 45 44                		mov.B	[r5,r4], r4
+ 340 0153 FB 52 00 00 00 00       		mov.L	#_day, r5
+ 341 0159 CC 55                   		mov.B	[r5], r5
+ 342 015b 5B 44                   		movu.B	r4, r4
+ 343 015d 5B 55                   		movu.B	r5, r5
+ 344 015f 47 54                   		cmp	r5, r4
+ 345 0161 22 4A                   		bgeu	.L9
+ 192:../src/board.c ****                         day=1;
+ 346                             		.loc 1 192 0
+ 347 0163 FB 52 00 00 00 00       		mov.L	#_day, r5
+ 348 0169 F8 54 01                		mov.B	#1, [r5]
+ 193:../src/board.c ****                         month++;
+ 349                             		.loc 1 193 0
+ 350 016c FB 52 00 00 00 00       		mov.L	#_month, r5
+ 351 0172 CC 55                   		mov.B	[r5], r5
+ 352 0174 62 15                   		add	#1, r5
+ 353 0176 CF 54                   		mov.B	r5, r4
+ 354 0178 FB 52 00 00 00 00       		mov.L	#_month, r5
+ 355 017e C3 54                   		mov.B	r4, [r5]
+ 194:../src/board.c ****                         if(month>12){
+ 356                             		.loc 1 194 0
+ 357 0180 FB 52 00 00 00 00       		mov.L	#_month, r5
+ 358 0186 CC 55                   		mov.B	[r5], r5
+ 359 0188 5B 55                   		movu.B	r5, r5
+ 360 018a 61 C5                   		cmp	#12, r5
+ 361 018c 25 1F                   		bleu	.L9
+ 195:../src/board.c ****                             month=1;
+ 362                             		.loc 1 195 0
+ 363 018e FB 52 00 00 00 00       		mov.L	#_month, r5
+ 364 0194 F8 54 01                		mov.B	#1, [r5]
+ 196:../src/board.c ****                              year++;
+ 365                             		.loc 1 196 0
+ 366 0197 FB 52 00 00 00 00       		mov.L	#_year, r5
+ 367 019d CC 55                   		mov.B	[r5], r5
+ 368 019f 62 15                   		add	#1, r5
+ 369 01a1 CF 54                   		mov.B	r5, r4
+ 370 01a3 FB 52 00 00 00 00       		mov.L	#_year, r5
+ 371 01a9 C3 54                   		mov.B	r4, [r5]
+ 372                             		.balign 8,3,2
+ 373                             	.L9:
+ 197:../src/board.c ****                         }
+ 198:../src/board.c ****                     }
+ 199:../src/board.c ****                 }
+ 200:../src/board.c **** 			}
+ 201:../src/board.c **** 		}
+ 202:../src/board.c **** 	}
+ 203:../src/board.c **** //       NVIC_ClearPendingIRQ(SysTick_IRQn);
+ 204:../src/board.c **** }
+ 374                             		.loc 1 204 0
+ 375 01ab 3F 66 01                		rtsd	#4, r6-r6
+ 376                             	.LFE4:
+ 378 01ae EF 00                   		.section	.text.init_IO,"ax",@progbits
+ 379                             		.global	_init_IO
+ 381                             	_init_IO:
+ 382                             	.LFB5:
+ 205:../src/board.c **** 
+ 206:../src/board.c **** /************************************************************************
+ 207:../src/board.c **** *! \fn			void init_IO(void)
+ 208:../src/board.c **** *  \brief		Init IOP
+ 209:../src/board.c **** *
+ 210:../src/board.c **** *  \param		none
+ 211:../src/board.c **** *  \exception	none
+ 212:../src/board.c **** *  \return		none
+ 213:../src/board.c **** ************************************************************************/
+ 214:../src/board.c **** void init_IO(void){
+ 383                             		.loc 1 214 0
+ 384 0000 7E A6                   		push.l	r6
+ 385                             	.LCFI12:
+ 386 0002 EF 06                   		mov.L	r0, r6
+ 387                             	.LCFI13:
+ 215:../src/board.c **** 
+ 216:../src/board.c **** 	PORT2.PDR.BIT.B2=1;		// Freigaben für PD und SS
+ 388                             		.loc 1 216 0
+ 389 0004 FB 5E 02 C0 08          		mov.L	#0x8c002, r5
+ 390 0009 CC 54                   		mov.B	[r5], r4
+ 391 000b 65 44                   		or	#4, r4
+ 392 000d C3 54                   		mov.B	r4, [r5]
+ 217:../src/board.c **** 	PORT3.PDR.BIT.B3=1;
+ 393                             		.loc 1 217 0
+ 394 000f FB 5E 03 C0 08          		mov.L	#0x8c003, r5
+ 395 0014 CC 54                   		mov.B	[r5], r4
+ 396 0016 65 84                   		or	#8, r4
+ 397 0018 C3 54                   		mov.B	r4, [r5]
+ 218:../src/board.c **** }
+ 398                             		.loc 1 218 0
+ 399 001a 3F 66 01                		rtsd	#4, r6-r6
+ 400                             	.LFE5:
+ 402                             		.section	.text.Init_EEPROM_Slave,"ax",@progbits
+ 403                             		.global	_Init_EEPROM_Slave
+ 405                             	_Init_EEPROM_Slave:
+ 406                             	.LFB6:
+ 219:../src/board.c **** 
+ 220:../src/board.c **** /*******************************************************************************
+ 221:../src/board.c **** * Outline      : Init_EEPROM_Slave
+ 222:../src/board.c **** * Description  : This function configures the IIC unit to operate in bus slave
+ 223:../src/board.c **** *                 mode. See the iic_eeprom_slave.h header file for configuration
+ 224:../src/board.c **** *                 options.
+ 225:../src/board.c **** * Argument     : none
+ 226:../src/board.c **** * Return value : none
+ 227:../src/board.c **** *******************************************************************************/
+ 228:../src/board.c **** void Init_EEPROM_Slave(void){
+ 407                             		.loc 1 228 0
+ 408 0000 7E A6                   		push.l	r6
+ 409                             	.LCFI14:
+ 410 0002 EF 06                   		mov.L	r0, r6
+ 411                             	.LCFI15:
+ 229:../src/board.c **** 
+ 230:../src/board.c ****     /* Protection off */
+ 231:../src/board.c **** 	SYSTEM.PRCR.WORD = 0xA503;
+ 412                             		.loc 1 231 0
+ 413 0004 FB 5E 00 00 08          		mov.L	#0x80000, r5
+ 414 0009 FA 59 FF 01 03 A5       		mov.W	#0xffffa503, 1022[r5]
+ 232:../src/board.c **** 	/* Cancel the RIIC0 module clock stop mode */
+ 233:../src/board.c **** 	MSTP_RIIC1 = 0;
+ 415                             		.loc 1 233 0
+ 416 000f FB 5E 00 00 08          		mov.L	#0x80000, r5
+ 417 0014 A9 5C                   		mov.L	20[r5], r4
+ 418 0016 77 24 FF FF EF          		and	#0xffefffff, r4
+ 419 001b A1 5C                   		mov.L	r4, 20[r5]
+ 234:../src/board.c **** 	/* Set SCL1 (P15) and SDA1 (P16) port pin directions to inputs */
+ 235:../src/board.c **** 	PORT1.PDR.BYTE &= ~(1<<6 | 1<<5);
+ 420                             		.loc 1 235 0
+ 421 001d FB 5E 01 C0 08          		mov.L	#0x8c001, r5
+ 422 0022 FB 4E 01 C0 08          		mov.L	#0x8c001, r4
+ 423 0027 CC 44                   		mov.B	[r4], r4
+ 424 0029 75 24 9F                		and	#0xffffff9f, r4
+ 425 002c C3 54                   		mov.B	r4, [r5]
+ 236:../src/board.c **** 	/* Set SCL1 and SDA1 port pin for peripheral use */
+ 237:../src/board.c **** 	PORT1.PMR.BYTE |= (1<<6 | 1<<5);;
+ 426                             		.loc 1 237 0
+ 427 002e FB 5E 01 C0 08          		mov.L	#0x8c001, r5
+ 428 0033 FB 4E 01 C0 08          		mov.L	#0x8c001, r4
+ 429 0038 CD 44 60                		mov.B	96[r4], r4
+ 430 003b 75 34 60                		or	#0x60, r4
+ 431 003e C7 54 60                		mov.B	r4, 96[r5]
+ 238:../src/board.c **** 	/* Protection on */
+ 239:../src/board.c **** 	SYSTEM.PRCR.WORD = 0xA500;
+ 432                             		.loc 1 239 0
+ 433 0041 FB 5E 00 00 08          		mov.L	#0x80000, r5
+ 434 0046 FA 59 FF 01 00 A5       		mov.W	#0xffffa500, 1022[r5]
+ 240:../src/board.c **** 
+ 241:../src/board.c **** 	/* Enable write to PFSWE bit */
+ 242:../src/board.c **** 	MPC.PWPR.BYTE = 0x00;
+ 435                             		.loc 1 242 0
+ 436 004c FB 5E 00 C1 08          		mov.L	#0x8c100, r5
+ 437 0051 3C DF 00                		mov.B	#0, 31[r5]
+ 243:../src/board.c **** 	/* Disable write protection to PFS registers */
+ 244:../src/board.c **** 	MPC.PWPR.BYTE = 0x40;
+ 438                             		.loc 1 244 0
+ 439 0054 FB 5E 00 C1 08          		mov.L	#0x8c100, r5
+ 440 0059 3C DF 40                		mov.B	#64, 31[r5]
+ 245:../src/board.c **** 	/* Select the pin function as SCL1 */
+ 246:../src/board.c **** 	MPC.P15PFS.BIT.PSEL = 0b01010;
+ 441                             		.loc 1 246 0
+ 442 005c FB 5E 00 C1 08          		mov.L	#0x8c100, r5
+ 443 0061 CD 54 4D                		mov.B	77[r5], r4
+ 444 0064 75 24 E0                		and	#-32, r4
+ 445 0067 65 A4                   		or	#10, r4
+ 446 0069 C7 54 4D                		mov.B	r4, 77[r5]
+ 247:../src/board.c **** 	/* Set pin 3 on Port1 as a normal pin */
+ 248:../src/board.c **** 	MPC.P16PFS.BIT.ISEL = 0;
+ 447                             		.loc 1 248 0
+ 448 006c FB 5E 00 C1 08          		mov.L	#0x8c100, r5
+ 449 0071 CD 54 4E                		mov.B	78[r5], r4
+ 450 0074 75 24 BF                		and	#0xffffffbf, r4
+ 451 0077 C7 54 4E                		mov.B	r4, 78[r5]
+ 249:../src/board.c **** 	/* Select the pin function as SDA1 */
+ 250:../src/board.c **** 	MPC.P16PFS.BIT.PSEL = 0b01010;
+ 452                             		.loc 1 250 0
+ 453 007a FB 5E 00 C1 08          		mov.L	#0x8c100, r5
+ 454 007f CD 54 4E                		mov.B	78[r5], r4
+ 455 0082 75 24 E0                		and	#-32, r4
+ 456 0085 65 A4                   		or	#10, r4
+ 457 0087 C7 54 4E                		mov.B	r4, 78[r5]
+ 251:../src/board.c **** 	/* Enable write protection to PFS registers */
+ 252:../src/board.c **** 	MPC.PWPR.BYTE = 0x80;
+ 458                             		.loc 1 252 0
+ 459 008a FB 5E 00 C1 08          		mov.L	#0x8c100, r5
+ 460 008f F9 54 1F 80             		mov.B	#0xffffff80, 31[r5]
+ 253:../src/board.c **** 
+ 254:../src/board.c **** 	/* Disable the RIIC1  */
+ 255:../src/board.c **** 	RIIC1.ICCR1.BIT.ICE = 0;
+ 461                             		.loc 1 255 0
+ 462 0093 FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 463 0098 CC 54                   		mov.B	[r5], r4
+ 464 009a 75 24 7F                		and	#0x7f, r4
+ 465 009d C3 54                   		mov.B	r4, [r5]
+ 256:../src/board.c **** 	/* Issue an internal RIIC0 reset */
+ 257:../src/board.c **** 	RIIC1.ICCR1.BIT.IICRST = 0x1;
+ 466                             		.loc 1 257 0
+ 467 009f FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 468 00a4 CC 54                   		mov.B	[r5], r4
+ 469 00a6 75 34 40                		or	#64, r4
+ 470 00a9 C3 54                   		mov.B	r4, [r5]
+ 258:../src/board.c **** 	/* Cancel the internal reset */
+ 259:../src/board.c **** 	RIIC1.ICCR1.BIT.IICRST = 0x0;
+ 471                             		.loc 1 259 0
+ 472 00ab FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 473 00b0 CC 54                   		mov.B	[r5], r4
+ 474 00b2 75 24 BF                		and	#0xffffffbf, r4
+ 475 00b5 C3 54                   		mov.B	r4, [r5]
+ 260:../src/board.c **** 
+ 261:../src/board.c **** 	/* Set the transfer clock to PCLK/8=6MHz */
+ 262:../src/board.c **** 	RIIC1.ICMR1.BIT.CKS = 0x3;
+ 476                             		.loc 1 262 0
+ 477 00b7 FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 478 00bc 88 D4                   		mov.B	2[r5], r4
+ 479 00be 75 24 8F                		and	#0xffffff8f, r4
+ 480 00c1 75 34 30                		or	#48, r4
+ 481 00c4 80 D4                   		mov.B	r4, 2[r5]
+ 263:../src/board.c **** 	/* Using 50% duty */
+ 264:../src/board.c **** 	/* Set the transfer bit rate to 100kbps */
+ 265:../src/board.c **** 	RIIC1.ICBRL.BIT.BRL = 0x7F;
+ 482                             		.loc 1 265 0
+ 483 00c6 FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 484 00cb 8C 54                   		mov.B	16[r5], r4
+ 485 00cd 75 34 1F                		or	#31, r4
+ 486 00d0 84 54                   		mov.B	r4, 16[r5]
+ 266:../src/board.c **** 	/* Set the transfer rate to 100kbps */
+ 267:../src/board.c **** 	RIIC1.ICBRH.BIT.BRH = 0x7F;
+ 487                             		.loc 1 267 0
+ 488 00d2 FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 489 00d7 8C 5C                   		mov.B	17[r5], r4
+ 490 00d9 75 34 1F                		or	#31, r4
+ 491 00dc 84 5C                   		mov.B	r4, 17[r5]
+ 268:../src/board.c **** 
+ 269:../src/board.c **** 	/* Set the address mode to 7-bits */
+ 270:../src/board.c **** 	RIIC1.SARU0.BIT.FS = 0;
+ 492                             		.loc 1 270 0
+ 493 00de FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 494 00e3 8A DC                   		mov.B	11[r5], r4
+ 495 00e5 75 24 FE                		and	#-2, r4
+ 496 00e8 82 DC                   		mov.B	r4, 11[r5]
+ 271:../src/board.c **** 
+ 272:../src/board.c **** 	/* Set the slave address */
+ 273:../src/board.c **** 	RIIC1.SARL0.BYTE = SIM_EEPROM_DEVICE_ADDRESS;
+ 497                             		.loc 1 273 0
+ 498 00ea FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 499 00ef F9 54 0A A0             		mov.B	#0xffffffa0, 10[r5]
+ 274:../src/board.c **** 
+ 275:../src/board.c **** 	/* Configure the bus mode register 2:
+ 276:../src/board.c **** 	Timeout detection uses a 16-bit timer
+ 277:../src/board.c **** 	Count is disable for both high and low level on the SCL0 line
+ 278:../src/board.c **** 	No SDA output delays used
+ 279:../src/board.c **** 	Output delay clock source set to internal IIC reference clock */
+ 280:../src/board.c **** 	RIIC1.ICMR2.BYTE = 0x00;
+ 500                             		.loc 1 280 0
+ 501 00f3 FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 502 00f8 3C 53 00                		mov.B	#0, 3[r5]
+ 281:../src/board.c **** 
+ 282:../src/board.c **** 	/* Configure the bus mode register 2:
+ 283:../src/board.c **** 	Single stage noise filter used.
+ 284:../src/board.c **** 	Select IIC bus function */
+ 285:../src/board.c **** 	RIIC1.ICMR2.BYTE = 0x00;
+ 503                             		.loc 1 285 0
+ 504 00fb FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 505 0100 3C 53 00                		mov.B	#0, 3[r5]
+ 286:../src/board.c **** 
+ 287:../src/board.c **** 	/* Configure the IIC bus function:
+ 288:../src/board.c **** 	Disable the timeout function
+ 289:../src/board.c **** 	Disbale master arbitration-lost detection
+ 290:../src/board.c **** 	Disable slave arbitration-lost detection
+ 291:../src/board.c **** 	Enable suspension of transfer operation during NACK reception
+ 292:../src/board.c **** 	No digital noise filtering used
+ 293:../src/board.c **** 	Disable SCL synchronous circuit
+ 294:../src/board.c **** 	Disable the fast-mode */
+ 295:../src/board.c **** 	RIIC1.ICFER.BYTE = 0x10;
+ 506                             		.loc 1 295 0
+ 507 0103 FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 508 0108 3C 55 10                		mov.B	#16, 5[r5]
+ 296:../src/board.c **** 
+ 297:../src/board.c **** 	/* Enable RIIC bus interface */
+ 298:../src/board.c **** 	RIIC1.ICCR1.BIT.ICE = 0x1;
+ 509                             		.loc 1 298 0
+ 510 010b FB 5E 20 83 08          		mov.L	#0x88320, r5
+ 511 0110 CC 54                   		mov.B	[r5], r4
+ 512 0112 75 34 80                		or	#0xffffff80, r4
+ 513 0115 C3 54                   		mov.B	r4, [r5]
+ 299:../src/board.c **** 
+ 300:../src/board.c **** 	/* Clear the contents of the simulated EEPROM memory */
+ 301:../src/board.c **** 	//memset(gSIM_EEPROM_Memory, 0x00, 256u);
+ 302:../src/board.c **** 
+ 303:../src/board.c **** }
+ 514                             		.loc 1 303 0
+ 515 0117 3F 66 01                		rtsd	#4, r6-r6
+ 516                             	.LFE6:
+ 672                             	.Letext0:
+ 673                             		.file 2 "C:/projekte/repo/HomeServer/Firmware/Renesas/RX600_EVE_HomeServer/generate/iodefine.h"
+ 674                             		.file 3 "c:\\program files (x86)\\gcc for renesas rx 4.8.4.201803-gnurx-elf\\rx-elf\\rx-elf\\rx-el
+ 675                             		.file 4 "c:\\program files (x86)\\gcc for renesas rx 4.8.4.201803-gnurx-elf\\rx-elf\\rx-elf\\rx-el

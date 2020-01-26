@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="HomeServer\EVE\TopDesign">
+<ExpandedNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\TopDesign</v>
+<v>HomeServer\EVE\EVE.cydwr\Pins</v>
+<v>HomeServer\EVE\EVE.cydwr\Analog</v>
+<v>HomeServer\EVE\EVE.cydwr\Clocks</v>
+<v>HomeServer\EVE\EVE.cydwr\Interrupts</v>
+<v>HomeServer\EVE\EVE.cydwr\DMA</v>
+<v>HomeServer\EVE\EVE.cydwr\System</v>
+<v>HomeServer\EVE\EVE.cydwr\Directives</v>
+<v>HomeServer\EVE\EVE.cydwr\Flash Security</v>
+<v>HomeServer\EVE\EVE.cydwr\EEPROM</v>
+<v>HomeServer\EVE\Header Files</v>
+<v>HomeServer\EVE\Header Files\copro_commands.h</v>
+<v>HomeServer\EVE\Header Files\cyapicallbacks.h</v>
+<v>HomeServer\EVE\Header Files\EVE.h</v>
+<v>HomeServer\EVE\Header Files\EVE_Config.h</v>
+<v>HomeServer\EVE\Header Files\EVE_HAL.h</v>
+<v>HomeServer\EVE\Header Files\FT_GPU.h</v>
+<v>HomeServer\EVE\Header Files\timing.h</v>
+<v>HomeServer\EVE\Header Files\Utils.h</v>
+<v>HomeServer\EVE\Source Files</v>
+<v>HomeServer\EVE\Source Files\copro_commands.c</v>
+<v>HomeServer\EVE\Source Files\EVE.c</v>
+<v>HomeServer\EVE\Source Files\EVE_HAL.c</v>
+<v>HomeServer\EVE\Source Files\main.c</v>
+<v>HomeServer\EVE\Source Files\timing.c</v>
+<v>HomeServer\EVE\Generated_Source</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5</v>
+<v>HomeServer\PSoC_Sensorboard</v>
+<v>HomeServer\PSoC_Sensorboard\TopDesign</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\Pins</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\Analog</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\Clocks</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\Interrupts</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\DMA</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\System</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\Directives</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\Flash Security</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.cydwr\EEPROM</v>
+<v>HomeServer\PSoC_Sensorboard\Header Files</v>
+<v>HomeServer\PSoC_Sensorboard\Header Files\cyapicallbacks.h</v>
+<v>HomeServer\PSoC_Sensorboard\Source Files</v>
+<v>HomeServer\PSoC_Sensorboard\Source Files\main.c</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\TopDesign</v>
+<v>HomeServer\EVE\EVE.cydwr</v>
+<v>HomeServer\EVE\Header Files</v>
+<v>HomeServer\EVE\Header Files\copro_commands.h</v>
+<v>HomeServer\EVE\Header Files\cyapicallbacks.h</v>
+<v>HomeServer\EVE\Header Files\EVE.h</v>
+<v>HomeServer\EVE\Header Files\EVE_Config.h</v>
+<v>HomeServer\EVE\Header Files\EVE_HAL.h</v>
+<v>HomeServer\EVE\Header Files\FT_GPU.h</v>
+<v>HomeServer\EVE\Header Files\timing.h</v>
+<v>HomeServer\EVE\Header Files\Utils.h</v>
+<v>HomeServer\EVE\Source Files</v>
+<v>HomeServer\EVE\Source Files\copro_commands.c</v>
+<v>HomeServer\EVE\Source Files\EVE.c</v>
+<v>HomeServer\EVE\Source Files\EVE_HAL.c</v>
+<v>HomeServer\EVE\Source Files\main.c</v>
+<v>HomeServer\EVE\Source Files\timing.c</v>
+<v>HomeServer\EVE\Generated_Source</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\Clock_1</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cy_boot</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\MISO_EVE</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\MOSI_EVE</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\nPD_EVE</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\SCLK_EVE</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\SPI_EVE</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\SS_EVE</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cycodeshareexport.ld</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cycodeshareimport.ld</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cycodeshareimport.scat</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydevice.h</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydevice_trm.h</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydevicegnu.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydevicegnu_trm.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydeviceiar.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydeviceiar_trm.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydevicerv.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydevicerv_trm.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cydisabledsheets.h</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cyfitter.h</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cyfitter_cfg.c</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cyfitter_cfg.h</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cyfittergnu.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cyfitteriar.inc</v>
+<v>HomeServer\EVE\Generated_Source\PSoC5\cyfitterrv.inc</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\TopDesign</v>
+<v>HomeServer\EVE\TopDesign\TopDesign.cysch</v>
+<v>HomeServer\PSoC_Sensorboard</v>
+<v>HomeServer\PSoC_Sensorboard\TopDesign</v>
+<v>HomeServer\PSoC_Sensorboard\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\TopDesign</v>
+<v>HomeServer\EVE\TopDesign\TopDesign.cysch</v>
+<v>HomeServer\PSoC_Sensorboard</v>
+<v>HomeServer\PSoC_Sensorboard\TopDesign</v>
+<v>HomeServer\PSoC_Sensorboard\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\CortexM3</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\copro_commands.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\EVE_HAL.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\MISO_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\MOSI_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\nPD_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_EVE_INT.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_EVE_PM.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SS_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\timing.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\EVE.elf</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\EVE.hex</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\EVE.map</v>
+<v>HomeServer\EVE\EVE.gpdsc</v>
+<v>HomeServer\EVE\EVE.rpt</v>
+<v>HomeServer\EVE\EVE_timing.html</v>
+<v>HomeServer\PSoC_Sensorboard</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.gpdsc</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.rpt</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\CortexM3</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\copro_commands.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\EVE_HAL.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\MISO_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\MOSI_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\nPD_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SCLK_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_EVE_INT.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_EVE_PM.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\SS_EVE.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\Listing Files\timing.lst</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\EVE.elf</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\EVE.hex</v>
+<v>HomeServer\EVE\CortexM3\ARM_GCC_541\Debug\EVE.map</v>
+<v>HomeServer\EVE\EVE.gpdsc</v>
+<v>HomeServer\EVE\EVE.rpt</v>
+<v>HomeServer\EVE\EVE_timing.html</v>
+<v>HomeServer\PSoC_Sensorboard</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.gpdsc</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard.rpt</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC_Sensorboard_timing.html</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\PSoC 5LP Architecture TRM</v>
+<v>HomeServer\EVE\CY8C58LP Family Datasheet</v>
+<v>HomeServer\EVE\System Reference Guides</v>
+<v>HomeServer\EVE\System Reference Guides\cy_boot_v5_70</v>
+<v>HomeServer\EVE\Connector20_v1_0.pdf</v>
+<v>HomeServer\EVE\cy_clock_v2_20.pdf</v>
+<v>HomeServer\EVE\cy_pins_v2_20</v>
+<v>HomeServer\EVE\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>HomeServer\EVE\SPI_Master_v2_50.pdf</v>
+<v>HomeServer\PSoC_Sensorboard</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC 5LP Architecture TRM</v>
+<v>HomeServer\PSoC_Sensorboard\CY8C58LP Family Datasheet</v>
+<v>HomeServer\PSoC_Sensorboard\System Reference Guides</v>
+<v>HomeServer\PSoC_Sensorboard\System Reference Guides\cy_boot_v5_70</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>HomeServer</v>
+<v>HomeServer\EVE</v>
+<v>HomeServer\EVE\PSoC 5LP Architecture TRM</v>
+<v>HomeServer\EVE\CY8C58LP Family Datasheet</v>
+<v>HomeServer\EVE\System Reference Guides</v>
+<v>HomeServer\EVE\System Reference Guides\cy_boot_v5_70</v>
+<v>HomeServer\EVE\Connector20_v1_0.pdf</v>
+<v>HomeServer\EVE\cy_clock_v2_20.pdf</v>
+<v>HomeServer\EVE\cy_pins_v2_20</v>
+<v>HomeServer\EVE\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>HomeServer\EVE\SPI_Master_v2_50.pdf</v>
+<v>HomeServer\PSoC_Sensorboard</v>
+<v>HomeServer\PSoC_Sensorboard\PSoC 5LP Architecture TRM</v>
+<v>HomeServer\PSoC_Sensorboard\CY8C58LP Family Datasheet</v>
+<v>HomeServer\PSoC_Sensorboard\System Reference Guides</v>
+<v>HomeServer\PSoC_Sensorboard\System Reference Guides\cy_boot_v5_70</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\PSoC_Sensorboard.cydsn\PSoC_Sensorboard.cydwr" />
+<name v=".\EVE.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\EVE.cydsn\EVE_Config.h" />
+<name v=".\EVE.cydsn\EVE_HAL.h" />
+<name v=".\EVE.cydsn\EVE_HAL.c" />
+<name v=".\EVE.cydsn\Utils.h" />
+<name v=".\EVE.cydsn\main.c" />
+<name v=".\EVE.cydsn\EVE.h" />
+<name v=".\EVE.cydsn\EVE.c" />
+<name v=".\EVE.cydsn\EVE.cydwr" />
+<name v=".\EVE.cydsn\timing.c" />
+<name v=".\EVE.cydsn\Generated_Source\PSoC5\SS_EVE.h" />
+<name v=".\EVE.cydsn\FT_GPU.h" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1284, 622" SelectedTabbedMdiWindow="6ba3ebc2-53cd-44ef-9852-da94e1c531b8"><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\PSoC_Sensorboard.cydsn\PSoC_Sensorboard.cydwr" Guid="9b3e58f1-1292-43bb-9418-2e4217d51f76" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\TopDesign\TopDesign.cysch" Guid="dea3dcaa-48b7-44a2-bea2-f812c7f961f2" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\EVE_Config.h" Guid="33a3510d-7e90-4fce-85a7-99cdf012f986" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\EVE_HAL.h" Guid="6027f6f0-7bf4-49cc-845f-2699e04ad7d5" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\EVE_HAL.c" Guid="3b3e4b89-e800-4af2-b27d-f9f557e9dd64" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\Utils.h" Guid="8283c9b2-c130-43d0-983c-6a2c07265dfe" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\main.c" Guid="3c331426-ccbc-405a-9518-1568c82eec2c" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\EVE.h" Guid="701c3258-5851-4512-aaab-f6d9a72a632e" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\EVE.c" Guid="6ba3ebc2-53cd-44ef-9852-da94e1c531b8" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\EVE.cydwr" Guid="a3c3287f-2c13-414d-b630-ec701c99f290" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\timing.c" Guid="3684d5a4-2ed6-49c2-8c37-af5129ea256d" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\Generated_Source\PSoC5\SS_EVE.h" Guid="1658cd8f-8fb5-47ca-94df-b9da8f98a54e" /><DocumentWindow Key="C:\projekte\repo\HomeServer\Firmware\Cypress\HomeServer\EVE.cydsn\FT_GPU.h" Guid="cd4185e5-658c-460b-8b16-574bbc711e1f" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="53bbe56a-0a85-485b-8a95-dae099e0128b" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>
