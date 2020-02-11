@@ -35,7 +35,8 @@
 /************************* I N C L U D E S ***********************************/
 /*****************************************************************************/
 #include <Arduino.h>
-
+#include "FT800_HAL.h"
+#include "FT800_Config.h"
 /*****************************************************************************/
 /********************** D E C L A R A T I O N S ******************************/
 /*****************************************************************************/
@@ -296,7 +297,9 @@
 #define ULAW_SAMPLES         1UL
 #define ZERO                 0UL
 
-// Useful Macros
+/***********************************************************************
+ * Macros
+ **********************************************************************/
 #define RGB(r, g, b)         ((((r) << 16) | (g) << 8) | (b))
 #define SQ(v)                ((v) * (v))
 #define MIN(x,y)             ((x) > (y) ? (y) : (x))
@@ -305,6 +308,51 @@
 #define F16(s)               (((s) * 65536))
 #define INVALID_TOUCH_XY     0x8000
 #define ABS(x)               ((x) > (0) ? (x) : (-x))
+
+#define LCD_WQVGA				// WQVGA = 480 x 272 (VM800B/C 4.3" and 5.0")
+
+// FT800 Chip Commands - use with cmdWrite
+#define FT800_ACTIVE	0x00			// Initializes FT800
+#define FT800_STANDBY	0x41			// Place FT800 in Standby (clk running)
+#define FT800_SLEEP	0x42			// Place FT800 in Sleep (clk off)
+#define FT800_PWRDOWN	0x50			// Place FT800 in Power Down (core off)
+#define FT800_CLKEXT	0x44			// Select external clock source
+#define FT800_CLK48M	0x62			// Select 48MHz PLL
+#define FT800_CLK36M	0x61			// Select 36MHz PLL
+#define FT800_CORERST	0x68			// Reset core - all registers default
+
+
+ class FT800
+ {
+ private:
+     /* data */
+    int8_t ft800pwrPin;
+    unsigned long ramDisplayList = RAM_DL;		// Set beginning of display list memory 
+    unsigned long ramCommandBuffer = RAM_CMD;	// Set beginning of graphics command memory
+
+    unsigned int cmdBufferRd = 0x0000;		// Used to navigate command ring buffer
+    unsigned int cmdBufferWr = 0x0000;		// Used to navigate command ring buffer
+    unsigned int cmdOffset = 0x0000;		// Used to navigate command rung buffer
+    unsigned int point_size = 0x0100;		// Define a default dot size
+    unsigned long point_x = (96 * 16);		// Define a default point x-location (1/16 anti-aliased)
+    unsigned long point_y = (136 * 16);		// Define a default point y-location (1/16 anti-aliased)
+    unsigned long color;				// Variable for chanign colors
+    unsigned char ft800Gpio;			// Used for FT800 GPIO register
+
+     unsigned int incCMDOffset(unsigned int currentOffset, unsigned char commandSize);
+ public:
+    //Constructor
+    FT800(int8_t sck, int8_t miso, int8_t mosi, int8_t ss, int8_t pwrdn);
+    
+    //Destructor
+    ~FT800();
+    void FT800_Init();
+    void FT800_setup();
+    void FT800_test();
+
+ };
+
+extern FT800 eve_display;
 
 #endif  //FT800_h
 /** EOF FT800.h ********************************************************/
