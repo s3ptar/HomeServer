@@ -27,6 +27,11 @@
 #define LCD_WQVGA 
 //#define LCD_WVVGA 
 
+//macros related to arduino plaform SPI
+/* SPI clock frequency */
+#define FT_SPI_CLK_FREQ_MIN		SPI_CLOCK_DIV2
+#define FT_SPI_CLK_FREQ_MAX		21*1000000
+
 // LCD display parameters
 #ifdef LCD_QVGA			            // QVGA display parameters
     #define LCDWIDTH    320				    // Active width of LCD display

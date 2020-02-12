@@ -132,6 +132,44 @@
 #define REG_VSYNC0            0x102448UL
 #define REG_VSYNC1            0x10244cUL
 
+/* Macros related to inbuilt font */
+#define FT_NUMCHAR_PERFONT 		(128L)		//number of font characters per bitmap handle
+#define FT_FONT_TABLE_SIZE 		(148L)		//size of the font table - utilized for loopup by the graphics engine
+#define FT_FONT_TABLE_POINTER	(0xFFFFCUL)	//pointer to the inbuilt font tables starting from bitmap handle 16
+
+/* Memory definitions */		
+#define FT_RAM_G						0x000000UL
+#define FT_ROM_CHIPID					0x0C0000UL	
+#define FT_ROM_FONT						0x0BB23CUL
+#define FT_ROM_FONT_ADDR				0x0FFFFCUL		
+#define FT_RAM_DL						0x100000UL
+#define FT_RAM_PAL						0x102000UL
+#define FT_RAM_CMD						0x108000UL
+#define FT_RAM_SCREENSHOT				0x1C2000UL		
+
+/* Memory buffer sizes */
+#define FT_RAM_G_SIZE					256*1024L
+#define FT_CMDFIFO_SIZE					4*1024L
+#define FT_RAM_DL_SIZE					8*1024L
+#define FT_RAM_PAL_SIZE					1*1024L
+
+/* Graphics display list swap macros */
+#define FT_DLSWAP_DONE          0
+#define FT_DLSWAP_LINE          1
+#define FT_DLSWAP_FRAME         2
+
+/* Host command macros */
+#define FT_ACTIVE				0x00			// Place FT800 in active state
+#define FT_STANDBY				0x41			// Place FT800 in Standby (clk running)
+#define FT_SLEEP				0x42			// Place FT800 in Sleep (clk off)
+#define FT_PWRDOWN				0x50			// Place FT800 in Power Down (core off)
+#define FT_CLKEXT				0x44			// Select external clock source
+#define FT_CLKINT				0x48			// Select internal clock source
+#define FT_CLK48M				0x62			// Select 48MHz PLL output
+#define FT_CLK36M				0x61			// Select 36MHz PLL output
+#define FT_CORERST				0x68			// Reset core - all registers default and processors reset
+
+
 // Graphics Engine Commands
 // Refer to the FT800 Programmers Guide
 #define CMDBUF_SIZE          4096UL
@@ -179,6 +217,7 @@
 #define CMD_TOGGLE           0xffffff12UL
 #define CMD_TRACK            0xffffff2cUL
 #define CMD_TRANSLATE        0xffffff27UL
+#define CMD_GETPROPS         0xFFFFFF25UL
 
 // Display list commands to be embedded in Graphics Processor
 #define DL_ALPHA_FUNC       0x09000000UL // requires OR'd arguments
@@ -297,6 +336,8 @@
 #define ULAW_SAMPLES         1UL
 #define ZERO                 0UL
 
+
+
 /***********************************************************************
  * Macros
  **********************************************************************/
@@ -309,50 +350,190 @@
 #define INVALID_TOUCH_XY     0x8000
 #define ABS(x)               ((x) > (0) ? (x) : (-x))
 
-#define LCD_WQVGA				// WQVGA = 480 x 272 (VM800B/C 4.3" and 5.0")
 
 // FT800 Chip Commands - use with cmdWrite
 #define FT800_ACTIVE	0x00			// Initializes FT800
 #define FT800_STANDBY	0x41			// Place FT800 in Standby (clk running)
-#define FT800_SLEEP	0x42			// Place FT800 in Sleep (clk off)
+#define FT800_SLEEP	    0x42			// Place FT800 in Sleep (clk off)
 #define FT800_PWRDOWN	0x50			// Place FT800 in Power Down (core off)
 #define FT800_CLKEXT	0x44			// Select external clock source
 #define FT800_CLK48M	0x62			// Select 48MHz PLL
 #define FT800_CLK36M	0x61			// Select 36MHz PLL
 #define FT800_CORERST	0x68			// Reset core - all registers default
 
+/* Widget command macros */
+#define FT_OPT_MONO             1
+#define FT_OPT_NODL             2
+#define FT_OPT_FLAT             256
+#define FT_OPT_CENTERX          512
+#define FT_OPT_CENTERY          1024
+#define FT_OPT_CENTER           (FT_OPT_CENTERX | FT_OPT_CENTERY)
+#define FT_OPT_NOBACK           4096
+#define FT_OPT_NOTICKS          8192
+#define FT_OPT_NOHM             16384
+#define FT_OPT_NOPOINTER        16384
+#define FT_OPT_NOSECS           32768
+#define FT_OPT_NOHANDS          49152
+#define FT_OPT_RIGHTX           2048
+#define FT_OPT_SIGNED           256
 
- class FT800
- {
- private:
-     /* data */
-    int8_t ft800pwrPin;
-    unsigned long ramDisplayList = RAM_DL;		// Set beginning of display list memory 
-    unsigned long ramCommandBuffer = RAM_CMD;	// Set beginning of graphics command memory
+/* Coprocessor reset related macros */
+#define FT_RESET_HOLD_COPROCESSOR		1
+#define FT_RESET_RELEASE_COPROCESSOR	0
 
-    unsigned int cmdBufferRd = 0x0000;		// Used to navigate command ring buffer
-    unsigned int cmdBufferWr = 0x0000;		// Used to navigate command ring buffer
-    unsigned int cmdOffset = 0x0000;		// Used to navigate command rung buffer
-    unsigned int point_size = 0x0100;		// Define a default dot size
-    unsigned long point_x = (96 * 16);		// Define a default point x-location (1/16 anti-aliased)
-    unsigned long point_y = (136 * 16);		// Define a default point y-location (1/16 anti-aliased)
-    unsigned long color;				// Variable for chanign colors
-    unsigned char ft800Gpio;			// Used for FT800 GPIO register
+/* Macros for sound play and stop */
+#define FT_SOUND_PLAY					1
+#define FT_AUDIO_PLAY					1
+/* Audio sample type macros */
+#define FT_LINEAR_SAMPLES       0	//8bit signed samples
+#define FT_ULAW_SAMPLES         1	//8bit ulaw samples
+#define FT_ADPCM_SAMPLES        2	//4bit ima adpcm samples
 
-     unsigned int incCMDOffset(unsigned int currentOffset, unsigned char commandSize);
- public:
-    //Constructor
-    FT800(int8_t sck, int8_t miso, int8_t mosi, int8_t ss, int8_t pwrdn);
-    
-    //Destructor
-    ~FT800();
-    void FT800_Init();
-    void FT800_setup();
-    void FT800_test();
+/* Synthesized sound macros */
+#define FT_SILENCE              0x00
 
- };
+#define FT_SQUAREWAVE           0x01
+#define FT_SINEWAVE             0x02
+#define FT_SAWTOOTH             0x03
+#define FT_TRIANGLE             0x04
 
-extern FT800 eve_display;
+#define FT_BEEPING              0x05
+#define FT_ALARM                0x06
+#define FT_WARBLE               0x07
+#define FT_CAROUSEL             0x08
+
+#define FT_PIPS(n)              (0x0F + (n))
+
+#define FT_HARP                 0x40
+#define FT_XYLOPHONE            0x41
+#define FT_TUBA                 0x42
+#define FT_GLOCKENSPIEL         0x43
+#define FT_ORGAN                0x44
+#define FT_TRUMPET              0x45
+#define FT_PIANO                0x46
+#define FT_CHIMES               0x47
+#define FT_MUSICBOX             0x48
+#define FT_BELL                 0x49
+
+#define FT_CLICK                0x50
+#define FT_SWITCH               0x51
+#define FT_COWBELL              0x52
+#define FT_NOTCH                0x53
+#define FT_HIHAT                0x54
+#define FT_KICKDRUM             0x55
+#define FT_POP                  0x56
+#define FT_CLACK                0x57
+#define FT_CHACK                0x58
+
+#define FT_MUTE                 0x60
+#define FT_UNMUTE               0x61
+
+/* Synthesized sound frequencies, midi note macros */
+#define FT_MIDI_A0            	21
+#define FT_MIDI_A_0           	22
+#define FT_MIDI_B0            	23
+#define FT_MIDI_C1            	24
+#define FT_MIDI_C_1           	25
+#define FT_MIDI_D1            	26
+#define FT_MIDI_D_1           	27
+#define FT_MIDI_E1            	28
+#define FT_MIDI_F1            	29
+#define FT_MIDI_F_1           	30
+#define FT_MIDI_G1            	31
+#define FT_MIDI_G_1           	32
+#define FT_MIDI_A1            	33
+#define FT_MIDI_A_1           	34
+#define FT_MIDI_B1            	35
+#define FT_MIDI_C2            	36
+#define FT_MIDI_C_2           	37
+#define FT_MIDI_D2            	38
+#define FT_MIDI_D_2           	39
+#define FT_MIDI_E2            	40
+#define FT_MIDI_F2            	41
+#define FT_MIDI_F_2           	42
+#define FT_MIDI_G2            	43
+#define FT_MIDI_G_2           	44
+#define FT_MIDI_A2            	45
+#define FT_MIDI_A_2           	46
+#define FT_MIDI_B2            	47
+#define FT_MIDI_C3            	48
+#define FT_MIDI_C_3           	49
+#define FT_MIDI_D3            	50
+#define FT_MIDI_D_3           	51
+#define FT_MIDI_E3            	52
+#define FT_MIDI_F3            	53
+#define FT_MIDI_F_3           	54
+#define FT_MIDI_G3            	55
+#define FT_MIDI_G_3           	56
+#define FT_MIDI_A3            	57
+#define FT_MIDI_A_3           	58
+#define FT_MIDI_B3            	59
+#define FT_MIDI_C4            	60
+#define FT_MIDI_C_4           	61
+#define FT_MIDI_D4            	62
+#define FT_MIDI_D_4           	63
+#define FT_MIDI_E4            	64
+#define FT_MIDI_F4            	65
+#define FT_MIDI_F_4           	66
+#define FT_MIDI_G4            	67
+#define FT_MIDI_G_4           	68
+#define FT_MIDI_A4            	69
+#define FT_MIDI_A_4           	70
+#define FT_MIDI_B4            	71
+#define FT_MIDI_C5            	72
+#define FT_MIDI_C_5           	73
+#define FT_MIDI_D5            	74
+#define FT_MIDI_D_5           	75
+#define FT_MIDI_E5            	76
+#define FT_MIDI_F5            	77
+#define FT_MIDI_F_5           	78
+#define FT_MIDI_G5            	79
+#define FT_MIDI_G_5           	80
+#define FT_MIDI_A5            	81
+#define FT_MIDI_A_5           	82
+#define FT_MIDI_B5            	83
+#define FT_MIDI_C6            	84
+#define FT_MIDI_C_6           	85
+#define FT_MIDI_D6            	86
+#define FT_MIDI_D_6           	87
+#define FT_MIDI_E6            	88
+#define FT_MIDI_F6            	89
+#define FT_MIDI_F_6           	90
+#define FT_MIDI_G6            	91
+#define FT_MIDI_G_6           	92
+#define FT_MIDI_A6            	93
+#define FT_MIDI_A_6           	94
+#define FT_MIDI_B6            	95
+#define FT_MIDI_C7            	96
+#define FT_MIDI_C_7           	97
+#define FT_MIDI_D7            	98
+#define FT_MIDI_D_7           	99
+#define FT_MIDI_E7            	100
+#define FT_MIDI_F7            	101
+#define FT_MIDI_F_7           	102
+#define FT_MIDI_G7            	103
+#define FT_MIDI_G_7           	104
+#define FT_MIDI_A7            	105
+#define FT_MIDI_A_7           	106
+#define FT_MIDI_B7            	107
+#define FT_MIDI_C8            	108
+
+/* Macros for audio playback parameters*/
+#define FT_AUDIO_SAMPLINGFREQ_MIN		8*1000L
+#define FT_AUDIO_SAMPLINGFREQ_MAX		48*1000L
+
+//coprocessor error macros
+#define FT_COPRO_ERROR					0xfffUL
+
+// Useful Macros
+#define RGB(r, g, b)         ((((r) << 16) | (g) << 8) | (b))
+#define SQ(v)                ((v) * (v))
+#define MIN(x,y)             ((x) > (y) ? (y) : (x))
+#define MAX(x,y)             ((x) > (y) ? (x) : (y))
+#define NOTE(n, sharp)       (((n) - 'C') + ((sharp) * 128))
+#define F16(s)               (((s) * 65536))
+#define INVALID_TOUCH_XY     0x8000
+#define ABS(x)               ((x) > (0) ? (x) : (-x))
 
 #endif  //FT800_h
 /** EOF FT800.h ********************************************************/

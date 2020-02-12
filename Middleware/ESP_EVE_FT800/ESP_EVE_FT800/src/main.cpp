@@ -24,14 +24,13 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <SPI.h>				// Arduino SPI Library definitions
-#include "FT800.h"				// FT800 register, memory and command values
-#include "FT800_HAL.h"
+#include "FT800_IMP.h"				// FT800 register, memory and command values
 
 const char* ssid = "chilihotdog";
 const char* password = "bxJHckMMkGqEPfY3Jf3nZnAn5FtGYwKZSkzVvbzFHNbpUZfv79GXm8afDuNu";
 char str_display[32];
 SSD1306Wire *display;
-FT800 eve_display(18,19,23,13,12);
+FT800_IMP eve_display(18,19,23,13,12,11);
 
 /******************************************************************************
  * Function:        void setup(void)
@@ -72,7 +71,10 @@ void setup()
   	}
 	eve_display.FT800_Init();
 	eve_display.FT800_setup();
-	
+
+	eve_display.CalibrateTouchPanel();
+
+	Serial.println("Calibration ready");
 
 // Port defaults to 3232
 // ArduinoOTA.setPort(3232);

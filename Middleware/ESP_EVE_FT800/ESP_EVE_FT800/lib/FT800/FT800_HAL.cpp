@@ -19,7 +19,10 @@
 /***********************************************************************
 * Declarations
 ***********************************************************************/
-
+#define Backlight_off HIGH
+#define Backlight_on  LOW
+#define Audio_off HIGH
+#define Audio_on  LOW
 /***********************************************************************
 * Constant
 ***********************************************************************/
@@ -91,6 +94,19 @@ void FT800_HAL::ft800memWrite8(unsigned long ftAddress, unsigned char ftData8)
   digitalWrite(ft800csPin, HIGH);		// Set CS# high
 }
 
+void FT800_HAL::ft800memWrite8Array(unsigned long ftAddress, uint8_t *Src, uint32_t NBytes)
+{
+  uint32_t i;
+  digitalWrite(ft800csPin, LOW);		// Set CS# low
+  SPI.transfer((char)(ftAddress >> 16) | MEM_WRITE); // Send Memory Write plus high address byte
+  SPI.transfer((char)(ftAddress >> 8));		// Send middle address byte
+  SPI.transfer((char)(ftAddress));		// Send low address byte
+  for(i=0;i<NBytes;i++)
+			SPI.transfer(*Src++);
+  digitalWrite(ft800csPin, HIGH);		// Set CS# high
+}
+
+
 void FT800_HAL::ft800memWrite16(unsigned long ftAddress, unsigned int ftData16)
 {
 //  digitalWrite(triggerPin, HIGH);		// Toggle a pin to trigger the oscilloscope
@@ -103,6 +119,7 @@ void FT800_HAL::ft800memWrite16(unsigned long ftAddress, unsigned int ftData16)
   SPI.transfer((char)(ftData16 >> 8));		// Send data high byte
   digitalWrite(ft800csPin, HIGH);		// Set CS# high
 }
+
 
 void FT800_HAL::ft800memWrite32(unsigned long ftAddress, unsigned long ftData32)
 {
@@ -152,6 +169,16 @@ unsigned int FT800_HAL::ft800memRead16(unsigned long ftAddress)
   return ftData16;				// Return integer read
 }
 
+void FT800_HAL::ft800memRead8Array(uint32_t Addr, uint8_t *Src, uint32_t NBytes){
+
+    uint32_t i;
+		StartRead(Addr);
+		for(i=0;i<NBytes;i++)
+			*Src++ = SPI.transfer(0x00);
+    digitalWrite(ft800csPin, HIGH);		// Set CS# high
+
+}
+
 unsigned long FT800_HAL::ft800memRead32(unsigned long ftAddress)
 {
   unsigned long ftData32;
@@ -183,4 +210,251 @@ void FT800_HAL::ft800cmdWrite(unsigned char ftCommand)
   SPI.transfer(0x00);				// Commands consist of two more zero bytes
   SPI.transfer(0x00);				// Send last zero byte
   digitalWrite(ft800csPin, HIGH);		// Set CS# high
+}
+
+
+/***********************************************************************
+*! \fn          void FT800_IMP::SetDisplayEnablePin(uint8_t GpioBit)
+*  \brief       FT_GC gpio bit for display enable/disable
+*  \param       uint8_t GpioBit
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::SetDisplayEnablePin(uint8_t GpioBit){
+
+    pinMode(GpioBit, OUTPUT);			// FT800 Power Down (reset) input
+    digitalWrite(GpioBit, HIGH);		// Set PD# high to start
+	
+}
+
+
+/***********************************************************************
+*! \fn          void FT800_HAL::SetAudioEnablePin(uint8_t GpioBit)
+*  \brief       FT_GC gpio bit for audio enable/disable
+*  \param       uint8_t GpioBit
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::SetAudioEnablePin(uint8_t GpioBit){
+
+    pinMode(GpioBit, OUTPUT);			// FT800 Power Down (reset) input
+    digitalWrite(GpioBit, HIGH);		// 
+  
+}
+
+/***********************************************************************
+*! \fn          void FT800_IMP::DisplayOn(uint8_t GpioBit)
+*  \brief       Apis to enable backlight
+*  \param       uint8_t GpioBit
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::DisplayOn(uint8_t GpioBit){
+
+    digitalWrite(GpioBit, Backlight_on);
+	
+}
+/***********************************************************************
+*! \fn          void FT800_IMP::DisplayOff(uint8_t GpioBit)
+*  \brief       Apis to disable backlight
+*  \param       uint8_t GpioBit
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::DisplayOff(uint8_t GpioBit){
+
+    digitalWrite(GpioBit, Backlight_off);
+
+}
+
+
+/***********************************************************************
+*! \fn          void AudioOn(uint8_t GpioBit)
+*  \brief       Apis to enable Audio
+*  \param       uint8_t GpioBit
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::AudioOn(uint8_t GpioBit){
+
+    digitalWrite(GpioBit, Audio_on);
+
+}
+/***********************************************************************
+*! \fn          void FT800_HAL::AudioOff(uint8_t GpioBit)
+*  \brief       Apis to edisble Audio
+*  \param       uint8_t GpioBit
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::AudioOff(uint8_t GpioBit){
+
+    digitalWrite(GpioBit, Audio_off);
+
+}
+
+/***********************************************************************
+*! \fn          void FT800_HAL::SetInterruptPin(uint16_t Intpin)
+*  \brief       apis to set interrupt pin
+*  \param       uint16_t Intpin
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::SetInterruptPin(uint16_t Intpin){
+  
+    /* update the interrupt pin */
+	  IntPin = Intpin;
+
+}
+
+/***********************************************************************
+*! \fn          void FT800_HAL::ChangeClock(uint32_t ClockValue)
+*  \brief       For due it is straight forward, for others only a switch
+*  \param       uint32_t ClockValue
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::ChangeClock(uint32_t ClockValue){
+    SPI.setClockDivider(ClockValue);
+}
+
+
+/***********************************************************************
+*! \fn          void FT800_HAL::StartRead(uint32_t Addr)
+*  \brief       APIs related to memory read & write/transport
+*  \param       uint32_t Addr
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::StartRead(uint32_t Addr){
+    //make sure the union array indexes are modified for big endian usecase
+		union{
+			  uint32_t UUint32;
+			  uint8_t  A[4];
+		};
+		UUint32 = Addr;
+		digitalWrite(ft800csPin, LOW);
+		SPI.transfer(A[2]);
+		SPI.transfer(A[1]);
+		SPI.transfer(A[0]);
+		SPI.transfer(0x00);//dummy byte for read
+	}
+
+/***********************************************************************
+*! \fn          void FT800_HAL::StartWrite(uint32_t Addr)
+*  \brief       APIs related to memory read & write/transport
+*  \param       uint32_t Addr
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::StartWrite(uint32_t Addr){
+    //make sure the union array indexes are modified for big endian usecase
+		union{
+			  uint32_t UUint32;
+			  uint8_t  A[4];
+		};
+		UUint32 = Addr;
+		digitalWrite(ft800csPin, LOW);
+		SPI.transfer(A[2] | 0x80);
+		SPI.transfer(A[1]);
+		SPI.transfer(A[0]);
+	}
+
+/***********************************************************************
+*! \fn          void FT800_HAL::Transfer(uint8_t *Buff,uint32_t NBytes)
+*  \brief       transfer n bytes
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::Transfer(uint8_t *Buff,uint32_t NBytes){
+
+    uint32_t i;
+		for(i=0;i<NBytes;i++){
+			  SPI.transfer(*Buff++);
+		}
+
+}
+/***********************************************************************
+*! \fn          void FT800_HAL::Transfer32(uint32_t Value32)
+*  \brief       transfer 4 bytes
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::Transfer32(uint32_t Value32){
+
+    union{
+			  uint32_t UUint32;
+			  uint8_t  A[4];
+		};
+		UUint32 = Value32;		
+		SPI.transfer(A[0]);
+		SPI.transfer(A[1]);
+		SPI.transfer(A[2]);
+		SPI.transfer(A[3]);
+
+}
+/***********************************************************************
+*! \fn          void FT800_HAL::Transfer16(uint16_t Value16)
+*  \brief       transfer 2 bytes
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::Transfer16(uint16_t Value16){
+
+    union{
+			  uint16_t UUint16;
+			  uint8_t  A[2];
+		};
+		UUint16 = Value16;
+		A[0] = SPI.transfer(A[0]);
+		A[1] = SPI.transfer(A[1]);
+
+}
+
+/***********************************************************************
+*! \fn          void FT800_HAL::Transfer8(uint8_t Value8)
+*  \brief       transfer a single byte
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::Transfer8(uint8_t Value8){
+
+    SPI.transfer(Value8);
+
+}
+/***********************************************************************
+*! \fn          void FT800_HAL::EndTransfer()
+*  \brief       end transfer
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::EndTransfer(){
+
+    digitalWrite(ft800csPin, HIGH);
+
+}
+/***********************************************************************
+*! \fn          void FT800_HAL::StartTransfer(uint32_t Addr)
+*  \brief       start transfer
+*  \param       uint32_t Addr
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_HAL::StartTransfer(uint32_t Addr){
+
+    union{
+			  uint32_t UUint32;
+			  uint8_t  A[4];
+		};
+		UUint32 = Addr;
+		digitalWrite(ft800csPin, LOW);
+		SPI.transfer(A[2] | 0x80);
+		SPI.transfer(A[1]);
+		SPI.transfer(A[0]);  
+
 }
