@@ -432,6 +432,7 @@ uint8_t FT800_IMP::ReadIntReg(void){
 void FT800_IMP::CalibrateTouchPanel(void){
 
 	/* Construct the display list with grey as background color, informative string "Please Tap on the dot" followed by inbuilt calibration command */
+	FT_Touch_Enable();
 	DLStart();
 	ClearColorRGB(64,64,64);
 	Clear(1,1,1);    
@@ -1767,5 +1768,32 @@ FT_GEStatus FT800_IMP::ChkGetFreeSpace(uint16_t NBytes){
 		}
 	}
 	return FT_GE_OK;
+
+}
+
+/***********************************************************************
+*! \fn          void FT800_IMP::FT_Touch_Disable()
+*  \brief       disable TouchScreen
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_IMP::FT_Touch_Disable(){
+
+	ft800HAL.ft800memWrite32(REG_TOUCH_MODE, 0);
+	ft800HAL.ft800memWrite32(REG_TOUCH_RZTHRESH, 0);   
+
+}
+/***********************************************************************
+*! \fn          void FT800_IMP::FT_Touch_Enable()
+*  \brief       enable Touchscreen
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void FT800_IMP::FT_Touch_Enable(){
+
+	ft800HAL.ft800memWrite32(REG_TOUCH_MODE, TOUCHMODE_FRAME);
+	ft800HAL.ft800memWrite32(REG_TOUCH_RZTHRESH, 1200);  
 
 }

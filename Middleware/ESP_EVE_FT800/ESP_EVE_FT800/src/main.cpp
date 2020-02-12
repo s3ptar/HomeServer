@@ -74,7 +74,7 @@ void setup()
 
 	eve_display.CalibrateTouchPanel();
 
-	Serial.println("Calibration ready");
+	eve_display.Cmd_Logo();
 
 // Port defaults to 3232
 // ArduinoOTA.setPort(3232);
@@ -173,7 +173,7 @@ void loop()
 	else
 	Serial.println("done\n");
 
-	eve_display.FT800_test();
+	//eve_display.FT800_test();
 
   	delay(500);					// Wait a half-second to observe the changing color
 }

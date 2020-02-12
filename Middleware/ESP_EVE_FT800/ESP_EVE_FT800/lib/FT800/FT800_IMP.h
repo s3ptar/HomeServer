@@ -374,6 +374,8 @@ class FT800_IMP
 	FT_GEStatus ChkGetFreeSpace(uint16_t NBytes);
 	FT_GEStatus StartTransferCmd();
     void EndTransferCmd(void);
+	void FT_Touch_Disable(void);
+	void FT_Touch_Enable(void);
 	
 	
 	/* Global variables */	
