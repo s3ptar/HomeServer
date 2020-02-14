@@ -55,8 +55,15 @@ FT800_IMP eve_display(18,19,23,13,12,11);
       Analog and power headers = n/c
   */
   
-void setup()
-{
+
+/***********************************************************************
+*! \fn          void setup()
+*  \brief       Arduino Setup - Routine
+*  \param       none
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void setup(){
 	Heltec.begin(true, false, true);
 	Serial.println("Booting...");
 	
@@ -64,6 +71,7 @@ void setup()
 	//Wire1.begin(SDA, SCL);        //If there have other device on I2C1, scan the device address via I2C1
 	WiFi.mode(WIFI_STA);
   	WiFi.begin(ssid, password);
+	
   	while (WiFi.waitForConnectResult() != WL_CONNECTED) {
     	Serial.println("Connection Failed! Rebooting...");
     	delay(5000);
@@ -73,8 +81,8 @@ void setup()
 	eve_display.FT800_setup();
 
 	eve_display.CalibrateTouchPanel();
-
 	eve_display.Cmd_Logo();
+	ArduinoOTA.setHostname("ESP_EVE");
 
 // Port defaults to 3232
 // ArduinoOTA.setPort(3232);
@@ -127,11 +135,14 @@ ArduinoOTA
   	Serial.println(WiFi.localIP());
 }
 
-
-void loop()
-{
-	byte error, address;
-	int nDevices;
+/***********************************************************************
+*! \fn          void loop(){
+*  \brief       construct host command and send to graphics controller
+*  \param       uint32_t HostCommand
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void loop(){
 	ArduinoOTA.handle();
 
 	Heltec.display->clear();
@@ -139,39 +150,7 @@ void loop()
 	Heltec.display->drawString(0, 0, WiFi.localIP().toString());
 	Heltec.display->display();
 
-	Serial.println("Scanning...");
-
-	nDevices = 0;
-	for(address = 1; address < 127; address++ )
-	{
-		Wire.beginTransmission(address);
-		error = Wire.endTransmission();
-
-//		Wire1.beginTransmission(address);
-//		error = Wire1.endTransmission();
-
-		if (error == 0)
-		{
-			Serial.print("I2C device found at address 0x");
-			if (address<16)
-			Serial.print("0");
-			Serial.print(address,HEX);
-			Serial.println("  !");
-
-			nDevices++;
-		}
-		else if (error==4)
-		{
-			Serial.print("Unknown error at address 0x");
-			if (address<16)
-				Serial.print("0");
-			Serial.println(address,HEX);
-		}
-	}
-	if (nDevices == 0)
-	Serial.println("No I2C devices found\n");
-	else
-	Serial.println("done\n");
+	
 
 	//eve_display.FT800_test();
 
