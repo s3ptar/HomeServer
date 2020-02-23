@@ -5,7 +5,7 @@
 *  \author:                 R. Gräber
 *  \version:                0
 *  \history:                -
-*  \brief                   /*****************************************************************************
+*  \brief                   *****************************************************************************
 *                            Copyright (c) Future Technology Devices International 2014
 *                            propriety of Future Technology devices International.
 *

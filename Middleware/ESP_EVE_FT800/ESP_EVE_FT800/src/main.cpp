@@ -25,12 +25,69 @@
 #include <ArduinoOTA.h>
 #include <SPI.h>				// Arduino SPI Library definitions
 #include "FT800_IMP.h"				// FT800 register, memory and command values
+#include <PubSubClient.h>
+#include <Ethernet.h>
+#include <Dns.h>
+#include "glb_var.h"
 
 const char* ssid = "chilihotdog";
 const char* password = "bxJHckMMkGqEPfY3Jf3nZnAn5FtGYwKZSkzVvbzFHNbpUZfv79GXm8afDuNu";
 char str_display[32];
 SSD1306Wire *display;
 FT800_IMP eve_display(18,19,23,13,12,11);
+const char* mqttServer = "192.168.0.222";
+const int mqttPort = 1883;
+WiFiClient ethClient;
+PubSubClient client(ethClient);
+glb_var global_var;
+
+
+
+/***********************************************************************
+*! \fn          void callback(char* topic, byte* payload, unsigned int length) 
+*  \brief       callback for MQTT Client
+*  \param       har* topic, byte* payload, unsigned int length
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void callback(char* topic, byte* payload, unsigned int length) {
+    Serial.print("Message arrived [");
+    Serial.print(topic);
+    Serial.print("] ");
+    for (int i=0;i<length;i++) {
+        Serial.print((char)payload[i]);
+    }
+    Serial.println();
+}
+
+/***********************************************************************
+*! \fn          void reconnect()
+*  \brief       reconnect for MQTT Client
+*  \param       har* topic, byte* payload, unsigned int length
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void reconnect() {
+  // Loop until we're reconnected
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Attempt to connect
+    if (client.connect("arduinoClient")) {
+      Serial.println("connected");
+      // Once connected, publish an announcement...
+      client.publish("outTopic","hello world");
+      // ... and resubscribe
+      client.subscribe("inTopic");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
+    }
+  }
+}
+
 
 /******************************************************************************
  * Function:        void setup(void)
@@ -55,7 +112,6 @@ FT800_IMP eve_display(18,19,23,13,12,11);
       Analog and power headers = n/c
   */
   
-
 /***********************************************************************
 *! \fn          void setup()
 *  \brief       Arduino Setup - Routine
@@ -64,25 +120,60 @@ FT800_IMP eve_display(18,19,23,13,12,11);
 *  \return      none
 ***********************************************************************/
 void setup(){
-	Heltec.begin(true, false, true);
-	Serial.println("Booting...");
-	
-	Wire.begin(SDA_OLED, SCL_OLED); //Scan OLED's I2C address via I2C0
-	//Wire1.begin(SDA, SCL);        //If there have other device on I2C1, scan the device address via I2C1
-	WiFi.mode(WIFI_STA);
-  	WiFi.begin(ssid, password);
-	
-  	while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    	Serial.println("Connection Failed! Rebooting...");
-    	delay(5000);
-    	ESP.restart();
-  	}
-	eve_display.FT800_Init();
-	eve_display.FT800_setup();
 
-	eve_display.CalibrateTouchPanel();
-	eve_display.Cmd_Logo();
-	ArduinoOTA.setHostname("ESP_EVE");
+
+    //Init Heltec Libary
+    Heltec.begin(true, false, true);
+	  Serial.println("Booting...");
+    //init Onboard OLED
+	  Wire.begin(SDA_OLED, SCL_OLED); //Scan OLED's I2C address via I2C0
+	  //Wire1.begin(SDA, SCL);        //If there have other device on I2C1, scan the device address via I2C1
+
+    /************************** WLAN ****************************************/
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, password);
+    while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+        global_var.wifi_is_connected = true;
+  	}
+
+    global_var.wifi_is_connected = WiFi.isConnected();
+    if (global_var.wifi_is_connected) {
+        Serial.println("Wifi connected");
+    }
+    else{
+        Serial.println("Wifi NOT connected");
+    }
+
+    /************************** Ping ****************************************/
+
+	  eve_display.FT800_Init();
+	  eve_display.FT800_setup();
+
+	  //eve_display.CalibrateTouchPanel();
+	  eve_display.Cmd_Logo();
+	  ArduinoOTA.setHostname("ESP_EVE");
+	  client.setServer(mqttServer, mqttPort);
+	  client.setCallback(callback);
+
+	  while (!client.connected()) {
+        Serial.println("Connecting to MQTT...");
+ 
+    if (client.connect("ESP32Client")) {
+ 
+        Serial.println("connected");  
+ 
+    } else {
+ 
+        Serial.print("failed with state ");
+        Serial.print(client.state());
+        delay(2000);
+ 
+    }
+  }
+  client.subscribe("System/DateAndTime");
+ 
+  //client.publish("esp/test", "Hello from ESP8266");
+
 
 // Port defaults to 3232
 // ArduinoOTA.setPort(3232);
@@ -143,16 +234,16 @@ ArduinoOTA
 *  \return      none
 ***********************************************************************/
 void loop(){
-	ArduinoOTA.handle();
 
-	Heltec.display->clear();
-	Heltec.display->setFont(ArialMT_Plain_10);
-	Heltec.display->drawString(0, 0, WiFi.localIP().toString());
-	Heltec.display->display();
+    //Serial.println("Next Round");
+	  ArduinoOTA.handle();
+	  Heltec.display->clear();
+	  Heltec.display->setFont(ArialMT_Plain_10);
+	  Heltec.display->drawString(0, 0, WiFi.localIP().toString());
+  	Heltec.display->display();
 
-	
 
 	//eve_display.FT800_test();
 
-  	delay(500);					// Wait a half-second to observe the changing color
+  	//delay(5000);					// Wait a half-second to observe the changing color
 }
