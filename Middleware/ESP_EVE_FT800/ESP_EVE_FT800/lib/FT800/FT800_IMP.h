@@ -206,7 +206,7 @@ class FT800_IMP
     FT800_IMP(int8_t sck, int8_t miso, int8_t mosi, int8_t ss, int8_t pwrdn, int8_t irqpin);
     //Destructor
     ~FT800_IMP();
-    void FT800_Init();
+    bool FT800_Init();
     void FT800_setup();
     void FT800_test();
 

@@ -79,13 +79,13 @@ FT800_IMP::FT800_IMP(int8_t sck, int8_t miso, int8_t mosi, int8_t ss, int8_t pwr
  }
 
 /***********************************************************************
-*! \fn			void FT800_Init(void)
+*! \fn			bool FT800_Init(void)
 *  \brief		Wake the Ft800 up
 *  \param		none
 *  \exception	none
-*  \return		none
+*  \return		true if okay, else 0
 ***********************************************************************/
-void FT800_IMP::FT800_Init( ){
+bool FT800_IMP::FT800_Init( ){
   
   	digitalWrite(ft800pwrPin, LOW);		// 1) lower PD#
   	delay(20);					// 2) hold for 20ms
@@ -103,8 +103,9 @@ void FT800_IMP::FT800_Init( ){
 	Serial.write("Check FT800!\r\n");		// Send an error message on the UART
   	while (ft800HAL.ft800memRead8(REG_ID) != 0x7C)		// Read ID register - is it 0x7C?
   	{
-    	Serial.write("System Halted!\r\n");		// Send an error message on the UART
+    	//Serial.write("System Halted!\r\n");		// Send an error message on the UART
     	//while(1);					// If we don't get 0x7C, the ineface isn't working - halt with infinite loop
+		return false;
   	}  
   
   	ft800HAL.ft800memWrite8(REG_PCLK, ZERO);		// Set PCLK to zero - don't clock the LCD until later
@@ -129,7 +130,7 @@ void FT800_IMP::FT800_Init( ){
   	ft800HAL.ft800memWrite8(REG_PCLK_POL, LCDPCLKPOL);	// LCD data is clocked in on this PCLK edge
 						// Don't set PCLK yet - wait for just after the first display list
 	// End of Initialize Display
-
+	return true;
 }
 
 

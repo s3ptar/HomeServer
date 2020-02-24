@@ -29,7 +29,15 @@
 #include <Ethernet.h>
 #include <Dns.h>
 #include "glb_var.h"
+#include <WiFiClient.h>
+#include <esp_wifi.h>
+#include <FS.h>
+#include <SPIFFS.h>
+#include "ArduinoJson.h"
 
+/***********************************************************************
+*                 Global Variablen
+***********************************************************************/
 const char* ssid = "chilihotdog";
 const char* password = "bxJHckMMkGqEPfY3Jf3nZnAn5FtGYwKZSkzVvbzFHNbpUZfv79GXm8afDuNu";
 char str_display[32];
@@ -40,8 +48,9 @@ const int mqttPort = 1883;
 WiFiClient ethClient;
 PubSubClient client(ethClient);
 glb_var global_var;
-
-
+/* 63 Char max and 17 missign for the mac */
+TaskHandle_t Task1;
+TaskHandle_t MQTTTaskHandle;
 
 /***********************************************************************
 *! \fn          void callback(char* topic, byte* payload, unsigned int length) 
@@ -59,6 +68,22 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
     Serial.println();
 }
+
+/***********************************************************************
+*! \fn          void MQTT_Task( void* prarm )
+*  \brief       MQTT Task
+*  \param       void* prarm 
+*  \exception   none
+*  \return      none
+***********************************************************************/
+void MQTT_Task( void* prarm ){
+
+}
+
+
+
+
+
 
 /***********************************************************************
 *! \fn          void reconnect()
@@ -146,14 +171,28 @@ void setup(){
 
     /************************** Ping ****************************************/
 
-	  eve_display.FT800_Init();
-	  eve_display.FT800_setup();
+	  global_var.ft800_ready = eve_display.FT800_Init();
+    if (global_var.ft800_ready)
+	      eve_display.FT800_setup();
 
 	  //eve_display.CalibrateTouchPanel();
-	  eve_display.Cmd_Logo();
+    if (global_var.ft800_ready)
+	      eve_display.Cmd_Logo();
 	  ArduinoOTA.setHostname("ESP_EVE");
 	  client.setServer(mqttServer, mqttPort);
 	  client.setCallback(callback);
+
+
+    /************************** Create Tasks ********************************
+    xTaskCreatePinnedToCore(
+        MQTT_Task,
+        "MQTT_Task",
+        10000,
+        NULL,
+        1,
+        &MQTTTaskHandle,
+        1
+    );*/
 
 	  while (!client.connected()) {
         Serial.println("Connecting to MQTT...");
