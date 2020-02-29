@@ -1,5 +1,5 @@
 /***********************************************************************
-*! \file:                   glb_varL.h
+*! \file:                   datastoreL.h
 *  \projekt:                globale Variablen
 *  \created on:             07.03.2019
 *  \author:                 R. Gräber
@@ -8,8 +8,8 @@
 *  \brief
 ***********************************************************************/
  
-#ifndef _glb_var_H_
-#define _glb_var_H_
+#ifndef _datastore_H_
+#define _datastore_H_
  
 /***********************************************************************
  * Includes
@@ -40,33 +40,44 @@
  * Funtions
  **********************************************************************/
 
-class glb_var
+class datastore
 {
 private:
-    /* data */
+    
 public:
-
+    
     //functions
-    glb_var(/* args */);
-    ~glb_var();
+    datastore(/* args */);
+    ~datastore();
     //variablen
     uint8_t wait_for_wifi_connect_1000ms;
     bool wifi_is_connected;
     bool ft800_ready;
+    char mqtt_prim_server_ipV4[15];
+    char mqtt_sec_server_ipV4[15];
+    char mqtthostname[15];
+	int mqtt_port;
+    char mqtttopic[127];
+
 };
 
-glb_var::glb_var(/* args */)
+datastore::datastore(/* args */)
 {
     wait_for_wifi_connect_1000ms = 10;
     wifi_is_connected = false;
+    sprintf(mqtt_prim_server_ipV4, "%s", "192.168.0.222") ;
+    sprintf(mqtt_prim_server_ipV4, "%s", "192.168.0.222") ;
+    sprintf(mqtthostname, "%s", "ESP32");
+    sprintf(mqtttopic, "%s", "System/DateAndTime");
+    mqtt_port = 1883;
     
 }
 
-glb_var::~glb_var()
+datastore::~datastore()
 {
 }
 
  
 
  
-#endif /* _glb_var_H_ */
+#endif /* _datastore_H_ */

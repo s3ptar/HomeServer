@@ -28,7 +28,7 @@
 #include <PubSubClient.h>
 #include <Ethernet.h>
 #include <Dns.h>
-#include "glb_var.h"
+#include "datastore.h"
 #include <WiFiClient.h>
 #include <esp_wifi.h>
 #include <FS.h>
@@ -47,7 +47,7 @@ const char* mqttServer = "192.168.0.222";
 const int mqttPort = 1883;
 WiFiClient ethClient;
 PubSubClient client(ethClient);
-glb_var global_var;
+datastore global_var;
 /* 63 Char max and 17 missign for the mac */
 TaskHandle_t Task1;
 TaskHandle_t MQTTTaskHandle;
@@ -77,11 +77,51 @@ void callback(char* topic, byte* payload, unsigned int length) {
 *  \return      none
 ***********************************************************************/
 void MQTT_Task( void* prarm ){
+    //const size_t capacity = JSON_OBJECT_SIZE(4);
+    //DynamicJsonBuffer jsonBuffer(capacity);
+    https://arduinojson.org/v6/doc/upgrade/
+    DynamicJsonDocument jsonBuffer(1024);
+    String JsonString = "";
+    uint32_t ulNotificationValue;
+    //int32_t last_message = millis();
+                         
+    Serial.println("MQTT Thread Start");
+    WiFiClient espClient;                       // WiFi ESP Client  
+    PubSubClient client(espClient);             // MQTT Client 
+    client.setCallback(callback);             // define Callback function
+    while(1==1){
 
+    /* if settings have changed we need to inform this task that a reload and reconnect is requiered */ 
+    ulNotificationValue = ulTaskNotifyTake( pdTRUE, 0 );
+
+    if( (ulNotificationValue & 0x01) != 0 ){
+        Serial.println("Reload MQTT Settings");
+        /* we need to reload the settings and do a reconnect */
+        if(true == client.connected() ){
+            client.disconnect();
+        }
+        //Settings = eepread_mqttsettings();
+    }
+
+    if(!client.connected()) {             
+        /* sainity check */
+        if( (global_var.mqtt_port!=0) && ((global_var.mqtt_prim_server_ipV4[0])!=0) ){
+      
+            Serial.print("Connecting to MQTT...");  // connect to MQTT
+            client.setServer(global_var.mqtt_prim_server_ipV4, global_var.mqtt_port); // Init MQTT     
+            if (client.connect(global_var.mqtthostname)) {
+                Serial.println("connected");          // successfull connected  
+                client.subscribe(global_var.mqtttopic);             // subscibe MQTT Topic
+            } else {
+                Serial.print("failed with state ");   // MQTT not connected       
+            }
+        }
+    } else{
+        client.loop();                            // loop on client
+    }
+     delay(10);
+    }
 }
-
-
-
 
 
 
@@ -153,6 +193,7 @@ void setup(){
     //init Onboard OLED
 	  Wire.begin(SDA_OLED, SCL_OLED); //Scan OLED's I2C address via I2C0
 	  //Wire1.begin(SDA, SCL);        //If there have other device on I2C1, scan the device address via I2C1
+    SPIFFS.begin();
 
     /************************** WLAN ****************************************/
     WiFi.mode(WIFI_STA);
@@ -183,7 +224,7 @@ void setup(){
 	  client.setCallback(callback);
 
 
-    /************************** Create Tasks ********************************
+    /************************** Create Tasks ********************************/
     xTaskCreatePinnedToCore(
         MQTT_Task,
         "MQTT_Task",
@@ -192,7 +233,7 @@ void setup(){
         1,
         &MQTTTaskHandle,
         1
-    );*/
+    );
 
 	  while (!client.connected()) {
         Serial.println("Connecting to MQTT...");
