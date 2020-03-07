@@ -12,22 +12,48 @@
 #define _datastore_H_
  
 /***********************************************************************
- * Includes
- **********************************************************************/
- 
+* Includes
+**********************************************************************/
+#include "stdio.h"
+#include "stdint.h"
 /***********************************************************************
- * Informations
- **********************************************************************/
+* Informations
+**********************************************************************/
 //https://www.dyclassroom.com/c/c-pointers-and-two-dimensional-array
  
 /***********************************************************************
- * Declarations
- **********************************************************************/
+* Declarations
+**********************************************************************/
  
 /***********************************************************************
- * Global Variable
- **********************************************************************/
- 
+* Global Variable
+**********************************************************************/
+
+struct mqtt_struct_tag {
+
+    char* mqtt_prim_server_ipV4;
+    char* mqtt_sec_server_ipV4;
+    char* mqtthostname;
+    int mqtt_port;
+    char* mqtttopic_TimeAndDate;
+   
+};
+extern struct mqtt_struct_tag struct_mqtt;
+
+struct ft800_struct_tag {
+
+    bool ft800_ready;
+   
+};
+extern struct ft800_struct_tag struct_ft800;
+
+struct struct_wlan_typ {
+    bool wifi_is_connected;
+    uint8_t wait_for_wifi_connect_1000ms;
+    const char* ssid;
+    const char* password;
+};
+extern struct struct_wlan_typ struct_wlan;
 /***********************************************************************
  * Constant
  **********************************************************************/
@@ -39,45 +65,4 @@
 /***********************************************************************
  * Funtions
  **********************************************************************/
-
-class datastore
-{
-private:
-    
-public:
-    
-    //functions
-    datastore(/* args */);
-    ~datastore();
-    //variablen
-    uint8_t wait_for_wifi_connect_1000ms;
-    bool wifi_is_connected;
-    bool ft800_ready;
-    char mqtt_prim_server_ipV4[15];
-    char mqtt_sec_server_ipV4[15];
-    char mqtthostname[15];
-	int mqtt_port;
-    char mqtttopic[127];
-
-};
-
-datastore::datastore(/* args */)
-{
-    wait_for_wifi_connect_1000ms = 10;
-    wifi_is_connected = false;
-    sprintf(mqtt_prim_server_ipV4, "%s", "192.168.0.222") ;
-    sprintf(mqtt_prim_server_ipV4, "%s", "192.168.0.222") ;
-    sprintf(mqtthostname, "%s", "ESP32");
-    sprintf(mqtttopic, "%s", "System/DateAndTime");
-    mqtt_port = 1883;
-    
-}
-
-datastore::~datastore()
-{
-}
-
- 
-
- 
 #endif /* _datastore_H_ */
