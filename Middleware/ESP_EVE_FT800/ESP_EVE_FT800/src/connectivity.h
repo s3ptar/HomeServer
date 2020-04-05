@@ -28,6 +28,8 @@
 #include <esp_wifi.h>
 #include "ArduinoJson.h"
 #include <heltec.h>
+#include "Config.h"
+#include "datastore.h"
 /***********************************************************************
 * Informations
 **********************************************************************/

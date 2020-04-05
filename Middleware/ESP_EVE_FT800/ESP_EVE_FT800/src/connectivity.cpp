@@ -17,6 +17,7 @@
 * Informations
 ***********************************************************************/
 //https://www.dyclassroom.com/c/c-pointers-and-two-dimensional-array
+//https://arduinojson.org/v5/example/parser/
 /***********************************************************************
 * Declarations
 ***********************************************************************/
@@ -56,13 +57,24 @@ TaskHandle_t MQTTTaskHandle;
 *  \return      none
 ***********************************************************************/
 void callback(char* topic, byte* payload, unsigned int length) {
-    Serial.print("Message arrived [");
+    DynamicJsonDocument jsonBuffer(1024);
+    deserializeJson(jsonBuffer, payload, length);
+
+    //if (topic == (const char*)"ServerStatus"){
+        const char* ServerZeit = jsonBuffer["ServerTime"];
+        Serial.print(ServerZeit);
+        CurrentServerTimeStamp = ServerZeit;
+        Serial.println();
+    //}
+    //Serial.print("Message arrived [");
     Serial.print(topic);
-    Serial.print("] ");
-    for (int i=0;i<length;i++) {
-        Serial.print((char)payload[i]);
-    }
     Serial.println();
+    //Serial.print("] ");
+    //for (int i=0;i<length;i++) {
+    //    Serial.print((char)payload[i]);
+    //}
+    //parse in string
+    
 }
 
 /***********************************************************************
@@ -76,8 +88,8 @@ void MQTT_Task( void* prarm ){
     //const size_t capacity = JSON_OBJECT_SIZE(4);
     //DynamicJsonBuffer jsonBuffer(capacity);
     //https://arduinojson.org/v6/doc/upgrade/
-    DynamicJsonDocument jsonBuffer(1024);
-    String JsonString = "";
+    //DynamicJsonDocument jsonBuffer(1024);
+    //String JsonString = "";
     uint32_t ulNotificationValue;
     //int32_t last_message = millis();
                          
@@ -170,7 +182,7 @@ void run_connectivity(){
             delay(2000);
         }
     }  
-    client.subscribe("System/DateAndTime");
+    client.subscribe("ServerStatus");
  
     //client.publish("esp/test", "Hello from ESP8266");
 
@@ -204,10 +216,11 @@ void run_connectivity(){
         })
         .onProgress([](unsigned int progress, unsigned int total) {
 		    sprintf(&str_display_con[0], "Progress: %u%%\r", (progress / (total / 100)));
-    	  Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+    	    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+            //Refresh upload
 		    Heltec.display->clear();
-		    Heltec.display->setFont(ArialMT_Plain_10);
-		    Heltec.display->drawString(0, 0, &str_display_con[0]);
+		    Heltec.display->setFont(Normal_Font);
+		    Heltec.display->drawString(ip_start_x_start, ip_start_y_start, &str_display_con[0]);
 		    Heltec.display->display();
         })
         .onError([](ota_error_t error) {
@@ -225,13 +238,13 @@ void run_connectivity(){
  
 
 /***********************************************************************
-*! \fn          void reconnect()
+*! \fn          void reconnect_mqtt()
 *  \brief       reconnect for MQTT Client
 *  \param       har* topic, byte* payload, unsigned int length
 *  \exception   none
 *  \return      none
 ***********************************************************************/
-void reconnect() {
+void reconnect_mqtt() {
     // Loop until we're reconnected, Check if WLan enable
     while (!client.connected()) {
         Serial.print("Attempting MQTT connection...");

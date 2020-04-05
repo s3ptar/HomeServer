@@ -89,6 +89,7 @@ void setup(){
     Wire.begin(SDA_OLED, SCL_OLED); //Scan OLED's I2C address via I2C0
 	  //Wire1.begin(SDA, SCL);        //If there have other device on I2C1, scan the device address via I2C1
     SPIFFS.begin();
+    Heltec.display->clear();
 
     /************************** WLAN ****************************************/
     run_connectivity();
@@ -124,7 +125,8 @@ void loop(){
 	  ArduinoOTA.handle();
     Heltec.display->clear();
 	  Heltec.display->setFont(ArialMT_Plain_10);
-	  Heltec.display->drawString(0, 0, WiFi.localIP().toString());
+	  Heltec.display->drawString(ip_start_x_start, ip_start_y_start, WiFi.localIP().toString());
+    Heltec.display->drawString(servertime_x_start, servertime_y_start, CurrentServerTimeStamp);
   	Heltec.display->display();
 
 
