@@ -92,7 +92,7 @@ void MQTT_Task( void* prarm ){
     //String JsonString = "";
     uint32_t ulNotificationValue;
     //int32_t last_message = millis();
-                         
+    uint8_t scubsriptions = 0;                     
     Serial.println("MQTT Thread Start");
     WiFiClient espClient;                       // WiFi ESP Client  
     PubSubClient client(espClient);             // MQTT Client 
@@ -119,7 +119,14 @@ void MQTT_Task( void* prarm ){
             client.setServer(struct_mqtt.mqtt_prim_server_ipV4, struct_mqtt.mqtt_port); // Init MQTT     
             if (client.connect(struct_mqtt.mqtthostname)) {
                 Serial.println("connected");          // successfull connected  
-                client.subscribe(struct_mqtt.mqtttopic_TimeAndDate);             // subscibe MQTT Topic
+                //subscripe to Topics
+				//sizeof(struct_mqtt.mqtttopics);
+				for(scubsriptions=0; scubsriptions < Max_MQTT_Topics  ; scubsriptions++){
+					
+					//subscrip to all nessessary 
+					client.subscribe(struct_mqtt.mqtttopics[scubsriptions]);
+					
+				}
             } else {
                 Serial.print("failed with state ");   // MQTT not connected       
             }

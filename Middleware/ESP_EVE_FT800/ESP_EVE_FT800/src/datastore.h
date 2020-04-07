@@ -25,10 +25,13 @@
 /***********************************************************************
 * Declarations
 **********************************************************************/
- 
+
+#define Max_MQTT_Topics                  1
+
 /***********************************************************************
 * Global Variable
 **********************************************************************/
+
 
 struct mqtt_struct_tag {
 
@@ -36,8 +39,8 @@ struct mqtt_struct_tag {
     char* mqtt_sec_server_ipV4;
     char* mqtthostname;
     int mqtt_port;
-    char* mqtttopic_TimeAndDate;
-   
+    char* mqtttopics[Max_MQTT_Topics];
+
 };
 extern struct mqtt_struct_tag struct_mqtt;
 
@@ -59,7 +62,7 @@ extern struct struct_wlan_typ struct_wlan;
 extern String CurrentServerTimeStamp;
 extern String CurrentIPAdress;
 
-extern String MQTT_Subscripes[];
+extern char* MQTT_Subscripes[];
 /***********************************************************************
  * Constant
  **********************************************************************/

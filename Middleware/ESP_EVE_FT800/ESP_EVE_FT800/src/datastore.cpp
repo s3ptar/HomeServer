@@ -39,20 +39,21 @@ struct struct_wlan_typ struct_wlan = {
 
 };
 
+
 struct mqtt_struct_tag struct_mqtt = {
 
     .mqtt_prim_server_ipV4  = "192.168.0.222",
     .mqtt_sec_server_ipV4  = "192.168.0.222",
     .mqtthostname = "ESP32",
     .mqtt_port = 1883,
-    .mqtttopic_TimeAndDate = "ServerStatus"
+    .mqtttopics = {"ServerStatus"},
 
 };
 
 String CurrentServerTimeStamp;
 String CurrentIPAdress;
 
-String MQTT_Subscripes[] = {"ServerStatus"};
+char* MQTT_Subscripes[] = {"ServerStatus"};
 
 /***********************************************************************
 * Constant
