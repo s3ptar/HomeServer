@@ -26,8 +26,10 @@
 * Declarations
 **********************************************************************/
 
-#define Max_MQTT_Topics                  1
-
+#define Max_MQTT_Subscription_Topics                  1
+#define Max_MQTT_Publish_Topics                       1
+#define MQTT_PubTopic_ClientStatus                    0
+ 
 /***********************************************************************
 * Global Variable
 **********************************************************************/
@@ -39,7 +41,8 @@ struct mqtt_struct_tag {
     char* mqtt_sec_server_ipV4;
     char* mqtthostname;
     int mqtt_port;
-    char* mqtttopics[Max_MQTT_Topics];
+    char* mqttsubtopics[Max_MQTT_Subscription_Topics];
+    char* mqttpubtopics[Max_MQTT_Publish_Topics];
 
 };
 extern struct mqtt_struct_tag struct_mqtt;

@@ -127,10 +127,12 @@ void loop(){
 	  Heltec.display->setFont(ArialMT_Plain_10);
 	  Heltec.display->drawString(ip_start_x_start, ip_start_y_start, WiFi.localIP().toString());
     Heltec.display->drawString(servertime_x_start, servertime_y_start, CurrentServerTimeStamp);
-  	Heltec.display->display();
-
+    Heltec.display->display();
+    check_Wlan();
 
 	  //eve_display.FT800_test();
+    publish_Status_information(MQTT_PubTopic_ClientStatus );
+    
 
-  	//delay(5000);					// Wait a half-second to observe the changing color
+    delay(5000);					// Wait a half-second to observe the changing color
 }

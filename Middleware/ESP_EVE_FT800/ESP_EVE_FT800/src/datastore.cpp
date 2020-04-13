@@ -46,14 +46,14 @@ struct mqtt_struct_tag struct_mqtt = {
     .mqtt_sec_server_ipV4  = "192.168.0.222",
     .mqtthostname = "ESP32",
     .mqtt_port = 1883,
-    .mqtttopics = {"ServerStatus"},
+    .mqttsubtopics = {"ServerStatus"},
+    .mqttpubtopics = {"ClientStatus"},
 
 };
 
 String CurrentServerTimeStamp;
 String CurrentIPAdress;
 
-char* MQTT_Subscripes[] = {"ServerStatus"};
 
 /***********************************************************************
 * Constant

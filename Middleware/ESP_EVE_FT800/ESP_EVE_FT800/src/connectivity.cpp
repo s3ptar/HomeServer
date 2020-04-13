@@ -18,6 +18,8 @@
 ***********************************************************************/
 //https://www.dyclassroom.com/c/c-pointers-and-two-dimensional-array
 //https://arduinojson.org/v5/example/parser/
+//https://arduinojson.org/v6/api/jsondocument/
+//https://techtutorialsx.com/2017/04/29/esp32-sending-json-messages-over-mqtt/
 /***********************************************************************
 * Declarations
 ***********************************************************************/
@@ -121,10 +123,10 @@ void MQTT_Task( void* prarm ){
                 Serial.println("connected");          // successfull connected  
                 //subscripe to Topics
 				//sizeof(struct_mqtt.mqtttopics);
-				for(scubsriptions=0; scubsriptions < Max_MQTT_Topics  ; scubsriptions++){
+				for(scubsriptions=0; scubsriptions < Max_MQTT_Subscription_Topics ; scubsriptions++){
 					
 					//subscrip to all nessessary 
-					client.subscribe(struct_mqtt.mqtttopics[scubsriptions]);
+					client.subscribe(struct_mqtt.mqttsubtopics[scubsriptions]);
 					
 				}
             } else {
@@ -163,9 +165,9 @@ void run_connectivity(){
         }  
     
     ArduinoOTA.setHostname("ESP_EVE");
-     /************************** MQTT Client *********************************/
-	  client.setServer( struct_mqtt.mqtt_prim_server_ipV4, struct_mqtt.mqtt_port);
-	  client.setCallback(callback);
+    /************************** MQTT Client *********************************/
+	client.setServer( struct_mqtt.mqtt_prim_server_ipV4, struct_mqtt.mqtt_port);
+	client.setCallback(callback);
 
     /************************** Create Tasks ********************************/
     xTaskCreatePinnedToCore(
@@ -253,7 +255,7 @@ void run_connectivity(){
 ***********************************************************************/
 void reconnect_mqtt() {
     // Loop until we're reconnected, Check if WLan enable
-    while (!client.connected()) {
+    if (client.connected()) {
         Serial.print("Attempting MQTT connection...");
         // Attempt to connect
         if (client.connect("arduinoClient")) {
@@ -272,13 +274,54 @@ void reconnect_mqtt() {
     }
 }
 /***********************************************************************
-*! \fn          void setup_wlan(){
-*  \brief       setup Wlan Connection
+*! \fn          uint8_t check_Wlan()
+*  \brief       check Wlan connection
 *  \param       none
 *  \exception   none
-*  \return      none
+*  \return      0 = all okay
 ***********************************************************************/
-void setup_wlan(){
+uint8_t check_Wlan(){
   
+    uint8_t return_code = no_error;
+    //If Not connected, reconnect
+    if(!WiFi.isConnected()){
+        return_code = wlan_disconnected;
+        struct_wlan.wifi_is_connected = false;
+        WiFi.reconnect();
+        while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+            struct_wlan.wifi_is_connected = true;
+            return_code = no_error;
+  	    }
+
+        struct_wlan.wifi_is_connected = WiFi.isConnected();
+        if (struct_wlan.wifi_is_connected) {
+            Serial.println("Wifi connected");
+        }
+        else{
+            Serial.println("Wifi NOT connected");
+        }
+    }
+    return return_code;
+}
+
+/***********************************************************************
+*! \fn          uint8_t publish_Status_information(uint8_t topic_number)
+*  \brief       send information to mqtt broker
+*  \param       uint8_t topic_number - Number of Topic in array
+*  \exception   none
+*  \return      0 = all okay
+***********************************************************************/
+uint8_t publish_Status_information(uint8_t topic_number){
+
+    DynamicJsonDocument JSONBuffer(1024);
+    char JSONmessageBuffer[1024];
+
+    JSONBuffer["ip"] = WiFi.localIP().toString();
+    JSONBuffer["dns"] = "EVE_Display";
+
+    serializeJson(JSONBuffer, JSONmessageBuffer);
     
+    client.publish(struct_mqtt.mqttpubtopics[topic_number], JSONmessageBuffer);
+
+    return no_error;
 }
