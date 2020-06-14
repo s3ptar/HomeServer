@@ -39,6 +39,7 @@ WiFiClient ethClient;
 PubSubClient client(ethClient);
 uint8_t connectivity_state = connectivity_setup;
 char str_display_con[32];
+
 /***********************************************************************
 * Constant
 ***********************************************************************/
@@ -119,14 +120,14 @@ void MQTT_Task( void* prarm ){
       
             Serial.print("Connecting to MQTT...");  // connect to MQTT
             client.setServer(struct_mqtt.mqtt_prim_server_ipV4, struct_mqtt.mqtt_port); // Init MQTT     
-            if (client.connect(struct_mqtt.mqtthostname)) {
+            if (client.connect(struct_mqtt.mqtt_device_root_topic)) {
                 Serial.println("connected");          // successfull connected  
                 //subscripe to Topics
 				//sizeof(struct_mqtt.mqtttopics);
 				for(scubsriptions=0; scubsriptions < Max_MQTT_Subscription_Topics ; scubsriptions++){
 					
 					//subscrip to all nessessary 
-					client.subscribe(struct_mqtt.mqttsubtopics[scubsriptions]);
+					client.subscribe(struct_mqtt.mqtt_server_status_topic);
 					
 				}
             } else {
@@ -148,6 +149,13 @@ void MQTT_Task( void* prarm ){
 *  \return      none
 ***********************************************************************/
 void run_connectivity(){
+
+    //generate root topic
+    byte mac[6];
+    WiFi.macAddress(mac);
+    char mac_buffer[15];
+    sprintf(mac_buffer,"%2u:%2u:%2u:%2u:%2u;%2u",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
+    struct_mqtt.mqtt_device_root_topic = mac_buffer;
 
     WiFi.mode(WIFI_STA);
         WiFi.begin(struct_wlan.ssid, struct_wlan.password);
@@ -180,17 +188,18 @@ void run_connectivity(){
         1
     );
 
-	  while (!client.connected()) {
-        Serial.println("Connecting to MQTT...");
+	    while (!client.connected()) {
+            Serial.println("Connecting to MQTT...");
  
-        if (client.connect("ESP32Client")) {
-            Serial.println("connected");  
-        } else {
-            Serial.print("failed with state ");
-            Serial.print(client.state());
-            delay(2000);
-        }
-    }  
+            //if (client.connect(struct_wlan.dns, struct_mqtt.mqttpubtopics[MQTT_PubTopic_ClientStatus], 0, true, JSONmessageBuffer)) {
+            if (client.connect(struct_wlan.dns)) {
+                Serial.println("connected");  
+            } else {
+                Serial.print("failed with state ");
+                Serial.print(client.state());
+                delay(2000);
+           }
+       }  
     client.subscribe("ServerStatus");
  
     //client.publish("esp/test", "Hello from ESP8266");
@@ -312,16 +321,38 @@ uint8_t check_Wlan(){
 *  \return      0 = all okay
 ***********************************************************************/
 uint8_t publish_Status_information(uint8_t topic_number){
-
-    DynamicJsonDocument JSONBuffer(1024);
-    char JSONmessageBuffer[1024];
-
-    JSONBuffer["ip"] = WiFi.localIP().toString();
-    JSONBuffer["dns"] = "EVE_Display";
-
-    serializeJson(JSONBuffer, JSONmessageBuffer);
     
-    client.publish(struct_mqtt.mqttpubtopics[topic_number], JSONmessageBuffer);
+    char JSONmessageBuffer[MAX_MQTT_Message_Buffer];
+    DynamicJsonDocument JSONBuffer(MAX_MQTT_Message_Buffer);
+    char mac_buffer[15];
+    char* topic;
+    byte mac[6];
 
+    WiFi.macAddress(mac);
+    sprintf(mac_buffer,"%2u:%2u:%2u:%2u:%2u;%2u",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
+    JSONBuffer["mac"] = String(mac_buffer);
+    JSONBuffer["ip"] = WiFi.localIP().toString();
+    JSONBuffer["dns"] = struct_wlan.dns;
+    JSONBuffer["status"] = "online";
+    serializeJson(JSONBuffer, JSONmessageBuffer);
+
+    strcpy(topic,struct_mqtt.mqtt_device_root_topic);
+    strcat(topic,struct_mqtt.mqtt_device_information_topic);
+    Serial.println(JSONmessageBuffer);
+    Serial.println("\r\n");
+
+    client.publish(struct_mqtt.mqtt_device_root_topic, JSONmessageBuffer);
     return no_error;
+}
+
+/***********************************************************************
+*! \fn          uint8_t publish_Status_information(uint8_t topic_number)
+*  \brief       send information to mqtt broker
+*  \param       uint8_t topic_number - Number of Topic in array
+*  \exception   none
+*  \return      0 = all okay
+***********************************************************************/
+void refresh_Status_information( ){
+
+    
 }

@@ -62,5 +62,6 @@
 void run_connectivity();
 uint8_t check_Wlan();
 uint8_t publish_Status_information(uint8_t topic_number);
+char* build_client_status(char* StatusMSG);
 
 #endif /* _connectivity_H_ */
